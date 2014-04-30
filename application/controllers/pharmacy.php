@@ -59,5 +59,24 @@ class Pharmacy extends CI_Controller {
 			}
 		 }
 	}
+
+	public function listOrder(){
+		$this->load->model('pharmacy_model');
+		$this->load->library('pagination');
+		
+		$config['base_url'] = base_url()."pharmacy/listOrder";
+		$config['per_page'] = 20;
+		$config['total_rows'] = 200; //should be reaplaced
+
+		$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+
+		$data["results"] = $this->pharmacy_model->getOrders($config["per_page"], $page);
+		$data["links"] = $this->pagination->create_links();
+		$data['main_content'] = 'list_orders';
+
+		$this->load->view('includes/template',$data);
+	}
 	
 }
