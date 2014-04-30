@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:81/hospital';
+$config['base_url']	= 'http://localhost:81/project-1';
 
 
 $config['server_root'] = $_SERVER['DOCUMENT_ROOT'];
@@ -28,7 +28,7 @@ $config['server_root'] = $_SERVER['DOCUMENT_ROOT'];
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
