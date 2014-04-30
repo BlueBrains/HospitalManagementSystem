@@ -46,7 +46,7 @@
 	</div>
 	<?php 
     	echo form_close(); 
-		echo validation_errors('<p class = "error">');
+		echo validation_errors('<p class = "error alert alert-danger">');
     ?>
 
 </div>
