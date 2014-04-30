@@ -16,3 +16,5 @@ class Migration_Patients extends CI_Migration {
         $this->dbforge->drop_table('patients');
     }
 }
+
+
