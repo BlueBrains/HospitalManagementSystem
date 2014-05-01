@@ -63,6 +63,7 @@ class Pharmacy extends CI_Controller {
 
 	public function newMed(){
 		$data['main_content'] = 'newMed';
+		$data['title'] = "New Medicine";
 		$this->load->view('includes/template',$data);
 	}
 	public function addMed(){
@@ -141,6 +142,7 @@ class Pharmacy extends CI_Controller {
 		$data["results"] = $this->pharmacy_model->getOrders($config["per_page"], $page);
 		$data["links"] = $this->pagination->create_links();
 		$data['main_content'] = 'list_orders';
+		$data['title'] = "Orders";
 
 		$this->load->view('includes/template',$data);
 	}
