@@ -36,3 +36,4 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<div class="container"><!-- main page container -->

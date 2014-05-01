@@ -1,4 +1,3 @@
-<div class="container">
 	<div class="page-header">
   		<h1>personal information<small> add this info please</small></h1>
 	</div>
@@ -48,5 +47,3 @@
     	echo form_close(); 
 		echo validation_errors('<p class = "error alert alert-danger">');
     ?>
-
-</div>
