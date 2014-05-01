@@ -10,8 +10,8 @@
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">patient name</button>
     			</span>
-    			<?php echo form_input(['name' => 'patientName','id' => 'patientName', 'class' =>
-     			'form-control']); 
+    			<?php echo form_input(array('name' => 'patientName','id' => 'patientName', 'class' =>
+     			'form-control')); 
     			?>
 			</div>
 		</div>
@@ -20,8 +20,8 @@
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">medicine name</button>
     			</span>
-    			<?php echo form_input(['name' => 'medicineName','id' => 'medicineName', 'class' =>
-     			'form-control']); 
+    			<?php echo form_input(array('name' => 'medicineName','id' => 'medicineName', 'class' =>
+     			'form-control')); 
     			?>
     		</div>
 		</div>
