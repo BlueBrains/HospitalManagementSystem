@@ -6,8 +6,10 @@ class Medicine_model extends CI_Model {
 		$this->db->from('medicines');
 		$this->db->where('tradeName', $value);
 		if($q = $this->db->get()){			
-			$data = $q->result();		
-			return $data[0]->id;		
+			$data = $q->result();
+			if($data){
+				return $data[0]->id;
+			}			
 		}			
 	}
 
