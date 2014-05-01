@@ -5,7 +5,7 @@ class Migration_Add_Password_To_Patients extends CI_Migration {
   public function up()
   {
     $fields = array(
-      "password varchar(255) NOT NULL DEFAULT ''"
+      "password varchar(255) NOT NULL DEFAULT ''",
     );
 
     $this->dbforge->add_column('patients', $fields);
@@ -15,5 +15,5 @@ class Migration_Add_Password_To_Patients extends CI_Migration {
   {
     $this->dbforge->drop_column('patients', 'password');
   }
+  }
 
-}
