@@ -39,9 +39,10 @@ class Pharmacy extends CI_Controller {
 		else
 		{
 			$this->load->model('pharmacy_model');
-			
+			$this->load->model('medicine_model');
+
 			if($patientId =$this->pharmacy_model->findPatient($this->input->post('patientName')) 
-			&&  $medicineId =$this->pharmacy_model->findMedicine($this->input->post('medicineName'))){
+			&&  $medicineId =$this->Medicine_model->findMedicine($this->input->post('medicineName'))){
 				$data = array(
 					'patientID' => $patientId,
 					'doctorID' => $this->uri->segment(3),
@@ -58,6 +59,42 @@ class Pharmacy extends CI_Controller {
 				}
 			}
 		 }
+	}
+
+	public function newMed(){
+		$data['main_content'] = 'newMed';
+		$this->load->view('includes/template',$data);
+	}
+	public function addMed(){
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('MedicineName','Medicine Name','trim|required');
+		$this->form_validation->set_rules('group','Group','trim|required');
+		$this->form_validation->set_rules('quantity','Quantity','trim|required');
+		if($this->form_validation->run()==FALSE)
+		{
+			$this->newMed();	
+		}
+		
+		$this->load->model('Medicine_model');
+		if($med_id = $this->Medicine_model->findMedicine($this->input->post('MedicineName'))){
+			$this->Medicine_model->updateQuantity($med_id,
+			$this->input->post('quantity')
+			);
+		}
+		else
+		{
+			$med = array(
+				'tradeName' => $this->input->post('MedicineName') ,
+				'quantity' =>  $this->input->post('quantity'),
+				'med_group' => $this->input->post('group'),
+				'price' => $this->input->post('price'),
+				'unit_per_packing' => $this->input->post('upp'),
+				'packing_per_unitpacking' => $this->input->post('pppu'),
+				'manufacturerName' => $this->input->post('provider')
+			);
+
+			$this->Medicine_model->addMedicine($med);
+		}
 	}
 
 	public function listOrder(){
