@@ -16,7 +16,7 @@ class Migration_Add_Data_and_relations extends CI_Migration {
 		$this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
         $this->dbforge->add_field("University varchar(255) NOT NULL DEFAULT '' ");
 		$this->dbforge->add_field("Section  varchar(255) NOT NULL DEFAULT '' ");
-		$this->dbforge->add_field("Date honored varchar(255) NOT NULL DEFAULT '' ");		
+		$this->dbforge->add_field("Date_honored varchar(255) NOT NULL DEFAULT '' ");		
 		$this->dbforge->add_key('id', TRUE);                           
         $this->dbforge->create_table('certificates', TRUE);
 	
