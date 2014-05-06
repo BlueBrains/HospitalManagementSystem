@@ -26,6 +26,28 @@
     		</div>
 		</div>
 	</div>
+		<div class='row' style="margin-bottom:50px">
+		<div class="col-md-6">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Dose</button>
+    			</span>
+    			<?php echo form_input(array('name' => 'dose','id' => 'Dose', 'class' =>
+     			'form-control')); 
+    			?>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Caliber</button>
+    			</span>
+    			<?php echo form_input(array('name' => 'caliber','id' => 'Caliber', 'class' =>
+     			'form-control')); 
+    			?>
+    		</div>
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-md-6">
 			<label>details</label>
