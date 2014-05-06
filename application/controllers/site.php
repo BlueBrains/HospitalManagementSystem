@@ -7,7 +7,7 @@ class site extends CI_Controller
 		parent::__construct();
 	session_start();
 		$this->is_logged_in();
-		$this->is_Doctor();
+		$this->user_is();
 		
 	}
 
@@ -16,14 +16,15 @@ class site extends CI_Controller
 		   redirect('login');
 		   die();
 	}
-	function is_Doctor()
+	function user_is()
 	{
-		// database fetching and proccessing
-		$is_Doctor = $_SESSION['is_Doctor'];
-		if ($is_Doctor)
-		{
-			echo"Admin";
-		}
+		if ($_SESSION['user']=='doctor')
+			echo "doctor";
+		else if ($_SESSION['user']=='admin') 
+			echo "Admin"			     
+		else 
+			echo"Patient";
+		
 		
 	}
 	function another_page() // just for sample

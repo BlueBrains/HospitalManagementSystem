@@ -5,7 +5,7 @@ class Login extends CI_Controller {
 	function index()
 	{
 		$data['main_content'] = 'index';
-		$this->load->view('index', $data);
+		$this->load->view('login', $data);
 
 
 	}
@@ -22,27 +22,17 @@ class Login extends CI_Controller {
 			$_SESSION['username']=$_POST["username"];
 			$_SESSION['is_logged_in']=true;
 		if ($_POST['ID']=='Doctor')	
-			$_SESSION['is_Doctor']=true;
-		else 		$_SESSION['is_Doctor']=false;
-			$name = $_POST["username"];
-		$query['record'] = $this->Membership_model->generate_xml();	
-		foreach($query['record'] as $row)
-		{
-		$xml = "<patient>";
-			  $xml .= "<generic>";
-			  $xml .= "<Name>".$name."</Name>";
-			  $xml .= "<id>".$row->id."</id>";
-			$xml .= "</generic>";			
-			$xml .= "</patient>";
-            $sxe = new SimpleXMLElement($xml);
-            $sxe->asXML("$name.xml");
-		}
+			$_SESSION['user']='doctor';
+		else if	($_POST['ID']=='Admin')	
+		    $_SESSION['user']='admin';
+		else		
+			$_SESSION['user']='patients';
+	
 			redirect('site/members_area',$data);
 		}
 		else // incorrect username or password
 		{
 			echo "Error Not Valid";	
-			//$this->index();
 			redirect('login',$data);
 		}
 	}	
@@ -98,9 +88,9 @@ class Login extends CI_Controller {
 			//$this->load->view('services');
 			if (isset($_SESSION['username']))
 						{ 
-						  if ($_SESSION['is_Doctor']==true)
+						  if ($_SESSION['user']=='doctor')
 						     $this->A1();
-						  else	  
+						  else	if ($_SESSION['user']=='admin') 
 						     $this->A2();
 						} 
 			else

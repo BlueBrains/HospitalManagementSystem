@@ -7,46 +7,24 @@ class Membership_model extends CI_Model {
 			
 		$this->db->where('username',$_POST['username']);
 		$this->db->where('password', $_POST['password']);
-		$query = $this->db->get('data');
-	
+		if ($_POST['ID']=='Doctor')
+		$query = $this->db->get('doctors');
+		else if ($_POST['ID']=='Admin')
+		$query = $this->db->get('admin');
+		else
+		$query = $this->db->get('patients');
 		if($query->num_rows == 1)
-		{
-			
+		{			
 			return true;
 		}
+
 		else
 		{
 		return false;
 		}
 		
 	}
-	function generate_xml()
-	{
-		$this->db->where('username',$_POST['username']);
-		$this->db->where('password', $_POST['password']);
-		$query = $this->db->get('data');
-		$selected_radio = $_POST['ID'];
-
-			if ($selected_radio == 'Patient') 
-			{		
-				if($query->num_rows == 1)
-		{
-			
-			$name=$_POST['username'];
-			//$query = $this->db->get('data');
-			foreach($query->result() as $row)
-			{
-				$data[]=$row;
-			}
-			return $data;
-		}	
-			}
-			else 
-				{		
-					
-				}
-		
-	} 	
+	 	
 	function create_member($x,$y,$z,$c,$v,$n)
 	{
 			
