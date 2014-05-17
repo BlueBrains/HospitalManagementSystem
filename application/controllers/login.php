@@ -4,10 +4,11 @@ class Login extends CI_Controller {
 	
 	function index()
 	{
-		$data['main_content'] = 'index';
-		$this->load->view('login', $data);
-
-
+		$data['main_content'] = 'logIn_view';
+		//$data['main_content'] = 'login';
+		$data['title'] = 'Join us !';
+		
+		$this->load->view('includes/template', $data);
 	}
 	
 	function validate_credentials()
@@ -15,20 +16,28 @@ class Login extends CI_Controller {
 		$this->load->model('Membership_model');
 		$q = $this->Membership_model->validate();
 		
+		if ($_POST['ID']=='doctor')
+			$state = 'is_doctor_logged_in';
+		else if ($_POST['ID']=='admin')
+			$state = 'is_admin_logged_in';
+		else
+			$state = 'is_patient_logged_in';
 		if($q) // if the user's credentials validated...
-		{	
+		{					
+				$data = array(
+				'username' => $this->input->post('username'),
+				 $state => true
+			);
+			$this->session->set_userdata($data);
+					
+					if ($_POST['ID']=='doctor')
+						redirect('Hospital/doctor',$data);
+					else if ($_POST['ID']=='admin')
+						redirect('Hospital/admin',$data);
+					else
+						redirect('Hospital',$data);
+						
 			
-		    session_start();
-			$_SESSION['username']=$_POST["username"];
-			$_SESSION['is_logged_in']=true;
-		if ($_POST['ID']=='Doctor')	
-			$_SESSION['user']='doctor';
-		else if	($_POST['ID']=='Admin')	
-		    $_SESSION['user']='admin';
-		else		
-			$_SESSION['user']='patients';
-	
-			redirect('site/members_area',$data);
 		}
 		else // incorrect username or password
 		{
@@ -44,13 +53,19 @@ class Login extends CI_Controller {
 	{
 		$this->load->view('station', $data);
 	}
-	function signup()
+	function add_doctor()
 	{
 		$data['main_content'] = 'signup_form';
-		$this->load->view('signup_form', $data);
+		$this->load->view('includes/template', $data);
 	}
 	
-	function create_member()
+	function add_paitent()
+	{
+		$data['main_content'] = 'signup_form_patient';
+		$this->load->view('includes/template', $data);
+	}
+	
+	function create_member($r)
 	{
 		$this->load->library('form_validation');
 		
@@ -70,7 +85,7 @@ class Login extends CI_Controller {
 			
 			$this->load->model('Membership_model');
 			/**/
-			if($query = $this->Membership_model->create_member($_POST['username'],$_POST['password'],$_POST['first_name'],$_POST['last_name'],$_POST['mobile'],$_POST['email']))
+			if($query = $this->Membership_model->create_member($r))
 			{
 				$data['main_content'] = 'signup_successful';
 				$this->load->view('signup_successful', $data);
@@ -82,6 +97,7 @@ class Login extends CI_Controller {
 		}
 		
 	}
+
 	function setorder()
 	{
 			session_start();
@@ -102,19 +118,10 @@ class Login extends CI_Controller {
 	{$this->load->view('nonserv'); }
 	function A2()
 	{$this->load->view('services');}
-	function request()
-	{
-		$this->load->view('request');
-	}
-	function bit()
-	{$this->load->view('js');}
-	function tbit()
-	{$this->load->view('script.html');}
+	
 	function logout()
 	{
-	    session_start();	
-	    session_destroy();
-		$this->load->view('station');
+		$this->session->sess_destroy();
 	}
 
 }

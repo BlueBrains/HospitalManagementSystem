@@ -25,6 +25,8 @@ class Pharmacy extends CI_Controller {
 	public function newOrder() //$patientId,$doctorId
 	{
 		$data['title'] = 'Request a medicine';	
+		$data['bar1'] = "SignIn";
+		$data['linkbar1'] ="/login";
 		$data['main_content'] = 'addMed';
 		$this->load->view('includes/template',$data);
 	}

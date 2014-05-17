@@ -48,71 +48,39 @@ else if (name=="Spine")
 </script>
 </head>
 <body>
-	<div id="header">
-		<a href="index.html" class="logo"><img src="<?php echo base_url();?>/images/logo.png" alt=""></a>
-		<ul>
-			<li>
-				<a href="station">home</a>
-			</li>
-			<li>
-				<a href="about.html">about</a>
-			</li>
-			<li>
-				<a href="services.html">services</a>
-			</li>
-			<li>
-				<a href="location.html">our locations</a>
-			</li>
-			<li>
-				<a href="contact.html">contact</a>
-			</li>
-			<li class="selected">
-				<a href="blog.html">blog</a>
-			</li>
-		</ul>
-	</div>
-	<div id="body">
-		<div  class="content">
-			<div>
-				<span>may 9, 2023</span>
-				<div>
-					<div class="article">
-						<h3>Please Fill the field </h3>
 						<p>
-							<form name="myform" action="send" method="post">
+							<form name="myform" action="send_req" method="post">
 									<label for="Patient ID"> <span>Patient ID*</span>
-									<input type="text" name="ID" id="ID">
-									</label>
-									<label for="Patient Doctor"> <span>Patient Doctor*</span>
-									<input type="text" name="Doc" id="Doc">
-									</label>
-									<label for="Photo Kind"> <span>Photo Kind*</span>
-									<input type="text" name="kind" id="kind">
-									</label>
+									<input type="text" name="patient_id" id="ID"></br>
+									<label > <span>image Type*</span>	</br>																		
+									<input type="radio" name="image_id" value="1" checked="true">
+									<label for="1">X-Ray</label>	
+									
+									<input type="radio" name="image_id" value="2" >
+									<label for="2">Ranen</label>
+									
+									<input type="radio" name="image_id" value="3" >
+									<label for="3">Echo</label>
+									</label> </br>
+									<label for="Photo Kind"> <span>Section name</span>
+									<input type="text" name="section_name" id="Section_name">
+									</label></br>
 									<label for="Part"> <span>Part of Body*</span>
-									<input type="text" name="part" id="part">
-									</label>
+									<input type="text" name="part_of_body" id="part" readonly="readonly">
+									</label></br>
 									<label for="position"> <span>position*</span>
-									<input type="text" name="position" id="position">
-									</label>
+									<input type="text" name="position" id="position" readonly="readonly">
+									</label></br>
 									<label for="Section Name"> <span>Section Name*</span>
 									<input type="text" name="sec" id="sec">
-									</label>
-									<label for="Comment"> <span>Comment*</span>
+									</label></br>
+									<label for="Comment"> <span>Comment</span>
 									<textarea name="comment" id="comment" cols="30" rows="10"></textarea>
 									</label>
 								<input type="submit" name="send" id="submit">
 							</form>
 						</p>
-						
-					</div>
-				</div>
-				<div class="stats">
-					
-				</div>
-			</div>
-		</div>
-		<div id="menu">
+	<div id="menu">
 	 <menu id="menu1" name="S1" >
 			<ul class="menu">
 				<li><a  class="parent"><span>SKULL</span></a>
@@ -381,69 +349,6 @@ onmousedown="set('Lower Extremities')"
 		<div>
 </div>		
 </div>		
-		<div id="sidebar">
-			<div class="archive">
-				<h3>archive</h3>
-				<ul>
-					<li>
-						<a href="">april 2023</a>
-					</li>
-					<li>
-						<a href="">march 2023</a>
-					</li>
-					<li>
-						<a href="">february 2023</a>
-					</li>
-					<li>
-						<a href="">january 2023</a>
-					</li>
-				</ul>
-			</div>
-			<div class="categories">
-				<h3>categories</h3>
-				<ul>
-					<li>
-						<a href="">illumelabs events</a>
-					</li>
-					<li>
-						<a href="">publications and news</a>
-					</li>
-					<li>
-						<a href="">product development</a>
-					</li>
-					<li>
-						<a href="">health tips</a>
-					</li>
-					<li>
-						<a href="">medications and vaccines</a>
-					</li>
-					<li>
-						<a href="">uncategorized</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-</div>
-	<div id="footer">
-		<div>
-			<p>
-				<span>2023 &copy; Illumelabs Diagnostic Center.</span><a href="#" >Terms of Service</a> | <a href="#" >Privacy Policy</a>
-			</p>
-			<ul>
-				<li id="facebook">
-					<a href="http://freewebsitetemplates.com/go/facebook/">facebook</a>
-				</li>
-				<li id="twitter">
-					<a href="http://freewebsitetemplates.com/go/twitter/">twitter</a>
-				</li>
-				<li id="googleplus">
-					<a href="http://freewebsitetemplates.com/go/googleplus/">googleplus</a>
-				</li>
-				<li id="rss">
-					<a href="#" >rss</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+
 </body>
 </html>

@@ -13,7 +13,7 @@ class site extends CI_Controller
 
 	function members_area()
 	{
-		   redirect('login');
+		   redirect('login/request');
 		   die();
 	}
 	function user_is()
@@ -21,7 +21,7 @@ class site extends CI_Controller
 		if ($_SESSION['user']=='doctor')
 			echo "doctor";
 		else if ($_SESSION['user']=='admin') 
-			echo "Admin"			     
+			echo "Admin";			     
 		else 
 			echo"Patient";
 		
