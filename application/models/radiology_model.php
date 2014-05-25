@@ -71,8 +71,8 @@ class radiology_model extends CI_Model {
              $size = $_FILES['fic']['size'];
              $type = $_FILES['fic']['type'];
              $name = $_FILES['fic']['name'];
-			 echo $name;
-        $blob = file_get_contents ($_FILES['fic']['tmp_name']);
+			 
+      $blob = mysql_real_escape_string(file_get_contents($_FILES['fic']['tmp_name']));
         $sql="UPDATE request SET name='".$name."' , file_size = '".$size."' , mime_type ='".$type."' , file_data='".$blob."' WHERE id = ".$req_id;
         $result=$this->db->query($sql)or die (mysql_error ());
         return true;
