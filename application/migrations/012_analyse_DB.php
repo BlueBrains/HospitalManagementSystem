@@ -26,7 +26,7 @@ class Migration_analyse_DB extends CI_Migration {
         $this->dbforge->add_field("description mediumtext NULL DEFAULT '' ");   
        $this->dbforge->add_field("result_date DATE NULL");
         $this->dbforge->add_field("file_size int  null");   
-        $this->dbforge->add_field("file_data longblob null");   
+        $this->dbforge->add_field("file_data LONGBLOB NULL");   
         $this->dbforge->add_field("mime_type varchar(255) null");
         $this->dbforge->add_field("name varchar(255) null");            
         $this->dbforge->add_key('id', TRUE);                           
@@ -36,9 +36,19 @@ class Migration_analyse_DB extends CI_Migration {
 
   public function down()
   {
+<<<<<<< HEAD
     $this->dbforge->drop_table('analyse');
     $this->dbforge->drop_table('catagoury');
     $this->dbforge->drop_table('analyse_request');  
+=======
+      $this->dbforge->drop_table('analyse_request');
+       $this->dbforge->drop_table('analyse');  
+       $this->dbforge->drop_table('catagoury');
+       
+       
+   
+    
+>>>>>>> 81088816246b6c2bc577c9fb888e8509d0872440
 
   }
 }
