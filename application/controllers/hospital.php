@@ -10,28 +10,29 @@ class Hospital extends CI_Controller {
 	
 	function doctor()
 	{
+		
 		if(!isset($isDoctorLoggedIn) || $isDoctorLoggedIn != true)
 		{
 			$data['main_content'] = 'doctor_view';	
 			$data['title'] = 'Welcome Doctor';	
 			$data['bar1'] = "Doctor Order";
-			$data['linkbar1'] ="login";
+			$data['linkbar1'] ="radiology/request";
 			$this->load->view('includes/template',$data);
-			die();			
+					
 		}
 	}
 	
 	function admin()
 	{
-		if(!isset($isDoctorLoggedIn) || $isDoctorLoggedIn != true)
+		if(!isset($isAdminLoggedIn) || $isAdminLoggedIn != true)
 		{
 				
 			$data['title'] = 'Welcome Admin';
-		//	$data['main_content'] ='admin_view';	
+			$data['main_content'] ='admin_view';	
 			$data['bar1'] = "Create member";
 			$data['linkbar1'] ="login/add_doctor";
 			$this->load->view('includes/template',$data);
-			die();			
+					
 		}
 	}
 }

@@ -71,9 +71,6 @@ else if (name=="Spine")
 									<label for="position"> <span>position*</span>
 									<input type="text" name="position" id="position" readonly="readonly">
 									</label></br>
-									<label for="Section Name"> <span>Section Name*</span>
-									<input type="text" name="sec" id="sec">
-									</label></br>
 									<label for="Comment"> <span>Comment</span>
 									<textarea name="comment" id="comment" cols="30" rows="10"></textarea>
 									</label>

@@ -23,7 +23,8 @@ class Migration_radiology_DB extends CI_Migration {
 		$this->dbforge->add_field("file_size int  null");	
 		$this->dbforge->add_field("file_data longblob null");	
 		$this->dbforge->add_field("mime_type varchar(255) null");
-		$this->dbforge->add_field("name varchar(255) null");			
+		$this->dbforge->add_field("name varchar(255) null");	
+		$this->dbforge->add_field("checked boolean NOT NULL DEFAULT false");		
 		$this->dbforge->add_key('id', TRUE);                           
         $this->dbforge->create_table('request', TRUE);
 	

@@ -17,16 +17,17 @@ class Login extends CI_Controller {
 		$q = $this->Membership_model->validate();
 		
 		if ($_POST['ID']=='doctor')
-			$state = 'is_doctor_logged_in';
+			$state = 'isDoctorLoggedIn';
 		else if ($_POST['ID']=='admin')
-			$state = 'is_admin_logged_in';
+			$state = 'isAdminLoggedIn';
 		else
-			$state = 'is_patient_logged_in';
+			$state = 'isPatientLoggedIn';
 		if($q) // if the user's credentials validated...
-		{					
+		{			
 				$data = array(
 				'username' => $this->input->post('username'),
-				 $state => true
+				 $state => true,
+//				 'isDoctorLoggedIn'=> true
 			);
 			$this->session->set_userdata($data);
 					
@@ -122,6 +123,7 @@ class Login extends CI_Controller {
 	function logout()
 	{
 		$this->session->sess_destroy();
+		$this->index();
 	}
 
 }
