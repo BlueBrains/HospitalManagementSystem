@@ -40,10 +40,10 @@ class Membership_model extends CI_Model {
 				'address' => $_POST['address'],
 				'phone' => $_POST['phone'],
 				'mobile' => $_POST['mobile'],
-				'emergencyPhone1' => $_POST['emergencyPhone1'],
-				'emergencyPhone2' => $_POST['emergencyPhone2'],
+				'emergencyPhone1' => $_POST['emergenceyPhone1'],
+				'emergencyPhone2' => $_POST['emergenceyPhone2'],
 				'chronicDiseases' => $_POST['chronicDiseases'],
-				'addication' => $_POST['addication'],
+				'addiction' => $_POST['addication'],
 				'bloodGroup' => $_POST['bloodGroup'],
 				'tallness' => $_POST['tallness']						
 			);

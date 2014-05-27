@@ -3,14 +3,15 @@
 class radiology extends CI_Controller {
 	function __construct()
 	{
-		parent::__construct();
+		parent::__construct();$this->load->library('session');
 		
 	}	
 	
 	function request()
 	{
-		//$isLoggedIn = $this->session->userdata('isLoggedIn');
-		if(!isset($isDoctorLoggedIn) || $isDoctorLoggedIn != true)
+			
+		$isLoggedIn = $this->session->userdata('isDoctorLoggedIn');
+		if(isset($isLoggedIn) && $isLoggedIn == true)
 		{
 				
 			$data['main_content'] = 'request';	
@@ -19,13 +20,14 @@ class radiology extends CI_Controller {
 			$data['linkbar1'] ="doctor_view";
 			$this->load->view('includes/template',$data);
 			//die();
-		}
-					
-	//	$this->load->view('request');
+		}			
+	
 	}
 	function send_req()
 	{
 		$this->load->model('radiology_model');
+		 $id=$this->input->post('patient_id');
+		if($id!=0)
 		if($data['record'] = $this->radiology_model->create_req())
 			{	
 		
@@ -45,13 +47,21 @@ class radiology extends CI_Controller {
 			$data['linkbar1'] ="#";
 			$this->load->view('includes/template',$data);
 			}
+		else 
+			{
+			$data['main_content'] = 'requests_page';	
+			$data['title'] = 'Welcome Admin';	
+			$data['bar1'] = "not specified";
+			$data['linkbar1'] ="#";
+			$this->load->view('includes/template',$data);
+			}
 	
 	}
 	function patient_req($id)
 	{
 
-		$isLoggedIn = $this->session->userdata('isLoggedIn');
-		if(!isset($isAdminLoggedIn) || $isAdminLoggedIn != true)
+		$isAdminLoggedIn = $this->session->userdata('isAdminLoggedIn');
+		if(isset($isAdminLoggedIn) && $isAdminLoggedIn == true)
 		{
 		$this->load->model('radiology_model');
 		$data['record'] = $this->radiology_model->fetch_req($id);	
@@ -108,8 +118,23 @@ class radiology extends CI_Controller {
 			$data['title'] = 'Welcome Admin';	
 			$data['bar1'] = "not specified";
 			$data['linkbar1'] ="#";
+			$data['idd']="2";
 			$this->load->view('includes/template',$data);
 
+	}
+	
+	function search ()
+	{
+		$this->load->model('radiology_model');
+		$e = $this->input->post('op');
+		$data['record'] = $this->radiology_model->search_by($e);	
+			$data['main_content'] = 'admin_view';	
+			$data['title'] = 'Welcome Admin';	
+			$data['bar1'] = "not specified";
+			$data['linkbar1'] ="#";
+			$data['idd']="2";
+			$this->load->view('includes/template',$data);		
+	
 	}
 }
 

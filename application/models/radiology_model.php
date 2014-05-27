@@ -8,9 +8,9 @@ class radiology_model extends CI_Model {
 			                 // "FROM request INNER JOIN  radiology on request.image_id = radiology.image_id ".
 				             // "WHERE request.patient_id = ".$id;            
 		if ($id>0)
-			$sql=$this->db->query("SELECT * FROM request WHERE patient_id = '".$id."' and checked = 0");
+			$sql=$this->db->query("SELECT * FROM request INNER JOIN radiology ON request.image_id = radiology.image_id WHERE patient_id = '".$id."' and checked = 0");
 		else 
-			$sql=$this->db->query("SELECT * FROM request ");
+			$sql=$this->db->query("SELECT * FROM request INNER JOIN radiology ON request.image_id = radiology.image_id");
 		foreach ($sql->result() as $raw ) {
                 $data[]=$raw;
             }
@@ -95,5 +95,36 @@ class radiology_model extends CI_Model {
 	{
 		$this->db->query("DELETE FROM request WHERE id = ".$id);
 		
+	}
+	
+	function search_by($by)
+	{
+		
+		if ($by=="date")
+		{
+			$sql=$this->db->query("SELECT * FROM request INNER JOIN radiology ON request.image_id = radiology.image_id WHERE date = '".$this->input->post('search')."'");
+		}
+		else if ($by=="section")
+		{
+			$sql=$this->db->query("SELECT * FROM request INNER JOIN radiology ON request.image_id = radiology.image_id WHERE section_name = '".$this->input->post('search')."'");
+		}
+		else if ($by=="photo_kind")
+		{
+			$sql=$this->db->query("SELECT * FROM request INNER JOIN radiology ON request.image_id = radiology.image_id WHERE photo_kind = '".$this->input->post('search')."'");
+		}
+		else {
+			$sql=$this->db->query("SELECT * FROM request INNER JOIN radiology ON request.image_id = radiology.image_id WHERE patient_id = '".$this->input->post('search')."'");
+			
+		}		
+		
+		 foreach ($sql->result() as $raw ) {
+                $data[]=$raw;
+            }
+		if ($sql->num_rows >= 1)
+            return $data;
+		else {
+			$f=0;	
+			return $f;
+		}
 	}
 }

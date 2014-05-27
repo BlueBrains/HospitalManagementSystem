@@ -168,5 +168,5 @@
 	</div>
 	<?php 
     	echo form_close(); 
-		echo validation_errors('<p class = "error alert alert-danger">');
+		//echo validation_errors('<p class = "error alert alert-danger">');
     ?>

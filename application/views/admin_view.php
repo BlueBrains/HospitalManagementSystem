@@ -1,6 +1,5 @@
 <html>
-	<script src="<?php echo base_url();?>/js/jquery.js" type="text/javascript"></script>
-
+<script src="<?php echo base_url();?>/js/jquery.js" type="text/javascript"></script>
 <script type="text/javascript">
    $(document).ready(function() {
    	 changeClass(<?php if (isset($idd)) echo $idd;?>);
@@ -30,8 +29,7 @@ function show_confirm(id){
     var c=confirm("Are you sure you wish to delete?");
     // if true
     if (c){
-	     window.location.href = "<?php echo base_url()."radiology/delete/";?>"+id;
-	     
+	     location.herf = "<?php echo base_url()."radiology/delete/";?>"+id;	     
 		}
   }
 
@@ -54,7 +52,7 @@ function show_confirm(id){
 	        document.getElementById("subtitle").innerHTML="Radiology";
 <?php	         $x =2;?>	        
        }
-       else
+       else if (id==3)
     	{
 	        document.getElementById("3").className = "list-group-item active";
 	        document.getElementById("2").className = "list-group-item ";
@@ -62,26 +60,51 @@ function show_confirm(id){
 	        document.getElementById("subtitle").innerHTML="Analyses";
 <?php	        $x=3;?>	        
        }
+       else 
+       {
+	        document.getElementById("3").className = "list-group-item ";
+	        document.getElementById("2").className = "list-group-item ";
+	        document.getElementById("1").className = "list-group-item ";
+       		document.getElementById("subtitle").innerHTML="Request";
+       }
     }
     
 </script>
 <body>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Please Enter password</h4>
+      </div>
+      <div class="modal-body">
+        <input type="password" class="form-control" name="pass">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Validate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
  <div class="list-group">
  
-  <a href="#" onclick="changeClass(1)"  "list-group-item" id="1">Pharmacy</a>
-  <a href="<?php echo base_url();?>radiology/patient_req/0" onclick="changeClass(2)" class="list-group-item active" id="2"> Radiology</a>
-  <a href="#" class="list-group-item" onclick="changeClass(3)" id="3">Analyses</a>
+  <a href="#" onclick="changeClass(1)"  "list-group-item" id="1"  data-toggle="modal" data-target="#myModal">Pharmacy</a>
+  <a href="#" onclick="changeClass(2)" class="list-group-item" id="2" data-toggle="modal" data-target="#myModal"> Radiology</a>
+  <a href="#" class="list-group-item" onclick="changeClass(3)" id="3" data-toggle="modal" data-target="#myModal">Analyses</a>
 </div>
 
 <div class="panel panel-success">
-  <div class="panel-heading" id="subtitle"></div>
+  <div class="panel-heading" id="subtitle">Requests Of</div>
   <div class="panel-body">
   	
   		<table class="table table-striped" ">
-  
 	   <?php
 	  if ($idd=2 || $x=2)
-	  {  
+	  { 
       if (isset($record))
 		{
 		 if(is_array($record)){
@@ -95,13 +118,10 @@ function show_confirm(id){
                 echo "<tr".$active.">";
                 echo "<td>"."Section Name:"."&nbsp".$row->section_name."</td>";
                 echo "<td>"."Request Date:"."&nbsp".$row->date."</td>";
+                echo "<td>"."Type:"."&nbsp".$row->photo_kind."</td>";
                 echo "<td>"."Part of Body:"."&nbsp".$row->part_of_body."</td>";
-                echo "<td>"."Position:"."&nbsp".$row->position."</td>";
                 echo "<td> "."Descreption:"."&nbsp".$row->description."</td>";
-                //echo "<td>"."<a href=\"photo(".$row->img_id.")"."\">".$row->img_name."</a><br />";
-                //echo "<td>"."<a href=upload/".$row->id.">".$row->name."</a><br/>";
-                
-				echo "<td>"."<a href = ".base_url()."radiology/upload/".$row->id." >Request Accepted</a><br/>";
+              	echo "<td>"."<a href = ".base_url()."radiology/upload/".$row->id." >Request Accepted</a><br/>";
 				echo "<td>"."<a href ".base_url()."radiology/delete/".$row->id."  >Reject Request </a><br/>";
                 echo "</tr>";
             }
@@ -124,9 +144,50 @@ function show_confirm(id){
 			
     ?>	
 		</table>
-		
+<form role="form" action="<?php echo base_url();?>radiology/search" Method="POST"> 
+ <div class="row">
+  <div class="col-xs-4">
+    <input type="text" class="form-control" placeholder=".col-xs-4" name="search">
   </div>
+  <div class="col-xs-3">
+	<select class="form-control" placeholder=".col-xs-4" name="op">
+		  <option value="date">date</option>
+		  <option value="section">section</option>
+		  <option value="photo_kind">photo_kind</option>
+		  <option value="patient_id">patient_id</option>
+	</select>	
+  </div> 
+  <button type="submit" class="btn btn-primary">Search</button>
 </div>
+ </form> 
+</div>
+</div>
+	<div class="panel panel-info">
+				<div class="panel-heading">
+			    	<h3 class="panel-title"> Asgiment Patient To Medical Section </h3>
+			  </div>
+			  <div class="panel-body">
+			    <form role="form" action="<?php echo base_url();?>hospital/assert_patient" Method="POST"> 
+ <div class="row">
+  <div class="col-xs-2">
+    <h4><span class="label label-primary">Patient ID Number</span></h4>
+  </div>
+  <div class="col-xs-3">
+  		<input type="text" class="form-control" placeholder=".col-xs-3" name="search">
+  </div>
+  <div class="col-xs-3">
+	<select class="form-control" placeholder=".col-xs-4" name="section">
+		  <option value="(A&E)">Accident and emergency (A&E)</option>
+		  <option value="Haematology">Haematology</option>
+		  <option value="Pain_management_clinics">Pain management clinics</option>
+		  <option value="(ENT)">Ear nose and throat (ENT)</option>
+	</select>	
+  </div> 
+  <button type="submit" class="btn btn-primary">Assert</button>
+</div>
+ </form> 
+			  </div>
+	</div>
 
 </body>
 </html>
