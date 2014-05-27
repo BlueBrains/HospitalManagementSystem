@@ -16,25 +16,44 @@ class Login extends CI_Controller {
 		$this->load->model('Membership_model');
 		$q = $this->Membership_model->validate();
 		
-		if ($_POST['ID']=='doctor')
-			$state = 'isDoctorLoggedIn';
-		else if ($_POST['ID']=='admin')
-			$state = 'isAdminLoggedIn';
-		else
-			$state = 'isPatientLoggedIn';
 		if($q) // if the user's credentials validated...
 		{			
-				$data = array(
-				'username' => $this->input->post('username'),
-				 $state => true,
-//				 'isDoctorLoggedIn'=> true
-			);
-			$this->session->set_userdata($data);
-					
+				if ($_POST['ID']=='doctor')
+				{
+					$this->session->set_userdata('username',$this->input->post('username'));
+					$this->session->set_userdata('isDoctorLoggedIn',TRUE);
+				}
+				else if ($_POST['ID']=='admin')
+{
+					$this->session->set_userdata('username',$this->input->post('username'));
+					$this->session->set_userdata('isAdminLoggedIn',TRUE);
+}
+				else
+					{
+					$this->session->set_userdata('username',$this->input->post('username'));
+					$this->session->set_userdata('isPatientLoggedIn',TRUE);
+					}
+
+				
+			
+			//$this->session->set_userdata('isDoctorLoggedIn',TRUE);
 					if ($_POST['ID']=='doctor')
-						redirect('Hospital/doctor',$data);
+				   		{
+				   				
+				   			$data['main_content'] = 'doctor_view';
+							$data['title'] = 'Welcome Doctor';
+							$data['bar1'] = "Doctor Order";
+							$data['linkbar1'] ="radiology/request";
+							$this->load->view('includes/template', $data);		
+						}
 					else if ($_POST['ID']=='admin')
-						redirect('Hospital/admin',$data);
+					{
+							$data['title'] = 'Welcome Admin';
+							$data['main_content'] ='admin_view';	
+							$data['bar1'] = "Create member";
+							$data['linkbar1'] ="login/add_doctor";
+							$this->load->view('includes/template',$data);
+					}
 					else
 						redirect('Hospital',$data);
 						
@@ -71,29 +90,47 @@ class Login extends CI_Controller {
 		$this->load->library('form_validation');
 		
 	  //  field name, error message, validation rules
-		$this->form_validation->set_rules('username', 'Username', 'trim|required|min_length[4]');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
+		$this->form_validation->set_rules('name', 'name', 'trim|required|min_length[4]');
+		$this->form_validation->set_rules('password', 'password', 'trim|required|min_length[4]|max_length[32]');
 		
-	
+
 		if($this->form_validation->run() == FALSE)
 		{
-			$this->load->view('signup_form');
+				if ($r==2){
+							$data['title'] = 'Welcome Admin';
+							$data['main_content'] ='signup_form';	
+							$data['bar1'] = "Create member";
+							$data['linkbar1'] ="login/add_doctor";
+							$this->load->view('includes/template',$data);
+}
+				else{
+							$data['title'] = 'Welcome Admin';
+							$data['main_content'] ='signup_form_patient';	
+							$data['bar1'] = "Create member";
+							$data['linkbar1'] ="login/add_doctor";
+							$this->load->view('includes/template',$data);			
+				}
 		}
 		
 		else
 		{			
-	
-			
 			$this->load->model('Membership_model');
 			/**/
 			if($query = $this->Membership_model->create_member($r))
 			{
-				$data['main_content'] = 'signup_successful';
-				$this->load->view('signup_successful', $data);
+							$data['title'] = 'Welcome Admin';
+							$data['main_content'] ='admin_view';	
+							$data['bar1'] = "Create member";
+							$data['linkbar1'] ="login/add_doctor";
+							$this->load->view('includes/template',$data);
 			}
 			else
 			{
-				$this->load->view('signup_form');			
+							$data['title'] = 'Welcome Admin';
+							$data['main_content'] ='signup_form_patient';	
+							$data['bar1'] = "Create member";
+							$data['linkbar1'] ="login/add_doctor";
+							$this->load->view('includes/template',$data);			
 			}
 		}
 		
@@ -123,7 +160,7 @@ class Login extends CI_Controller {
 	function logout()
 	{
 		$this->session->sess_destroy();
-		$this->index();
+		redirect('Login');
 	}
 
 }
