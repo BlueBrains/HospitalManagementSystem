@@ -3,19 +3,25 @@
 		<thead>
 			<th>#</th>
 			<th>Doctor</th>
-			<th>Meicine</th>
+			<th>Patient</th>
+			<th>Medicine</th>
+			<th>Caliber</th>
 			<th>Accept</th>
 			<th>Reject</th>
 		</thead>
 		<tbody>
 	<?php
+	$disabled;
 		foreach ($results as $data) {
+			if($data->quantity == 0) $disabled = "disabled"; else $disabled = "";  
 			echo "<tr>
 					<td>$data->id</td>
-					<td>$data->doctorID</td>
-					<td>$data->medicineID</td>
-					<td><button class='btn btn-success'>Accept</button></td>
-					<td><button class='btn btn-danger'>Reject</button></td>
+					<td>$data->firstName $data->lastName</td>
+					<td>$data->pfirstName $data->plastName</td>
+					<td>$data->tradeName</td>
+					<td>$data->caliber</td>					 								 
+					<td><a class='btn btn-success ".$disabled."' href='../confirmOrder/$data->id' role='button'>Accept</a></td>
+					<td><a class='btn btn-danger' href='../rejectOrder/$data->id' role='button'>Reject</a></td>
 				 </tr>";
 		}
 	?>
