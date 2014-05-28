@@ -25,7 +25,7 @@ class Pharmacy extends CI_Controller {
 	public function newOrder() //$patientId,$doctorId
 	{
 		$data['title'] = 'Request a medicine';	
-		$data['bar1'] = "SignIn";
+		$data['bar1'] = "Log In";
 		$data['linkbar1'] ="/login";
 		$data['main_content'] = 'addMed';
 		$this->load->view('includes/template',$data);
@@ -87,6 +87,11 @@ class Pharmacy extends CI_Controller {
 	public function newMed(){
 		$data['main_content'] = 'newMed';
 		$data['title'] = "New Medicine";
+		$this->load->view('includes/template',$data);
+	}
+	public function updateMed(){
+		$data['main_content'] = 'updateMed';
+		$data['title'] = "Enter Medicines Order";
 		$this->load->view('includes/template',$data);
 	}
 	public function addMed(){
@@ -171,5 +176,16 @@ class Pharmacy extends CI_Controller {
 
 		$this->load->view('includes/template',$data);
 	}
-	
+	public function confirmOrder($value){
+		//TODO adding the med to the patient bill
+		$this->load->model('pharmacy_model');
+		$this->pharmacy_model->deleteOrder($value);		
+		redirect('Pharmacy/listOrder/0');	
+	}
+	public function rejectOrder($value){
+		//TODO telling the doctor that his order has rejected
+		$this->load->model('pharmacy_model');
+		$this->pharmacy_model->deleteOrder($value);
+		redirect('Pharmacy/listOrder/');	
+	}		
 }

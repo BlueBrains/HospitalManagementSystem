@@ -19,14 +19,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand</a>
+      <a class="navbar-brand" href=<?php if(isset($linkbar0)) echo base_url().$linkbar0; else echo base_url()."#"; ?>><?php if(isset($bar0)) echo $bar0; else echo "Brand" ?></a>
     </div>
 	
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href= <?php if(isset($linkbar1)) echo base_url().$linkbar1; else echo base_url()."login"; ?>><?php if(isset($bar1)) echo $bar1; else echo "Log In " ?> </a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href= <?php if(isset($linkbar2)) echo base_url().$linkbar2; else echo base_url()."#"; ?>><?php if(isset($bar2)) echo $bar2; else echo "Contact Us" ?></a></li>
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
