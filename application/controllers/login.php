@@ -90,10 +90,25 @@ class Login extends CI_Controller {
 		$this->load->library('form_validation');
 		
 	  //  field name, error message, validation rules
-		$this->form_validation->set_rules('name', 'name', 'trim|required|min_length[4]');
+		$this->form_validation->set_rules('name', 'name', 'trim|required|min_length[3]');
 		$this->form_validation->set_rules('password', 'password', 'trim|required|min_length[4]|max_length[32]');
+		$this->form_validation->set_rules('first_name', 'first_name', 'trim|required|min_length[1]');
+		$this->form_validation->set_rules('last_name', 'last_name', 'trim|required|min_length[1]');
 		
-
+		if ($r==1){
+		$this->form_validation->set_rules('country', 'country', 'trim|required|min_length[1]');
+		$this->form_validation->set_rules('phone', 'phone', 'trim|required|min_length[1]');
+		$this->form_validation->set_rules('emergencyPhone1', 'emergencyphone1', 'trim|required|min_length[1]');
+		$this->form_validation->set_rules('chronicDiseases', 'chronicDiseases', 'trim|required|min_length[1]');
+		$this->form_validation->set_rules('addication', 'addication', 'trim|required|min_length[1]');
+		}
+		else 
+		{
+			$this->form_validation->set_rules('department', 'department', 'trim|required|min_length[1]');
+			$this->form_validation->set_rules('certificate', 'certificate', 'trim|required|min_length[1]');
+		
+		}
+			
 		if($this->form_validation->run() == FALSE)
 		{
 				if ($r==2){

@@ -27,8 +27,9 @@ class radiology extends CI_Controller {
 	{
 		$this->load->model('radiology_model');
 		 $id=$this->input->post('patient_id');
-		if($id!=0)
-		if($data['record'] = $this->radiology_model->create_req())
+		 $this->load->model('Membership_model');
+		if($this->Membership_model->findPatient($id)){
+			if($data['record'] = $this->radiology_model->create_req())
 			{	
 		
 			$data['main_content'] = 'requests_page';	
@@ -47,15 +48,16 @@ class radiology extends CI_Controller {
 			$data['linkbar1'] ="#";
 			$this->load->view('includes/template',$data);
 			}
-		else 
-			{
+		}
+		else {
+			echo "No Patient Id ";
 			$data['main_content'] = 'requests_page';	
 			$data['title'] = 'Welcome Admin';	
 			$data['bar1'] = "not specified";
 			$data['linkbar1'] ="#";
 			$this->load->view('includes/template',$data);
-			}
-	
+			
+		}
 	}
 	function patient_req($id)
 	{
@@ -125,6 +127,9 @@ class radiology extends CI_Controller {
 	
 	function search ()
 	{
+		$isAdminLoggedIn = $this->session->userdata('isAdminLoggedIn');
+		if(isset($isAdminLoggedIn) && $isAdminLoggedIn == true)
+		{	
 		$this->load->model('radiology_model');
 		$e = $this->input->post('op');
 		$data['record'] = $this->radiology_model->search_by($e);	
@@ -134,7 +139,7 @@ class radiology extends CI_Controller {
 			$data['linkbar1'] ="#";
 			$data['idd']="2";
 			$this->load->view('includes/template',$data);		
-	
+		}
 	}
 }
 
