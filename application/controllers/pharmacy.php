@@ -136,7 +136,7 @@ class Pharmacy extends CI_Controller {
 		$config['per_page'] = 20;
 		$config['total_rows'] = 200; //should be reaplaced
 
-		$config['per_page'] = 2;
+		$config['per_page'] = 5;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 2;
 
@@ -177,9 +177,8 @@ class Pharmacy extends CI_Controller {
 		$this->load->view('includes/template',$data);
 	}
 	public function confirmOrder($value){
-		//TODO adding the med to the patient bill
 		$this->load->model('pharmacy_model');
-		$this->pharmacy_model->deleteOrder($value);		
+		$this->pharmacy_model->confirmOrder($value);		
 		redirect('Pharmacy/listOrder/0');	
 	}
 	public function rejectOrder($value){
@@ -188,4 +187,14 @@ class Pharmacy extends CI_Controller {
 		$this->pharmacy_model->deleteOrder($value);
 		redirect('Pharmacy/listOrder/');	
 	}		
+	public function detailOrder($value)
+	{
+		$this->load->model('pharmacy_model');		
+		if($q = $this->pharmacy_model->detailOrder($value)){
+			$data['main_content'] = 'detailOrder';
+			$data['title'] = "Details";
+			$data['result'] = $q[0];			
+			$this->load->view('includes/template',$data);
+		}		
+	}
 }
