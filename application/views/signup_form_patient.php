@@ -14,9 +14,12 @@
 	</div>
 	
 	<?php echo form_open('login/create_member/1');?>
-	
+	<div class="panel panel-success">
+  		<div class="panel-heading" id="subtitle">Civil INFO</div>
+  			<div class="panel-body">
+  
 	<div class='row' style="margin-bottom:50px">
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="input-group">
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">first name*</button>
@@ -24,7 +27,7 @@
 					<input type="text" name="first_name" id="first_name" class="form-control">
 			</div>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="input-group">
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">last name*</button>
@@ -32,7 +35,28 @@
 					<input type="text" name="last_name" id="last_name" class="form-control">
     		</div>
 		</div>
+		<div class="col-md-4">
+			<div class="input-group">
+				<span class="input-group-btn">
+						<button class="btn btn-default" type="button">Gender*</button>
+    			</span>
+    		</div>	
+    			<div class="col-md-2">
+					<div class="radio-inline"> 	
+				        <label>
+				          <input type="radio" name="ID" id="optionsRadios1" value="male" checked> Male
+				        </label>
+			        </div>
+			        <div class="radio-inline">
+				        <label>
+				          <input type="radio" name="ID" id="optionsRadios2" value="female"> Female
+				        </label>
+			        </div>
+			      </div>  
+    		</div>
+		
 	</div>
+		
 		<div class='row' style="margin-bottom:50px">
 		<div class="col-md-6">
 			<div class="input-group">
@@ -123,6 +147,12 @@
     			</div>
 			</div>
 		</div>
+	</div>
+	</div>
+	<div class="panel panel-info">
+ 	 <div class="panel-heading" id="subtitle">Medical INFO</div>
+ 		 <div class="panel-body">
+  	
 		 	<div class='row' style="margin-bottom:50px">
 		<div class="col-md-6">
 			<div class="input-group">
@@ -160,7 +190,9 @@
     			</div>
 			</div>
 		</div>
-			
+	</div>
+	</div>
+		
 	<div class="row" style="margin-bottom:50px">
 		<div class='col-sm-2'>
 			<button class="btn btn-lg btn-primary" type="submit">Submit</button>
@@ -168,5 +200,5 @@
 	</div>
 	<?php 
     	echo form_close(); 
-		//echo validation_errors('<p class = "error alert alert-danger">');
+		echo validation_errors('<p class = "error alert alert-danger">');
     ?>

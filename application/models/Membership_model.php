@@ -59,12 +59,23 @@ class Membership_model extends CI_Model {
 				'lastName' => $_POST['last_name'],
 				'emailAddress' => $_POST['email'],
 				'Certificate_id' => $_POST['certificate'],
-				'Department' => $_POST['department']						
+				'department_id' => $_POST['department']						
 			);
 				$insert = $this->db->insert('doctors', $new_member_insert_data);
 				return $insert;
 						
 		}
 					
+	}
+	public function findPatient($value)
+	{
+		$this->db->where('id', $value);
+		$query = $this->db->get('patients');
+		if($query->num_rows == 1)
+		{			
+			return true;
+		}
+		else 
+		return false;
 	}
 }
