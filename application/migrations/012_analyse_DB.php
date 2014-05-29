@@ -36,19 +36,9 @@ class Migration_analyse_DB extends CI_Migration {
 
   public function down()
   {
-<<<<<<< HEAD
     $this->dbforge->drop_table('analyse');
     $this->dbforge->drop_table('catagoury');
     $this->dbforge->drop_table('analyse_request');  
-=======
-      $this->dbforge->drop_table('analyse_request');
-       $this->dbforge->drop_table('analyse');  
-       $this->dbforge->drop_table('catagoury');
-       
-       
-   
-    
->>>>>>> 81088816246b6c2bc577c9fb888e8509d0872440
 
   }
 }
