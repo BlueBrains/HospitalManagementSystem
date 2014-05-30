@@ -17,7 +17,7 @@ class radiology extends CI_Controller {
 			$data['main_content'] = 'request';	
 			$data['title'] = 'Welcome Doctor';	
 			$data['bar1'] = "Doctor Order";
-			$data['linkbar1'] ="doctor_view";
+			$data['linkbar1'] ="hospital/doctor";
 			$this->load->view('includes/template',$data);
 			//die();
 		}			
@@ -50,13 +50,12 @@ class radiology extends CI_Controller {
 			}
 		}
 		else {
-			echo "No Patient Id ";
-			$data['main_content'] = 'requests_page';	
+			$data['error']='no patient id matches';
+			$data['main_content'] = 'request';	
 			$data['title'] = 'Welcome Admin';	
 			$data['bar1'] = "not specified";
 			$data['linkbar1'] ="#";
 			$this->load->view('includes/template',$data);
-			
 		}
 	}
 	function patient_req($id)

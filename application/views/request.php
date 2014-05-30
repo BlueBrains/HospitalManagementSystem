@@ -21,7 +21,7 @@ $('#menu9').hide();
 }
 );
 function showTutorial(name){
-  document.show.show.value = name
+  document.myform.show.showtext.value = name
 }
 function set(name){
   document.myform.part.value = name
@@ -48,11 +48,22 @@ else if (name=="Spine")
 </script>
 </head>
 <body>
-						<p>
-							<form name="myform" action="send_req" method="post">
-									<label for="Patient ID"> <span>Patient ID*</span>
-									<input type="text" name="patient_id" id="ID"></br>
-									<label > <span>image Type*</span>	</br>																		
+<form name="myform" action="send_req" method="post">
+								
+	  <div class='row' style="margin-bottom:20px">
+		<div class="col-md-6">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Patient ID*</button>
+    			</span>
+				<input type="text" name="patient_id" id="patient_id" class="form-control">
+				
+			</div>
+			<span><?php if (isset($error)) echo '<p class = "error alert alert-danger">'.$error;?></span>
+		</div>
+		<div class="col-md-6">
+			<div class="input-group">
+				<label > <span>image Type*</span>	</br>																		
 									<input type="radio" name="image_id" value="1" checked="true">
 									<label for="1">X-Ray</label>	
 									
@@ -62,205 +73,74 @@ else if (name=="Spine")
 									<input type="radio" name="image_id" value="3" >
 									<label for="3">Echo</label>
 									</label> </br>
-									<label for="Photo Kind"> <span>Section name</span>
-									<input type="text" name="section_name" id="Section_name">
-									</label></br>
-									<label for="Part"> <span>Part of Body*</span>
-									<input type="text" name="part_of_body" id="part" readonly="readonly">
-									</label></br>
-									<label for="position"> <span>position*</span>
-									<input type="text" name="position" id="position" readonly="readonly">
-									</label></br>
-									<label for="Comment"> <span>Comment</span>
-									<textarea name="comment" id="comment" cols="30" rows="10"></textarea>
-									</label>
-								<input type="submit" name="send" id="submit">
-							</form>
-						</p>
-	<div id="menu">
-	 <menu id="menu1" name="S1" >
-			<ul class="menu">
-				<li><a  class="parent"><span>SKULL</span></a>
-					<div><ul>
-                        <li><a ><span>SKull AP</span></a></li>
-                        <li><a><span>Skull PA</span></a></li>
-                        <li><a><span>SKull LAT</span></a></li>
-                        <li><a><span>SKull 3/4</span></a></li>
-						<li><a><span>Orbita AP</span></a></li>
-                        <li><a><span>Orbita PA</span></a></li>
-                        <li><a><span>Orbita 3/4</span></a></li>
-                        <li><a><span>OPG</span></a></li>
-						<li><a><span>Nasal Bone</span></a></li>
-                        <li><a><span>Sinus AP</span></a></li>
-                        <li><a><span>Sinus PA</span></a></li>
-                        <li><a><span>Sinus LAT</span></a></li>
-						<li><a><span>Mastoid</span></a></li>
-                        <li><a><span>Mandibula</span></a></li>
-                        <li><a><span>Cephalogram PA</span></a></li>
-                        <li><a><span>Cephalogram LAT</span></a></li>
-                        <li><a><span>TMJ open mouth</span></a></li>
-                        <li><a><span>TMJ closed mouth </span></a></li>
-						</ul></div>
-				</li>	
-			</ul>
- </menu>
- </div>
-		<div id="menu">
-			 <menu id="menu2" name="S1" >
-					<ul class="menu">
-						<li><a  class="parent"><span>Shoulder</span></a>
-							<div><ul>
-								<li><a ><span>Clavical AP</span></a></li>
-								<li><a><span>Clavical AX</span></a></li>
-								<li><a><span>Scapular AP</span></a></li>
-								<li><a><span>Scapular Y</span></a></li>
-								<li><a><span>Scapular Lat</span></a></li>
-								<li><a><span>Shoulder AP</span></a></li>
-								<li><a><span>Shoulder AP ER</span></a></li>
-								<li><a><span>Shoulder AP IR</span></a></li>
-								<li><a><span>Shoulder PR</span></a></li>
-								<li><a><span>Shoulder Axiaal</span></a></li>
-								<li><a><span>Shoulder Transthoracic</span></a></li>
-								<li><a><span>Shoulder Abduction</span></a></li>
-								<li><a><span>ACJ AP</span></a></li>
-								<li><a><span>ACJ AP with weight</span></a></li>
-								</ul></div>
-						</li>	
-					</ul>
-		 </menu>
-		 </div>
-		 <div id="menu">
-			 <menu id="menu3" name="S1" >
-					<ul class="menu">
-						<li><a  class="parent"><span>Chest</span></a>
-							<div><ul>
-								<li><a ><span>Chest AP</span></a></li>
-								<li><a><span>Chest PA</span></a></li>
-								<li><a><span>Chest LAT</span></a></li>
-								<li><a><span>Chest on bed AP </span></a></li>
-								<li><a><span>Ribs upper</span></a></li>
-								<li><a><span>Ribs Lower</span></a></li>
-								<li><a><span>Trachea AP</span></a></li>
-								<li><a><span>Trachea Lat</span></a></li>
-								<li><a><span>Sterrum AP</span></a></li>
-								<li><a><span>Sterrum Lat</span></a></li>
-								<li><a><span>Stemo Clav. Gewr.</span></a></li>
-								</ul></div>
-						</li>	
-					</ul>
-		 </menu>
-		 </div>
-		 <div id="menu">
-			 <menu id="menu4" name="S1" >
-					<ul class="menu">
-						<li><a  class="parent"><span>Abdomen</span></a>
-							<div><ul>
-								<li><a ><span>Abdomen AP</span></a></li>
-								<li><a><span>Abdomen LAT</span></a></li>
-								<li><a><span>Abdomen procubitus</span></a></li>
-								<li><a><span>Abdomen LAT Dec</span></a></li>
-								</ul></div>
-						</li>	
-					</ul>
-		 </menu>
-		 </div>
-		<div id="menu">
-			 <menu id="menu5" name="S1" >
-					<ul class="menu">
-						<li><a  class="parent"><span>Pelvis</span></a>
-							<div><ul>
-								<li><a ><span>Pelvis AP</span></a></li>
-								<li><a><span>Pelvis Inlet</span></a></li>
-								<li><a><span>Pelvis Outlet</span></a></li>
-								<li><a><span>Pelvitremie</span></a></li>
-								<li><a><span>Hib AP</span></a></li>
-								<li><a><span>Hib AX</span></a></li>
-								<li><a><span>Hib LAT</span></a></li>
-								<li><a><span>Pubis</span></a></li>
-								<li><a><span>SU</span></a></li>
-								<li><a><span>Pelvis Loweristan </span></a></li>
-								</ul></div>
-						</li>	
-					</ul>
-		 </menu>
-		 </div>
-		<div id="menu">
-			 <menu id="menu6" name="S1" >
-					<ul class="menu">
-						<li><a  class="parent"><span>Mammo</span></a>
-							<div><ul>
-								<li><a  class="parent"><span>Right</span></a>
-									<div><ul>
-										<li><a ><span>R-CC</span></a></li>
-										<li><a><span>R-MLO</span></a></li>
-										<li><a><span>R-ML</span></a></li>
-										<li><a><span>R-Xcc</span></a></li>
-										<li><a><span>Mag R</span></a></li>
-										<li><a><span>Spot R</span></a></li>
-										<li><a><span>Implant R-CC</span></a></li>
-										<li><a><span>Implant Displ R-CC</span></a></li>
-										<li><a><span>Implant R-MLO</span></a></li>
-									</ul></div>
-								</li>
-								<li><a  class="parent"><span>Left</span></a>
-									<div><ul>
-										<li><a><span>L-CC</span></a></li>
-										<li><a><span>L-MLO</span></a></li>
-										<li><a><span>L-ML</span></a></li>
-										<li><a><span>L-Xcc</span></a></li>
-										<li><a><span>Mag L</span></a></li>
-										<li><a><span>Spot L</span></a></li>
-										<li><a><span>Implant L-CC</span></a></li>
-										<li><a><span>Implant Displ L-CC</span></a></li>
-										<li><a><span>Implant L-MLO</span></a></li>						
-								</ul></div>
-								</li>
-								<li><a><span>Stereotaxy</span></a></li>
-								<li><a><span>Needle Specimen</span></a></li>
-								<li><a><span>Sugical Specimen </span></a></li>
-								</ul></div>
-						</li>	
-					</ul>
-		 </menu>
-		 </div>
-		<div id="menu">
-			 <menu id="menu7" name="S1" >
-					<ul class="menu">
-						<li><a  class="parent"><span>Upper Extremities</span></a>
-							<div><ul>
-								</ul></div>
-						</li>	
-					</ul>
-		 </menu>
-		 </div>
-		<div id="menu">
-			 <menu id="menu8" name="S1" >
-					<ul class="menu">
-						<li><a  class="parent"><span> Lower Extremities</span></a>
-							<div><ul>
-								</ul></div>
-						</li>	
-					</ul>
-		 </menu>
-		 </div>
-				<div id="menu">
-			 <menu id="menu9" name="S1" >
-					<ul class="menu">
-						<li><a  class="parent"><span>Spine</span></a>
-							<div><ul>
-								</ul></div>
-						</li>	
-					</ul>
-		 </menu>
-		 </div> 
-        <div class="content">
-			<div class="archive">
-<!-- Create  Mappings -->
-<img src="<?php echo base_url();?>/images/bone.jpg" alt="HTML Map" 
-        border="0" usemap="#tutorials"/>
-<form name="show" action="send" method="post">
-	<input type="text" name="show" id="show">
+			</div>
+		</div>
+	 </div>	
+
+	<div class='row' style="margin-bottom:40px" >
+	<div style="margin-right:120px">
+		<div class="col-md-4">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Section name</button>
+    			</span>
+				<input type="text" name="section_name" id="section_name" class="form-control">
+			</div>
+		</div>
+	</div>	
+		<div style="margin-right:120px">	
+		<div class="col-md-4">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Part of Body*</button>
+    			</span>
+				<input type="text" name="part_of_body" id="part" class="form-control">
+			</div>
+		</div>
+	</div>
+	<div style="margin-right:120px">	
+		<div class="col-md-4">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">position*</button>
+    			</span>
+				<input type="text" name="position" id="position" class="form-control">
+			</div>
+		</div>	
+	</div>	
+	
+
+	</div>
+	<div class="row">
+					
+		<div class="col-md-6" style="margin-right:120px">
+			<button class="btn btn-default" type="button">Comment</button>
+    		<textarea name="comment"cols="60" rows="4" class="form-control"></textarea>
+		</div>
+		
+			<div class="col-md-4">
+			<div class="media">
+				  <a class="pull-right" href="#">
+				   		 <img class="media-object" src="<?php echo base_url();?>/images/bone.jpg" alt="HTML Map"  border="0" usemap="#tutorials"/>
+				  </a>
+			</div>	
+		</div>
+		<div class="col-md-6" style="margin-right:20px">
+			<button type="submit" class="btn btn-primary">Send Request </button>
+		</div>	
+		
+		
+	</div>
+
+
+</div>
+
 </form>
+<!--	<form name="show" id="show">
+		<input type="text" name="showtext" id="showtext">
+	</form>
+-->
+
 <map name="tutorials">
    <area shape="rect" 
             coords="91,5,154,75"

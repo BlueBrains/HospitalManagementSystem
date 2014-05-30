@@ -41,18 +41,13 @@
 						<button class="btn btn-default" type="button">Gender*</button>
     			</span>
     		</div>	
-    			<div class="col-md-2">
-					<div class="radio-inline"> 	
-				        <label>
-				          <input type="radio" name="ID" id="optionsRadios1" value="male" checked> Male
-				        </label>
-			        </div>
-			        <div class="radio-inline">
-				        <label>
-				          <input type="radio" name="ID" id="optionsRadios2" value="female"> Female
-				        </label>
-			        </div>
-			      </div>  
+			<div class="input-group">																
+									<input type="radio" name="gender" value="male" checked="true">
+									<label for="1">Male</label>	
+									
+									<input type="radio" name="gender" value="female" >
+									<label for="2">Female</label>
+			</div> 
     		</div>
 		
 	</div>

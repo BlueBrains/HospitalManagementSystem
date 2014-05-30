@@ -10,7 +10,8 @@ class Hospital extends CI_Controller {
 	
 	function doctor()
 	{
-		$isDoctorLoggedIn = $this->session->userdata('isdoctorLoggedIn');
+		$isDoctorLoggedIn = $this->session->userdata('isDoctorLoggedIn');
+		
 		if(isset($isDoctorLoggedIn) && $isDoctorLoggedIn == true)
 		{
 			$data['main_content'] = 'doctor_view';	
