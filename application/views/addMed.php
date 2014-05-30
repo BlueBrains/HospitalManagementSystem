@@ -11,7 +11,7 @@
 					<button class="btn btn-default" type="button">patient name</button>
     			</span>
     			<?php echo form_input(array('name' => 'patientName','id' => 'patientName', 'class' =>
-     			'form-control')); 
+     			'form-control','tabIndex'=>'1')); 
     			?>
 			</div>
 		</div>
@@ -21,7 +21,7 @@
 					<button class="btn btn-default" type="button">medicine name</button>
     			</span>
     			<?php echo form_input(array('name' => 'medicineName','id' => 'medicineName', 'class' =>
-     			'form-control')); 
+     			'form-control','tabIndex'=>'2')); 
     			?>
     		</div>
 		</div>
@@ -33,7 +33,7 @@
 					<button class="btn btn-default" type="button">Dose</button>
     			</span>
     			<?php echo form_input(array('name' => 'dose','id' => 'Dose', 'class' =>
-     			'form-control')); 
+     			'form-control','tabIndex'=>'3')); 
     			?>
 			</div>
 		</div>
@@ -43,7 +43,7 @@
 					<button class="btn btn-default" type="button">Caliber</button>
     			</span>
     			<?php echo form_input(array('name' => 'caliber','id' => 'Caliber', 'class' =>
-     			'form-control')); 
+     			'form-control','tabIndex'=>'4')); 
     			?>
     		</div>
 		</div>
@@ -56,13 +56,13 @@
 
 	<div class="row" style="margin-bottom:50px">
 		<div class="col-md-6">
-    		<textarea name="address"cols="60" rows="4" class="form-control"></textarea>
+    		<textarea name="details" cols="60" rows="4" class="form-control" tabindex="5"></textarea>
 		</div>
 	</div>
 
 	<div class="row" style="margin-bottom:50px">
 		<div class='col-sm-2'>
-			<button class="btn btn-lg btn-primary" type="submit">Request</button>
+			<button class="btn btn-lg btn-primary" type="submit" tabindex="6">Request</button>
 		</div>
 	</div>
 	<?php 
