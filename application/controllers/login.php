@@ -16,18 +16,22 @@ class Login extends CI_Controller {
 		$this->load->model('Membership_model');
 		$q = $this->Membership_model->validate();
 		
-		if($q) // if the user's credentials validated...
+		if($q->num_rows==1) // if the user's credentials validated...
 		{			
 				if ($_POST['ID']=='doctor')
 				{
+							foreach ($q->result() as $raw ) {
+                				$data[]=$raw;
+            						}
 					$this->session->set_userdata('username',$this->input->post('username'));
 					$this->session->set_userdata('isDoctorLoggedIn',TRUE);
+					$this->session->set_userdata('ID',$raw->id);
 				}
 				else if ($_POST['ID']=='admin')
-{
+					{
 					$this->session->set_userdata('username',$this->input->post('username'));
 					$this->session->set_userdata('isAdminLoggedIn',TRUE);
-}
+					}
 				else
 					{
 					$this->session->set_userdata('username',$this->input->post('username'));

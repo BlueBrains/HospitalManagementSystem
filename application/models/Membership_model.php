@@ -15,7 +15,7 @@ class Membership_model extends CI_Model {
 		$query = $this->db->get('patients');
 		if($query->num_rows == 1)
 		{			
-			return true;
+			return $query;
 		}
 
 		else
@@ -74,6 +74,21 @@ class Membership_model extends CI_Model {
 		if($query->num_rows == 1)
 		{			
 			return true;
+		}
+		else 
+		return false;
+	}
+
+	public function findDoctor($value)
+	{
+		$query=$this->db->query("SELECT * FROM doctors INNER JOIN department ON department.department_id = doctors.department_id WHERE id = '".$value."'");
+		
+		if($query->num_rows == 1)
+		{
+			foreach ($query->result() as $raw ) {
+                $data[]=$raw;
+            	}				
+			return $raw;
 		}
 		else 
 		return false;

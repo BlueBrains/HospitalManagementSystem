@@ -168,25 +168,37 @@ function show_confirm(id){
 			  </div>
 			  <div class="panel-body">
 			    <form role="form" action="<?php echo base_url();?>hospital/assert_patient" Method="POST"> 
- <div class="row">
-  <div class="col-xs-2">
-    <h4><span class="label label-primary">Patient ID Number</span></h4>
-  </div>
-  <div class="col-xs-3">
-  		<input type="text" class="form-control" placeholder=".col-xs-3" name="search">
-  </div>
-  <div class="col-xs-3">
-	<select class="form-control" placeholder=".col-xs-4" name="section">
-		  <option value="(A&E)">Accident and emergency (A&E)</option>
-		  <option value="Haematology">Haematology</option>
-		  <option value="Pain_management_clinics">Pain management clinics</option>
-		  <option value="(ENT)">Ear nose and throat (ENT)</option>
-	</select>	
-  </div> 
-  <button type="submit" class="btn btn-primary">Assert</button>
-</div>
- </form> 
+					 <div class="row">
+					  <div class="col-xs-2">
+					    <h4><span class="label label-primary">Patient ID Number</span></h4>
+					  </div>
+					  <div class="col-xs-3">
+					  		<input type="text" class="form-control" placeholder=".col-xs-3" name="assert">
+					  </div>
+					  <div class="col-xs-3">
+						<select class="form-control" placeholder=".col-xs-4" name="section">
+							  <option value="1">Accident and emergency (A&E)</option>
+							  <option value="2">Haematology</option>
+							  <option value="3">Pain management clinics</option>
+							  <option value="4">Ear nose and throat (ENT)</option>
+						</select>	
+					  </div> 
+					  <button type="submit" class="btn btn-primary">Assert</button>
+					</div>
+ 				</form> 
 			  </div>
+			  <?php 
+			  			if(isset($done) && $done==FALSE){
+			  				echo "<div class='alert alert-danger'>";
+							echo "<a>wrong Pateint Id  </a>";
+							echo "</div>";
+						}
+						else if (isset($done) && $done==True){
+							echo "<div class='alert alert-success'>";
+							echo "<a>Patient Add Successfully</a>";
+							echo "</div>";
+						} 
+			  ?>
 	</div>
 
 </body>

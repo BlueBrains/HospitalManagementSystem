@@ -22,8 +22,9 @@ class radiology_model extends CI_Model {
 		}
            
         }				
-	function create_req()
+	function create_req($dep)
 	{
+				
 			$now=getdate();
 			$id=$this->input->post('patient_id');
 			$y=$now['year']."-".$now['mon']."-".$now['mday'];
@@ -34,7 +35,8 @@ class radiology_model extends CI_Model {
 			'comment' => $this->input->post('comment'),	
 			'image_id'=> $this->input->post('image_id'),
 			'part_of_body'=> $this->input->post('part_of_body'),
-			'position'=> $this->input->post('position')
+			'position'=> $this->input->post('position'),
+			'patient_depart_id'=>$dep
 		);	
 		$insert = $this->db->insert('request', $new_request_insert_data);	
 		$sql=$this->db->query("SELECT * FROM request WHERE patient_id = '".$id."' and checked = 0");

@@ -49,7 +49,31 @@ else if (name=="Spine")
 </head>
 <body>
 <form name="myform" action="send_req" method="post">
-								
+	<div class="panel panel-info">
+		<div class="panel-heading">
+    		<h3 class="panel-title">Doctor Information</h3>
+  		</div>
+			<div class="panel-body">
+    			<div class="col-md-4">	
+    			<div class="input-group">
+    			<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Doctor Name       : </button>
+    			</span>
+				<input type="text" class="form-control" readonly="TRUE" value="<?php echo $nam; ?>">
+			</div>
+			</div>
+			<div class="col-md-6">
+    		<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Doctor Department :</button>
+    			</span>
+				<input type="text" readonly="TRUE" value="<?php echo $dep; ?>" class="form-control">
+			</div>
+			</div>
+		</div>		
+	</div>	
+	
+							
 	  <div class='row' style="margin-bottom:20px">
 		<div class="col-md-6">
 			<div class="input-group">
@@ -78,16 +102,6 @@ else if (name=="Spine")
 	 </div>	
 
 	<div class='row' style="margin-bottom:40px" >
-	<div style="margin-right:120px">
-		<div class="col-md-4">
-			<div class="input-group">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">Section name</button>
-    			</span>
-				<input type="text" name="section_name" id="section_name" class="form-control">
-			</div>
-		</div>
-	</div>	
 		<div style="margin-right:120px">	
 		<div class="col-md-4">
 			<div class="input-group">
