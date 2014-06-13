@@ -92,9 +92,9 @@ function show_confirm(id){
 
  <div class="list-group">
  
-  <a href="#" onclick="changeClass(1)"  "list-group-item" id="1"  data-toggle="modal" data-target="#myModal">Pharmacy</a>
-  <a href="#" onclick="changeClass(2)" class="list-group-item" id="2" data-toggle="modal" data-target="#myModal"> Radiology</a>
-  <a href="#" class="list-group-item" onclick="changeClass(3)" id="3" data-toggle="modal" data-target="#myModal">Analyses</a>
+  <a href="#"   class="list-group-item" id="1"  >Pharmacy</a>
+  <a href="#"  class="list-group-item" id="2"  > Radiology</a>
+  <a href="#" class="list-group-item"  id="3"  >Analyses</a>
 </div>
 
 <div class="panel panel-success">
