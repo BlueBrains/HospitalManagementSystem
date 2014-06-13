@@ -147,10 +147,10 @@ function show_confirm(id){
 <form role="form" action="<?php echo base_url();?>radiology/search" Method="POST"> 
  <div class="row">
   <div class="col-xs-4">
-    <input type="text" class="form-control" placeholder=".col-xs-4" name="search">
+    <input type="text" class="form-control" placeholder="" name="search">
   </div>
   <div class="col-xs-3">
-	<select class="form-control" placeholder=".col-xs-4" name="op">
+	<select class="form-control" placeholder="" name="op">
 		  <option value="date">date</option>
 		  <option value="section">section</option>
 		  <option value="photo_kind">photo_kind</option>
@@ -164,7 +164,7 @@ function show_confirm(id){
 </div>
 	<div class="panel panel-info">
 				<div class="panel-heading">
-			    	<h3 class="panel-title"> Asgiment Patient To Medical Section </h3>
+			    	<h3 class="panel-title"> Enter Patient To A Specific Section </h3>
 			  </div>
 			  <div class="panel-body">
 			    <form role="form" action="<?php echo base_url();?>hospital/assert_patient" Method="POST"> 
@@ -173,10 +173,10 @@ function show_confirm(id){
 					    <h4><span class="label label-primary">Patient ID Number</span></h4>
 					  </div>
 					  <div class="col-xs-3">
-					  		<input type="text" class="form-control" placeholder=".col-xs-3" name="assert">
+					  		<input type="text" class="form-control" placeholder="" name="assert">
 					  </div>
 					  <div class="col-xs-3">
-						<select class="form-control" placeholder=".col-xs-4" name="section">
+						<select class="form-control" placeholder="" name="section">
 							  <option value="1">Accident and emergency (A&E)</option>
 							  <option value="2">Haematology</option>
 							  <option value="3">Pain management clinics</option>

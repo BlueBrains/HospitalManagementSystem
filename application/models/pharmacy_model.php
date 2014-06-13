@@ -20,10 +20,10 @@ class Pharmacy_model extends CI_Model {
 		$this->db->where('id',$value);
 		$this->db->delete('order_medicine');					
 	}
-	public function confirmOrder($value)
+	public function confirmOrder($value)	
 	{
 		$this->db->where('id',$value);
-		$this->db->update('order_medicine',array('confirmed'=>1));		
+		$this->db->update('order_medicine',array('confirmed'=>1));				
 	}
 	public function addOrder($data)
 	{
