@@ -20,9 +20,8 @@ class patient_departe_model extends CI_Model {
 	{   	
         $sql=$this->db->query("SELECT * 
 FROM patient_depart
-INNER JOIN doctors ON doctors.department_id = patient_depart.department_id
 WHERE patient_id =  '".$r."'
-AND doctors.id =  '".$this->session->userdata('ID')."'
+AND department_id=  '".$this->input->post('section')."'
 AND close_bill =  '0'");
         
         foreach ($sql->result() as $raw ) {
