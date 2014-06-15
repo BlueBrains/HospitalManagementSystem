@@ -91,10 +91,18 @@ function show_confirm(id){
 </div>
 
  <div class="list-group">
- 
-  <a href="#"   class="list-group-item" id="1"  >Pharmacy</a>
-  <a href="#"  class="list-group-item" id="2"  > Radiology</a>
-  <a href="#" class="list-group-item"  id="3"  >Analyses</a>
+ <?php
+ $roll = $this->session->userdata('rollname');
+ $value = $this->session->userdata('pharmacy_admin');
+ if (isset($value) && $value==TRUE )
+  echo"<a href='".base_url()."'   class='list-group-item' id='1'  >Pharmacy</a>";
+ $value = $this->session->userdata('radiology_admin');
+ if (isset($value) && $value==TRUE )
+  echo"<a href='".base_url()."radiology/patient_req/0'  class='list-group-item' id='2'  > Radiology</a>";
+ $value = $this->session->userdata('analysis_admin');
+ if (isset($value) && $value==TRUE )
+  echo "<a href='".base_url()."' class='list-group-item'  id='3'  >Analyses</a>";
+  ?>
 </div>
 
 <div class="panel panel-success">
@@ -162,6 +170,11 @@ function show_confirm(id){
  </form> 
 </div>
 </div>
+<?php 
+$roll = $this->session->userdata('rollname');
+$value = $this->session->userdata('assert_patient');
+ if (isset($value) && $value==TRUE )
+ echo '
 	<div class="panel panel-info">
 				<div class="panel-heading">
 			    	<h3 class="panel-title"> Enter Patient To A Specific Section </h3>
@@ -186,9 +199,8 @@ function show_confirm(id){
 					  <button type="submit" class="btn btn-primary">Assert</button>
 					</div>
  				</form> 
-			  </div>
-			  <?php 
-			  			if(isset($done) && $done==FALSE){
+			  </div> 
+		';	  			if(isset($done) && $done==FALSE){
 			  				echo "<div class='alert alert-danger'>";
 							echo "<a>wrong Pateint Id  </a>";
 							echo "</div>";

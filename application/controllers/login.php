@@ -4,8 +4,8 @@ class Login extends CI_Controller {
 	
 	function index()
 	{
-		$data['main_content'] = 'logIn_view';
-		//$data['main_content'] = 'login';
+		//$data['main_content'] = 'logIn_view';
+		$data['main_content'] = 'login';
 		$data['title'] = 'Join us !';
 		
 		$this->load->view('includes/template', $data);
@@ -15,78 +15,100 @@ class Login extends CI_Controller {
 	{		
 		$this->load->model('Membership_model');
 		$q = $this->Membership_model->validate();
-		
+ 		
 		if($q->num_rows==1) // if the user's credentials validated...
 		{			
-				if ($_POST['ID']=='doctor')
-				{
-							foreach ($q->result() as $raw ) {
-                				$data[]=$raw;
-            						}
+				foreach ($q->result() as $raw ) {
+                		$data[]=$raw;
+            			}
 					$this->session->set_userdata('username',$this->input->post('username'));
-					$this->session->set_userdata('isDoctorLoggedIn',TRUE);
-					$this->session->set_userdata('ID',$raw->id);
-				}
-				else if ($_POST['ID']=='admin')
-					{
-					$this->session->set_userdata('username',$this->input->post('username'));
-					$this->session->set_userdata('isAdminLoggedIn',TRUE);
+					$this->session->set_userdata('isLoggedIn',TRUE);
+					$this->session->set_userdata('rollname',$raw->rollname);
+					if (isset($raw->doctor_id))
+					$this->session->set_userdata('ID',$raw->doctor_id);
+					elseif (isset($raw->patient_id)) {
+						$this->session->set_userdata('ID',$raw->patient_id);
 					}
-				else
-					{
-					$this->session->set_userdata('username',$this->input->post('username'));
-					$this->session->set_userdata('isPatientLoggedIn',TRUE);
-					}
+					redirect('hospital/station');
+		}			
 
-				
-			
-			//$this->session->set_userdata('isDoctorLoggedIn',TRUE);
-					if ($_POST['ID']=='doctor')
-				   		{
-				   				
-				   			$data['main_content'] = 'doctor_view';
-							$data['title'] = 'Welcome Doctor';
-							$data['bar1'] = "Doctor Order";
-							$data['linkbar1'] ="radiology/request";
-							$this->load->view('includes/template', $data);		
-						}
-					else if ($_POST['ID']=='admin')
-					{
-							$data['title'] = 'Welcome Admin';
-							$data['main_content'] ='admin_view';	
-							$data['bar1'] = "Create member";
-							$data['linkbar1'] ="login/add_doctor";
-							$this->load->view('includes/template',$data);
-					}
-					else
-						redirect('Hospital',$data);
+		else // incorrect username or password
+		 {	
+			 redirect('login',$data);
+		 }
+		
+		// if($q->num_rows==1) // if the user's credentials validated...
+		// {			
+				// if ($_POST['ID']=='doctor')
+				// {
+							// foreach ($q->result() as $raw ) {
+                				// $data[]=$raw;
+            						// }
+					// $this->session->set_userdata('username',$this->input->post('username'));
+					// $this->session->set_userdata('isDoctorLoggedIn',TRUE);
+					// $this->session->set_userdata('ID',$raw->id);
+				// }
+				// else if ($_POST['ID']=='admin')
+					// {
+					// $this->session->set_userdata('username',$this->input->post('username'));
+					// $this->session->set_userdata('isAdminLoggedIn',TRUE);
+					// }
+				// else
+					// {
+					// $this->session->set_userdata('username',$this->input->post('username'));
+					// $this->session->set_userdata('isPatientLoggedIn',TRUE);
+					// }
+// 
+// 				
+// 			
+			// //$this->session->set_userdata('isDoctorLoggedIn',TRUE);
+					// if ($_POST['ID']=='doctor')
+				   		// {
+// 				   				
+				   			// $data['main_content'] = 'doctor_view';
+							// $data['title'] = 'Welcome Doctor';
+							// $data['bar1'] = "Doctor Order";
+							// $data['linkbar1'] ="radiology/request";
+							// $this->load->view('includes/template', $data);		
+						// }
+					// else if ($_POST['ID']=='admin')
+					// {
+							// $data['title'] = 'Welcome Admin';
+							// $data['main_content'] ='admin_view';	
+							// $data['bar1'] = "Create member";
+							// $data['linkbar1'] ="login/add_doctor";
+							// $this->load->view('includes/template',$data);
+					// }
+					// else
+						// redirect('Hospital',$data);
 						
 			
-		}
-		else // incorrect username or password
-		{
-			echo "Error Not Valid";	
-			redirect('login',$data);
-		}
+		//}
+		// else // incorrect username or password
+		// {
+			// echo "Error Not Valid";	
+			// redirect('login',$data);
+		// }
 	}	
-	function red()
-	{
-		$this->load->view('station', $data);
-	}
-		function station()
-	{
-		$this->load->view('station', $data);
-	}
+
 	function add_doctor()
 	{
-		$data['main_content'] = 'signup_form';
-		$this->load->view('includes/template', $data);
+		$value = $this->session->userdata('add_doctor');
+ 		 if (isset($value) && $value==TRUE )	
+		 {
+		  $data['main_content'] = 'signup_form';
+		  $this->load->view('includes/template', $data);
+		 }
 	}
 	
 	function add_paitent()
 	{
-		$data['main_content'] = 'signup_form_patient';
-		$this->load->view('includes/template', $data);
+		$value = $this->session->userdata('add_patient');
+ 		 if (isset($value) && $value==TRUE )	
+		 {
+		 	$data['main_content'] = 'signup_form_patient';
+			$this->load->view('includes/template', $data);
+		 }
 	}
 	
 	function create_member($r)
@@ -171,11 +193,6 @@ class Login extends CI_Controller {
 					
 					
 	}
-	function A1()
-	{$this->load->view('nonserv'); }
-	function A2()
-	{$this->load->view('services');}
-	
 	function logout()
 	{
 		$this->session->sess_destroy();

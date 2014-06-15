@@ -4,19 +4,21 @@ class radiology extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();$this->load->library('session');
-		
+	
 	}	
 	
 	function request()
 	{
-			
-		$isLoggedIn = $this->session->userdata('isDoctorLoggedIn');
-		if(isset($isLoggedIn) && $isLoggedIn == true)
+
+		$isLoggedIn = $this->session->userdata('isLoggedIn');
+		$roll = $this->session->userdata('rollname');
+		$this->load->model('Membership_model');
+		if(isset($isLoggedIn) && $isLoggedIn == true && $this->Membership_model->can_do($roll,'send_requests'))
 		{
 		    $this->load->model('Membership_model');
 			$res=$this->Membership_model->findDoctor($this->session->userdata('ID'));	
 			$data['dep']=$res->department_name;
-			$data['nam']=$res->firstName." ".$res->lastName;	
+			$data['nam']=$res->firstName." ".$res->lastName;
 			$data['main_content'] = 'request';	
 			$data['title'] = 'Welcome Doctor';	
 			$data['bar1'] = "Doctor";
@@ -63,8 +65,8 @@ class radiology extends CI_Controller {
 	function patient_req($id)
 	{
 
-		$isAdminLoggedIn = $this->session->userdata('isAdminLoggedIn');
-		if(isset($isAdminLoggedIn) && $isAdminLoggedIn == true)
+		$isLoggedIn = $this->session->userdata('isLoggedIn');
+		if(isset($isLoggedIn) && $isLoggedIn == true)
 		{
 		$this->load->model('radiology_model');
 		$data['record'] = $this->radiology_model->fetch_req($id);	
@@ -142,8 +144,8 @@ class radiology extends CI_Controller {
 	
 	function search ()
 	{
-		$isAdminLoggedIn = $this->session->userdata('isAdminLoggedIn');
-		if(isset($isAdminLoggedIn) && $isAdminLoggedIn == true)
+		$isLoggedIn = $this->session->userdata('isLoggedIn');
+		if(isset($isLoggedIn) && $isLoggedIn == true)
 		{	
 		$this->load->model('radiology_model');
 		$e = $this->input->post('op');
