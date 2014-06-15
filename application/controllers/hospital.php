@@ -60,8 +60,14 @@ class Hospital extends CI_Controller {
 						$this->session->set_userdata('assert_patient', $row->assert_patient);
 						$this->session->set_userdata('eject_patient', $row->eject_patient);
 						$this->session->set_userdata('view_patient', $row->view_patient);
-						
-						if ($this->Membership_model->can_do($roll,'view_patient')){
+						if ($roll=='superadmin'||$roll=='pharmacy_admin'||$roll=='analyse_admin'||$roll=='radiology_admin') {
+							$data['title'] = 'Welcome '.$roll;
+							$data['main_content'] ='admin_view';	
+							$data['bar1'] = "Create member";
+							$data['linkbar1'] ="login/add_doctor";
+							$this->load->view('includes/template',$data);
+						}
+						else if ($this->Membership_model->can_do($roll,'view_patient')){
  					
 							$data['main_content'] = 'doctor_view';
 							$data['title'] = 'Welcome Doctor';
@@ -70,13 +76,7 @@ class Hospital extends CI_Controller {
 							$this->load->view('includes/template', $data);	
 							
 							}
-						else if ($roll=='superadmin'||$roll=='pharmacy_admin'||$roll=='analyse_admin'||$roll=='radiology_admin') {
-							$data['title'] = 'Welcome '.$roll;
-							$data['main_content'] ='admin_view';	
-							$data['bar1'] = "Create member";
-							$data['linkbar1'] ="login/add_doctor";
-							$this->load->view('includes/template',$data);
-						}
+					 
 						else
 							{	//patient
 							//redirect('Hospital',$data);
@@ -88,26 +88,35 @@ class Hospital extends CI_Controller {
 	{
 		if($this->can('assert_patient'))
 		{
+			$x=0;
 			$this->load->model('Membership_model');
 				if($this->Membership_model->findPatient($this->input->post('assert'))){
 					$this->load->model('patient_departe_model');
-					$this->patient_departe_model->assert_t_depart();	
-					$data['title'] = 'Welcome Admin';
-			$data['main_content'] ='admin_view';	
-			$data['bar1'] = "Create member";
-			$data['linkbar1'] ="login/add_doctor";
-			$data['done'] =TRUE;
-			$this->load->view('includes/template',$data);
+					if ($this->patient_departe_model->get_depart($this->input->post('assert')))
+							{$x=1; goto Lable;}
+					else {
+					$this->patient_departe_model->assert_t_depart();
+						$data['title'] = 'Welcome Admin';
+						$data['main_content'] ='admin_view';	
+						$data['bar1'] = "Create member";
+						$data['linkbar1'] ="login/add_doctor";
+						$data['done'] =TRUE;
+						$this->load->view('includes/template',$data);
+							}
 				}
-				else {
-					$data['title'] = 'Welcome Admin';
-			$data['main_content'] ='admin_view';	
-			$data['bar1'] = "Create member";
-			$data['linkbar1'] ="login/add_doctor";
-			$data['done'] =FALSE;
-			$this->load->view('includes/template',$data);
+			else{ Lable :
+					if ($x)
+						$data['done']="the patient is al-ready in this section";
+					else
+						$data['done'] =FALSE;			
 					
-				}
+					$data['title'] = 'Welcome Admin';
+					$data['main_content'] ='admin_view';	
+					$data['bar1'] = "Create member";
+					$data['linkbar1'] ="login/add_doctor";
+					$this->load->view('includes/template',$data);
+			}		
+				
 		}
 	}
 

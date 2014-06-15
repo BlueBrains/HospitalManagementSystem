@@ -174,40 +174,45 @@ function show_confirm(id){
 $roll = $this->session->userdata('rollname');
 $value = $this->session->userdata('assert_patient');
  if (isset($value) && $value==TRUE )
- echo '
-	<div class="panel panel-info">
-				<div class="panel-heading">
-			    	<h3 class="panel-title"> Enter Patient To A Specific Section </h3>
+ echo "
+	<div class='panel panel-info'>
+				<div class='panel-heading'>
+			    	<h3 class='panel-title'> Enter Patient To A Specific Section </h3>
 			  </div>
-			  <div class="panel-body">
-			    <form role="form" action="<?php echo base_url();?>hospital/assert_patient" Method="POST"> 
-					 <div class="row">
-					  <div class="col-xs-2">
-					    <h4><span class="label label-primary">Patient ID Number</span></h4>
+			  <div class='panel-body'>
+			    <form role='form' action='".base_url()."hospital/assert_patient' Method='POST'> 
+					 <div class='row'>
+					  <div class='col-xs-2'>
+					    <h4><span class='label label-primary'>Patient ID Number</span></h4>
 					  </div>
-					  <div class="col-xs-3">
-					  		<input type="text" class="form-control" placeholder="" name="assert">
+					  <div class='col-xs-3'>
+					  		<input type='text' class='form-control' placeholder='' name='assert'>
 					  </div>
-					  <div class="col-xs-3">
-						<select class="form-control" placeholder="" name="section">
-							  <option value="1">Accident and emergency (A&E)</option>
-							  <option value="2">Haematology</option>
-							  <option value="3">Pain management clinics</option>
-							  <option value="4">Ear nose and throat (ENT)</option>
+					  <div class='col-xs-3'>
+						<select class='form-control' placeholder='' name='section'>
+							  <option value='1'>Accident and emergency (A&E)</option>
+							  <option value='2'>Haematology</option>
+							  <option value='3'>Pain management clinics</option>
+							  <option value='4'>Ear nose and throat (ENT)</option>
 						</select>	
 					  </div> 
-					  <button type="submit" class="btn btn-primary">Assert</button>
+					  <button type='submit' class='btn btn-primary'>Assert</button>
 					</div>
  				</form> 
 			  </div> 
-		';	  			if(isset($done) && $done==FALSE){
+		";	  			if(isset($done) && $done===FALSE){
 			  				echo "<div class='alert alert-danger'>";
 							echo "<a>wrong Pateint Id  </a>";
 							echo "</div>";
 						}
-						else if (isset($done) && $done==True){
+						else if (isset($done) && $done===True){
 							echo "<div class='alert alert-success'>";
 							echo "<a>Patient Add Successfully</a>";
+							echo "</div>";
+						} 
+						else if (isset($done) && is_string($done)){
+							echo "<div class='alert alert-warning'>";
+							echo "<a>".$done."</a>";
 							echo "</div>";
 						} 
 			  ?>
