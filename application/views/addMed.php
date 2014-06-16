@@ -2,7 +2,7 @@
   		<h1>personal information<small> add this info please</small></h1>
 	</div>
 	
-	<?php echo form_open('pharmacy/addOrder/2');?>
+	<?php echo form_open('doctors/addMedOrder/');?>
 	
 	<div class='row' style="margin-bottom:50px">
 		<div class="col-md-6">
@@ -10,7 +10,7 @@
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">patient name</button>
     			</span>
-    			<?php echo form_input(array('name' => 'patientName','id' => 'patientName', 'class' =>
+    			<?php echo form_input(array('name' => 'patientName','id' => 'patientName1', 'class' =>
      			'form-control','tabIndex'=>'1')); 
     			?>
 			</div>
@@ -20,7 +20,7 @@
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">medicine name</button>
     			</span>
-    			<?php echo form_input(array('name' => 'medicineName','id' => 'medicineName', 'class' =>
+    			<?php echo form_input(array('name' => 'medicineName','id' => 'medicineName1', 'class' =>
      			'form-control','tabIndex'=>'2')); 
     			?>
     		</div>

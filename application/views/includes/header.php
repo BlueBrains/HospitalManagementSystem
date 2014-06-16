@@ -5,8 +5,26 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
 	<title><?php echo $title ?></title>
 	<link rel="stylesheet" href="<?php echo base_url();?>/css/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="<?php echo base_url();?>/js/jquery.ui.css" type="text/css" media="screen" />
 	<script type="text/javascript" src="<?php echo base_url();?>/js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>/js/jquery.ui.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>/css/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		$(function(){
+  			$("#patientName1").autocomplete({
+    			source: "<?php echo base_url();?>doctors/get_patients" // path to the get_birds method
+  			}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+        		var inner_html = '<a href="<?echo base_url();?>doctors/patient_details/' + item.image + '"><div style="width:300px;height:50px;padding:5px 0px 5px;"><div class="img-responsive" style="float:left;margin-right:10px;"><img height="42" width="42" src="<? echo base_url()?>/photos/patients/'+ item.image +'.png"></div><div style="font-size:16px;margin-top:8px">' + item.label + '</div></div></a>';
+        		return $( "<li></li>" )
+            		.data( "item.autocomplete", item )
+            		.append(inner_html)
+            		.appendTo( ul );
+    		};
+  			$("#medicineName1").autocomplete({
+    			source: "<?php echo base_url();?>doctors/get_medicines" // path to the get_birds method
+  			});
+		});
+	</script>
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation">
