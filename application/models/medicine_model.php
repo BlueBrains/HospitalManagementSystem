@@ -1,5 +1,6 @@
 <?php
 class Medicine_model extends CI_Model {
+		
 	public function findMedicine($med_name,$med_caliber)
 	{
 		$this->db->select('id');
@@ -34,6 +35,18 @@ class Medicine_model extends CI_Model {
 		$this->db->where('id',$id);
 		$this->db->update('medicines');
 	} 
+	
+	function get_medicine($q){
+    	$this->db->select('tradeName');
+    	$this->db->like('tradeName', $q);
+    	$query = $this->db->get('medicines');
+    	if($query->num_rows > 0){
+      		foreach ($query->result_array() as $row){
+        		$row_set[] = htmlentities(stripslashes($row['tradeName'])); //build an array        		
+      		}
+      		echo json_encode($row_set); //format the array into json data
+    	}
+  	}
 }
 
 ?>
