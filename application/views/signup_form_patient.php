@@ -7,7 +7,7 @@
 </head>
 <ul class="nav nav-tabs">
     <li class="active"><a href="add_patient">Patient</a></li>	
-  <li ><a href="<?php echo base_url();?>login/add_doctor">Doctor</a></li>
+  	<li ><a href="<?php echo base_url();?>login/add_doctor">Doctor</a></li>
 </ul>
 	<div class="page-header">
   		<h1>personal information<small> add this info please</small></h1>
@@ -41,13 +41,18 @@
 						<button class="btn btn-default" type="button">Gender*</button>
     			</span>
     		</div>	
-			<div class="input-group">																
-									<input type="radio" name="gender" value="male" checked="true">
-									<label for="1">Male</label>	
-									
-									<input type="radio" name="gender" value="female" >
-									<label for="2">Female</label>
-			</div> 
+    			<div class="col-md-2">
+					<div class="radio-inline"> 	
+				        <label>
+				          <input type="radio" name="ID" id="optionsRadios1" value="male" checked> Male
+				        </label>
+			        </div>
+			        <div class="radio-inline">
+				        <label>
+				          <input type="radio" name="ID" id="optionsRadios2" value="female"> Female
+				        </label>
+			        </div>
+			      </div>  
     		</div>
 		
 	</div>
