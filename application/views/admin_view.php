@@ -91,10 +91,18 @@ function show_confirm(id){
 </div>
 
  <div class="list-group">
- 
-  <a href="#" onclick="changeClass(1)"  "list-group-item" id="1"  data-toggle="modal" data-target="#myModal">Pharmacy</a>
-  <a href="#" onclick="changeClass(2)" class="list-group-item" id="2" data-toggle="modal" data-target="#myModal"> Radiology</a>
-  <a href="#" class="list-group-item" onclick="changeClass(3)" id="3" data-toggle="modal" data-target="#myModal">Analyses</a>
+ <?php
+ $roll = $this->session->userdata('rollname');
+ $value = $this->session->userdata('pharmacy_admin');
+ if (isset($value) && $value==TRUE )
+  echo"<a href='".base_url()."'   class='list-group-item' id='1'  >Pharmacy</a>";
+ $value = $this->session->userdata('radiology_admin');
+ if (isset($value) && $value==TRUE )
+  echo"<a href='".base_url()."radiology/patient_req/0'  class='list-group-item' id='2'  > Radiology</a>";
+ $value = $this->session->userdata('analysis_admin');
+ if (isset($value) && $value==TRUE )
+  echo "<a href='".base_url()."' class='list-group-item'  id='3'  >Analyses</a>";
+  ?>
 </div>
 
 <div class="panel panel-success">
@@ -162,40 +170,49 @@ function show_confirm(id){
  </form> 
 </div>
 </div>
-	<div class="panel panel-info">
-				<div class="panel-heading">
-			    	<h3 class="panel-title"> Enter Patient To A Specific Section </h3>
+<?php 
+$roll = $this->session->userdata('rollname');
+$value = $this->session->userdata('assert_patient');
+ if (isset($value) && $value==TRUE )
+ echo "
+	<div class='panel panel-info'>
+				<div class='panel-heading'>
+			    	<h3 class='panel-title'> Enter Patient To A Specific Section </h3>
 			  </div>
-			  <div class="panel-body">
-			    <form role="form" action="<?php echo base_url();?>hospital/assert_patient" Method="POST"> 
-					 <div class="row">
-					  <div class="col-xs-2">
-					    <h4><span class="label label-primary">Patient ID Number</span></h4>
+			  <div class='panel-body'>
+			    <form role='form' action='".base_url()."hospital/assert_patient' Method='POST'> 
+					 <div class='row'>
+					  <div class='col-xs-2'>
+					    <h4><span class='label label-primary'>Patient ID Number</span></h4>
 					  </div>
-					  <div class="col-xs-3">
-					  		<input type="text" class="form-control" placeholder="" name="assert">
+					  <div class='col-xs-3'>
+					  		<input type='text' class='form-control' placeholder='' name='assert'>
 					  </div>
-					  <div class="col-xs-3">
-						<select class="form-control" placeholder="" name="section">
-							  <option value="1">Accident and emergency (A&E)</option>
-							  <option value="2">Haematology</option>
-							  <option value="3">Pain management clinics</option>
-							  <option value="4">Ear nose and throat (ENT)</option>
+					  <div class='col-xs-3'>
+						<select class='form-control' placeholder='' name='section'>
+							  <option value='1'>Accident and emergency (A&E)</option>
+							  <option value='2'>Haematology</option>
+							  <option value='3'>Pain management clinics</option>
+							  <option value='4'>Ear nose and throat (ENT)</option>
 						</select>	
 					  </div> 
-					  <button type="submit" class="btn btn-primary">Assert</button>
+					  <button type='submit' class='btn btn-primary'>Assert</button>
 					</div>
  				</form> 
-			  </div>
-			  <?php 
-			  			if(isset($done) && $done==FALSE){
+			  </div> 
+		";	  			if(isset($done) && $done===FALSE){
 			  				echo "<div class='alert alert-danger'>";
 							echo "<a>wrong Pateint Id  </a>";
 							echo "</div>";
 						}
-						else if (isset($done) && $done==True){
+						else if (isset($done) && $done===True){
 							echo "<div class='alert alert-success'>";
 							echo "<a>Patient Add Successfully</a>";
+							echo "</div>";
+						} 
+						else if (isset($done) && is_string($done)){
+							echo "<div class='alert alert-warning'>";
+							echo "<a>".$done."</a>";
 							echo "</div>";
 						} 
 			  ?>

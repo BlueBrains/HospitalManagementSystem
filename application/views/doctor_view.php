@@ -7,6 +7,7 @@
 <div class="media" style="margin-top:10px">
   <div class="pull-left" style="margin: 15px 40px 10px 30px">
 
+
     <img class="media-object img-responsive img-thumbnail" src="<?php echo base_url();?>photos/doctors/<?php echo $this->session->userdata('ID') ; ?>.jpg" alt="profile picture">
   </div>
   <div class="media-body" style="margin-top: 130px">
@@ -27,3 +28,8 @@
   <div class="panel-body">
   </div>
 </div>
+
+
+echo $this->session->userdata('isLoggedIn')."</br>";
+echo $this->session->userdata('ID');
+
