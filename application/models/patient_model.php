@@ -6,8 +6,8 @@
 class Patient_model extends CI_Model {
 	
 	function get_patient($q){
-    	$this->db->select('name,id');
-    	$this->db->like('name', $q);
+    	$this->db->select('CONCAT(firstName, " " , lastName) As name , id',FALSE);
+    	$this->db->like('firstName', $q);
     	$query = $this->db->get('patients');
     	if($query->num_rows > 0){
       		foreach ($query->result_array() as $row){
