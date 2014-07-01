@@ -14,10 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/project-1';
+$config['base_url']	= 'http://localhost/project-1/';
 
-
-$config['server_root'] = $_SERVER['DOCUMENT_ROOT'];
 /*
 |--------------------------------------------------------------------------
 | Index File
