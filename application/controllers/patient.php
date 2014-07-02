@@ -32,7 +32,7 @@ class patient extends REST_Controller{
 		$this->load->view('patient/edit.html');
 	}
 
-	function edit_post(){
-		//magic here
+	function edit_put(){
+		echo "hi";
 	}
 }
