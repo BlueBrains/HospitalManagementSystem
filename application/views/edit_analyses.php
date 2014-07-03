@@ -1,8 +1,17 @@
 <html>
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <title>Laboratory Website Template</title>
+    <script src="<?php echo base_url();?>javascript/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var base_url = "<?php echo base_url();?>";
+        var controller = 'analyse';
+    </script>
+    <script src="<?php echo base_url();?>javascript/notification.js" type="text/javascript">
+    </script>
     <link rel="stylesheet" href="<?php echo base_url();?>/css/style.css" type="text/css">
+    
+
 </head>
 <body>
     

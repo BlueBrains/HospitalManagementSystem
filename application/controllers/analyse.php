@@ -15,17 +15,18 @@ class analyse extends CI_Controller
          $data['records2']=$this->analyse_model->get_catagoury();
          $this->load->view("fetch_request",$data);
      }
-     function createRequest()
+     function createRequest($patient_id)
      {
          $this->load->model('analyse_model');
           $this->analyse_model->createRequest();
           $this->Fill_order_anlayze();
      }
-     function saveAnalyse()
+	 
+     function saveAnalyse($request_id)
      {
          $this->load->model('analyse_model');
-         $id=1;
-        $this->analyse_model->uploadAnalyse($id);
+         $request_id=1;
+        $this->analyse_model->uploadAnalyse($request_id);
      }
      
      function uploadAnalyse()
@@ -36,20 +37,32 @@ class analyse extends CI_Controller
         $this->load->view("uploadAnalyse",$data);
      }
      
-     function edit_Analyses($id)
+     function Analyses($patient_id)
     {
         $this->load->model('analyse_model');
-        $id=1;
-        $data['records']=$this->analyse_model->edit_Analyses($id);
+        $patient_id=1;
+        $data['records']=$this->analyse_model->edit_Analyses($patient_id);
         $this->load->view('edit_analyses',$data);
     }
-    function edit_Analyse($id)
-{
-    $this->load->model('analyse_model');
-    $data['records']=$this->analyse_model->edit_Analyse($id);
-    $this->load->view("edit_Analyse",$data);
-}
-    
+    function Analyse($request_id)
+	{
+	    $this->load->model('analyse_model');
+	    $data['records']=$this->analyse_model->edit_Analyse($request_id);
+	    $this->load->view("edit_Analyse",$data);
+	}
+    function get_number_notification()
+    {
+        $this->load->model('analyse_model');
+         $data['num_not']=$this->analyse_model->get_number_notification();
+        $this->load->view('notification_number', $data);
+    }
+	function get_notification()
+    {
+        $this->load->model('analyse_model');
+        $data['records']=$this->analyse_model->get_notification();
+        $this->load->view('notification', $data);
+        
+    }
 }
 
 
