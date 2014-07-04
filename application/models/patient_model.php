@@ -1,6 +1,16 @@
 <?php
 class Patient_model extends CI_Model{
 	//read operations
+	public function find($id){
+		$this->db->select('*')
+				 ->from('patients')
+			     ->join('patient_private_info','patients.id = patient_private_info.patient_id', 'left')
+				 ->join('patient_family','patient_private_info.patient_id = patient_family.patient_id', 'left')
+				 ->join('patient_health_recored',' patient_family.patient_id = patient_health_recored.patient_id', 'left');
+		$patient = $this->db->get();
+		return $patient->result()[0];
+
+	}
 
 	public function get_public_info($id){
 		return $this->db->get_where('patients', array('id' => $id),1);
