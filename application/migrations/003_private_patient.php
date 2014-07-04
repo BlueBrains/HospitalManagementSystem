@@ -66,7 +66,7 @@ class Migration_private_patient extends CI_Migration {
 			)
 		));
 
-		$this->dbforge->add_field("created datetime NOT NULL");
+		$this->dbforge->add_field("created datetime NOT NULL DEFAULT NOW()");
 
 		$this->dbforge->add_field("last_edit timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
 
