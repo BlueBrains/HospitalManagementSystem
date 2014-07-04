@@ -2,30 +2,30 @@
 class Patient_model extends CI_Model{
 	//read operations
 	public function find($id){
-		$this->db->select('*')
-				 ->from('patients')
-			     ->join('patient_private_info','patients.id = patient_private_info.patient_id', 'left')
-				 ->join('patient_family','patient_private_info.patient_id = patient_family.patient_id', 'left')
-				 ->join('patient_health_recored',' patient_family.patient_id = patient_health_recored.patient_id', 'left');
-		$patient = $this->db->get();
-		return $patient->result()[0];
+		$patient = array();
+		$patient['public'] = $this->get_public_info($id);
+		$patient['private'] = $this->get_private_info($id);
+		$patient['family'] = $this->get_family_info($id);
+		$patient['health'] = $this->get_health_recored($id);
+
+		return $patient;
 
 	}
 
 	public function get_public_info($id){
-		return $this->db->get_where('patients', array('id' => $id),1);
+		return $this->db->get_where('patients', array('id' => $id),1)->result()[0];
 	}
 
 	public function get_private_info($id){
-		return $this->db->get_where('patient_private_info', array('patient_id' => $id),1);
+		return $this->db->get_where('patient_private_info', array('patient_id' => $id),1)->result()[0];
 	}
 
 	public function get_family_info($id){
-		return $this->db->get_where('patient_family', array('patient_id' => $id),1);
+		return $this->db->get_where('patient_family', array('patient_id' => $id))->result();
 	}
 
 	public function get_health_recored($id){
-		return $this->db->get_where('patient_health_recored', array('patient_id' => $id),1);
+		return $this->db->get_where('patient_health_recored', array('patient_id' => $id))->result();
 	}
 
 	// create operations

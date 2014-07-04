@@ -7,7 +7,9 @@ class patient extends REST_Controller{
 		$patient = $this->patient_model->find($this->get('id'));
 		if($this->response->format == 'html'){
 			$data['patient'] = $patient;
-			$this->load->view('patient/view.html',$data);
+			$data['main_content']='patient/view.html';
+			
+			$this->load->view('includes/template',$data);
 		}
 		
 		else 
