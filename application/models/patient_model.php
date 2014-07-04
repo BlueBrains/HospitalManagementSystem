@@ -9,7 +9,6 @@ class Patient_model extends CI_Model{
 		$patient['health'] = $this->get_health_recored($id);
 
 		return $patient;
-
 	}
 
 	public function get_public_info($id){
