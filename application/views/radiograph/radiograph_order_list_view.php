@@ -144,7 +144,6 @@ font-size: 12px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                        	<th>Status</th>
                                         	<th>Patient name</th>
                                             <th>section name</th>
                                             <th>Date</th>
@@ -156,39 +155,11 @@ font-size: 12px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                                     </thead>
                                     <tbody>
 	   <?php
-	  if ($idd=2)
-	  { 
       if (isset($record))
 		{
 		 if(is_array($record)){
              foreach($record as $row ) 
             {
-            	
-				if ($row->emergancy )
-				{
-					$sympol1='class="glyphicon glyphicon-screenshot"';	
-						
-				}
-				if ($row->state == 1)
-				{
-					$sympol2 ='class="glyphicon glyphicon-info-sign"' ;
-				}
-				if ($row->state == 2)
-				{
-					$sympol2 ='class="glyphicon glyphicon-ok-sign"' ;
-				}
-				if ($row->state == 0)
-				{
-					$sympol2 ='class="glyphicon glyphicon-question-sign" ';
-				}
-				if ($row->out == 1)
-				{
-					$sympol3 = 'class="glyphicon glyphicon-log-out"';	
-				}
-				if ($row->out == 0)
-				{
-					$sympol3 = 'class="glyphicon glyphicon-log-in"';
-				}
 				if ($row->emergancy && $row->state != 2)
 					$active='class="danger"';
 				else if ($row->emergancy == 0 && $row->state != 2)
@@ -196,13 +167,12 @@ font-size: 12px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 				else 
 					$active ='class="success"';    	
                 echo "<tr".$active.">";
-				echo "<td>".$sympol3."&nbsp".$sympol2."&nbsp".$sympol1."&nbsp"."</td>";
-                echo "<td>"."Section Name:"."&nbsp".$row->patient_name."</td>";
-                echo "<td>"."Section Name:"."&nbsp".$row->section_name."</td>";
-                echo "<td>"."Request Date:"."&nbsp".$row->date."</td>";
-                echo "<td>"."Type:"."&nbsp".$row->photo_kind."</td>";
-                echo "<td>"."Part of Body:"."&nbsp".$row->part_of_body."</td>";
-                echo "<td> "."Descreption:"."&nbsp".$row->description."</td>";
+                echo "<td>".$row->patient_name."</td>";
+                echo "<td>".$row->section_name."</td>";
+                echo "<td>".$row->date."</td>";
+                echo "<td>".$row->photo_kind."</td>";
+                echo "<td>".$row->part_of_body."</td>";
+                echo "<td>".$row->description."</td>";
               	echo "<td>"."<a href = ".base_url()."radiograph_supervisor/confirm_request/".$row->id." class='glyphicon glyphicon-eye-open'></a>";
 				echo "<a href ".base_url()."radiology/delete/".$row->id." class='glyphicon glyphicon-eye-close' > </a><br/></td>";
                 echo "</tr>";
@@ -212,11 +182,7 @@ font-size: 12px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 		  	{
 		  }
 		 }
-		}
-		else
-			{
-			}
-			
+		
     ?>	
                                     </tbody>
                                 </table>

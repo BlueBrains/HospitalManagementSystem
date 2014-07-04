@@ -161,7 +161,7 @@ else if (name=="Spine")
 <body>
 
 <div class="col-md-6">	
-<form name="myform" action="radiograph_external_request_sign" method="post">						
+<form name="myform" action="radiograph_external_request_sign" method="get">						
 	  <div class='row' style="margin-bottom:20px">
 		
 			<div class="input-group">
@@ -178,7 +178,7 @@ else if (name=="Spine")
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">image Type*</button>
     			</span>	
-				<select class="form-control">
+				<select class="form-control" name="image_id">
 				    <option value="1">X-Ray</option>
 				    <option value="2">Computed Tomography</option>
 				    <option value="3">Magnetic Resonance Imaging</option>

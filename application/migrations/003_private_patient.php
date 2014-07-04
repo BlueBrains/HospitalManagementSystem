@@ -66,7 +66,10 @@ class Migration_private_patient extends CI_Migration {
 			)
 		));
 
-		$this->dbforge->add_field("created datetime NOT NULL ");
+
+
+		$this->dbforge->add_field("created datetime NOT NULL DEFAULT 0");
+
 
 		$this->dbforge->add_field("last_edit timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
 
@@ -74,6 +77,8 @@ class Migration_private_patient extends CI_Migration {
 		$this->dbforge->add_key('patient_id');
 
 		$this->dbforge->create_table('patient_private_info');
+		$query = "CREATE TRIGGER `info_INSERT` BEFORE INSERT ON `patient_private_info` FOR EACH ROW SET new.created = now();";
+		mysql_query($query);		
 	}
 
 	public function down(){

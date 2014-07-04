@@ -76,6 +76,7 @@ class radiograph_supervisor extends REST_Controller{
 	
 	function radiograph_external_request_sign_get()
 	{
+		
 		$data['record'] = $this->radiograph_model->create_req(-1);	
 		$this->load->view('radiograph/test');
 	}
