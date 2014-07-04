@@ -6,7 +6,7 @@ class Migration_basic_patient extends CI_Migration{
 		$this->dbforge->add_field(array(
 			'id' => array(
 				'type'=>'int',
-				'constraint'=>10,
+				'constraint'=>11,
 				'unsigned' => TRUE,
 				'auto_increment' => TRUE
 			),
@@ -67,9 +67,13 @@ class Migration_basic_patient extends CI_Migration{
 		));
 
 
+<<<<<<< HEAD
 		$this->dbforge->add_field("created datetime NOT NULL DEFAULT 0");
+=======
+		$this->dbforge->add_field("created datetime NOT NULL DEFAULT NOW()");
+>>>>>>> 69d61dbf83a01abd80922f767519984e638ddf40
 
-		$this->dbforge->add_field("last_edit timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
+		$this->dbforge->add_field("last_edit TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
 
 		$this->dbforge->add_key('id',TRUE);
 
