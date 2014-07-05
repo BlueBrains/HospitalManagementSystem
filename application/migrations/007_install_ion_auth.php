@@ -131,6 +131,11 @@ class Migration_Install_ion_auth extends CI_Migration {
 				'type' => 'VARCHAR',
 				'constraint' => '20',
 				'null' => TRUE
+			),
+			'profile_id' =>array(
+				'type'=>'INT',
+				'constraint'=>5,
+				'null' => FALSE
 			)
 
 		));
