@@ -19,7 +19,7 @@ class Migration_analyses_tables extends CI_Migration {
 		 $this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
         $this->dbforge->add_field("patient_id int(11) unsigned NOT NULL ");
         $this->dbforge->add_field("analyse_id int(11) unsigned NOT NULL ");
-        $this->dbforge->add_field("request_date date NOT NULL DEFAULT NOW()");
+        $this->dbforge->add_field("request_date datetime NOT NULL DEFAULT NOW()");
 		$this->dbforge->add_field("doctor_id  int(11) unsigned NOT NULL ");
 		$this->dbforge->add_field("comment varchar(255) NOT NULL DEFAULT '' "); 
 		$this->dbforge->add_field("state SET(  '0',  '1',  '2' ) NOT NULL DEFAULT '0'");
