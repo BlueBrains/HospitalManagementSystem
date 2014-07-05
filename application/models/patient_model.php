@@ -10,7 +10,11 @@ class Patient_model extends CI_Model{
 
 		return $patient;
 	}
-
+	public function find_by_name($name){
+		list($fname,$lname) = split(' ',$name);
+		$this->db->get_where('patients',array('fname'=>$fname,'lname'=>$lname))
+		->result()[0];
+	}
 	public function names(){
 		$this->db->select('id,fname,lname');
 		return $this->db->get('patients')->result();
