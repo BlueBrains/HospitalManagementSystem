@@ -11,6 +11,11 @@ class Patient_model extends CI_Model{
 		return $patient;
 	}
 
+	public function names(){
+		$this->db->select('id,fname,lname');
+		return $this->db->get('patients')->result();
+	}
+
 	public function get_public_info($id){
 		return $this->db->get_where('patients', array('id' => $id),1)->result()[0];
 	}
