@@ -17,16 +17,18 @@
     <tbody>
     	<tr>
     		<?php 
-    			echo "<td>{$patient['private']->address}</td>
-		    		<td>{$patient['private']->province}</td>
-		    		<td>{$patient['private']->c_country}</td>
-		    		<td>{$patient['private']->email}</td>
-		    		<td>{$patient['private']->phone}</td>
-		    		<td>{$patient['private']->cell}</td>
-		    		<td>{$patient['private']->position}</td>
-		    		<td>{$patient['private']->company}</td>
-		    		<td>{$patient['private']->comments}</td>";
-    		?>
+                if($patient['private'] != NULL){
+                    echo "<td>{$patient['private']->address}</td>
+                    <td>{$patient['private']->province}</td>
+                    <td>{$patient['private']->c_country}</td>
+                    <td>{$patient['private']->email}</td>
+                    <td>{$patient['private']->phone}</td>
+                    <td>{$patient['private']->cell}</td>
+                    <td>{$patient['private']->position}</td>
+                    <td>{$patient['private']->company}</td>
+                    <td>{$patient['private']->comments}</td>";
+                }
+            ?>
     	</tr>
     </tbody>
 

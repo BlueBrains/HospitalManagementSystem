@@ -44,7 +44,7 @@ class patient extends REST_Controller{
 		$patient = array();
 		foreach ($this->post() as $key => $value) {
 			if($key == 'language'){
-				$patient['language']=str_replace('', '_', $value);
+				$patient['language']=str_replace('_', '', $value);
 			}
 			else if($key == 'marital_status'){
 				if ($value == 'single'){

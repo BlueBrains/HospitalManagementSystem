@@ -45,13 +45,17 @@ class Patient_model extends CI_Model{
 
 	public function get_public_info($id){
 		if($data = $this->db->get_where('patients', array('id' => $id),1)->result()){
-			return $data[0];
+			if($data[0])
+				return $data[0];
+			return NULL;
 		}
 	}
 
 	public function get_private_info($id){
 		if($data = $this->db->get_where('patient_private_info', array('patient_id' => $id),1)->result()){
-			return $data[0];
+			if($data[0])
+				return $data[0];
+			return NULL;
 		}
 	}
 
