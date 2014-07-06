@@ -1,5 +1,5 @@
 <?php
-require(APPPATH.'libraries/pusher.php');
+require(APPPATH.'libraries/CI_Pusher.php');
 class testPusher extends CI_Controller{
 	function t(){
 		$p = new CI_Pusher();
