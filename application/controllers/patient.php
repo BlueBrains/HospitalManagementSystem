@@ -2,8 +2,13 @@
 require(APPPATH.'libraries/rest_controller.php');
  
 class patient extends REST_Controller{
-	function u_get(){
+	
+	function __construct(){
+		parent::__construct();
 		$this->load->model('patient_model');
+	}
+
+	function u_get(){
 		$patient = $this->patient_model->find($this->get('id'));
 		if($this->response->format == 'html'){
 			$data['patient'] = $patient;
@@ -18,8 +23,13 @@ class patient extends REST_Controller{
 
 	function u_delete(){
 		$id = array($this->get('id'));
-		$this->load->model('patient_model');
 		$this->patient_model->delete($id);
+	}
+
+	function index_get()
+	{
+		$all = $this->patient_model->names();
+		$this->response($all,200);
 	}
 
 	function new_get(){
@@ -27,7 +37,6 @@ class patient extends REST_Controller{
 	}
 
 	function new_post(){
-		$this->load->model('patient_model');
 		
 		$patient = array($this->post());
 		
@@ -35,7 +44,6 @@ class patient extends REST_Controller{
 	}
 
 	function pr_post(){
-		$this->load->model('patient_model');
 		
 		$private = array($this->post());
 		
@@ -43,7 +51,6 @@ class patient extends REST_Controller{
 	}
 
 	function fm_post(){
-		$this->load->model('patient_model');
 		
 		$family = array($this->post());
 		
@@ -51,7 +58,6 @@ class patient extends REST_Controller{
 	}
 
 	function hl_post(){
-		$this->load->model('patient_model');
 		
 		$health = array($this->post());
 		
@@ -70,7 +76,6 @@ class patient extends REST_Controller{
 				$patient[$key] = $value;
 		}
 
-		$this->load->model('patient_model');
 		$this->patient_model->update($id,$patient);
 	}
 
@@ -82,7 +87,6 @@ class patient extends REST_Controller{
 				$private[$key] = $value;
 		}
 
-		$this->load->model('patient_model');
 		$this->patient_model->update_private_info($id,$private);
 	}
 
@@ -94,7 +98,6 @@ class patient extends REST_Controller{
 				$family[$key] = $value;
 		}
 
-		$this->load->model('patient_model');
 		$this->patient_model->update_family_info($id,$family);
 	}
 
@@ -106,7 +109,6 @@ class patient extends REST_Controller{
 				$health[$key] = $value;
 		}
 
-		$this->load->model('patient_model');
 		$this->patient_model->update_health_info($id,$health);
 	}
 }

@@ -1,0 +1,34 @@
+<div class="table-responsive">
+<table class="table table-hover">
+    <thead>
+    	<tr>
+    		<th>Address</th>
+    		<th>Province</th>
+    		<th>Current Countery</th>
+    		<th>Email</th>
+    		<th>Phone NUM</th>
+    		<th>Cell Phone Num</th>
+    		<th>Position</th>
+    		<th>Company</th>
+    		<th>Comments</th>
+    	</tr>
+    </thead>
+
+    <tbody>
+    	<tr>
+    		<?php 
+    			echo "<td>{$patient['private']->address}</td>
+		    		<td>{$patient['private']->province}</td>
+		    		<td>{$patient['private']->c_country}</td>
+		    		<td>{$patient['private']->email}</td>
+		    		<td>{$patient['private']->phone}</td>
+		    		<td>{$patient['private']->cell}</td>
+		    		<td>{$patient['private']->position}</td>
+		    		<td>{$patient['private']->company}</td>
+		    		<td>{$patient['private']->comments}</td>";
+    		?>
+    	</tr>
+    </tbody>
+
+</table>
+</div>
