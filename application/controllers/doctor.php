@@ -12,6 +12,7 @@ class doctor extends REST_Controller
 			// $this->load->model('patient_model');
 		// }
 		$this->load->model('patient_model');
+		$this->load->model('medicine_model');
 	}
 	function finish_analyse_request_get($patient_id)
 	{
@@ -78,7 +79,7 @@ class doctor extends REST_Controller
 		if($this->patient_model->find_by_name($patientname))
 			return TRUE;
 		else {
-			$this->form_validation->set_message('find_patientName', 'The %s field does not exist yet, check you write correctness');
+			$this->form_validation->set_message('find_patientName_get', 'The %s field does not exist yet, check you write correctness');
 			return FALSE;
 		}
 	}
@@ -87,7 +88,7 @@ class doctor extends REST_Controller
 		if($this->medicine_model->findMedicine($medicinename,$caliber))
 			return TRUE;
 		else {		
-			$this->form_validation->set_message('find_medicineName', 'The %s field does not exist yet, check you write correctness');
+			$this->form_validation->set_message('find_medicineName_get', 'The %s field does not exist yet, check you write correctness');
 			return FALSE;
 		}
 	}
