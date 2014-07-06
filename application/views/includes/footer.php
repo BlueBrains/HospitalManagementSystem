@@ -7,11 +7,11 @@
     <!-- METISMENU SCRIPTS -->
     <script src="<? echo base_url();?>assets/js/jquery.metisMenu.js"></script>
    	<!-- DATA TABLE SCRIPTS -->
-    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script> 
+    <script src="<? echo base_url();?>assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="<? echo base_url();?>assets/js/dataTables/dataTables.bootstrap.js"></script> 
 	<!-- MORRIS CHART SCRIPTS -->
-   	<script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>    
+   	<script src="<? echo base_url();?>assets/js/morris/raphael-2.1.0.min.js"></script>
+    <!-- <script src="<? echo base_url();?>assets/js/morris/morris.js"></script>     -->
     <!-- CUSTOM SCRIPTS -->
     <script src="<? echo base_url();?>assets/js/custom.js"></script>
     <script>    	
@@ -19,7 +19,7 @@
 		  			$("#patientName1").autocomplete({
 		    			source: "<?php echo base_url();?>doctor/get_patients" 
 		  			}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-		        		var inner_html = '<a href="<?echo base_url();?>doctor/patient_details/' + item.image + '"><div style="width:300px;height:50px;padding:5px 0px 5px;"><div class="img-responsive" style="float:left;margin-right:10px;"><img height="42" width="42" src="<? echo base_url()?>/photos/patients/'+ item.image +'.png"></div><div style="font-size:16px;margin-top:8px">' + item.label + '</div></div></a>';
+		        		var inner_html = '<a href="<?echo base_url();?>doctor/patient_details/id/' + item.image + '"><div style="width:300px;height:50px;padding:5px 0px 5px;"><div class="img-responsive" style="float:left;margin-right:10px;"><img height="42" width="42" src="<? echo base_url()?>/photos/patients/'+ item.image +'.png"></div><div style="font-size:16px;margin-top:8px">' + item.label + '</div></div></a>';
 		        		return $( "<li></li>" )
 		            		.data( "item.autocomplete", item )
 		            		.append(inner_html)
