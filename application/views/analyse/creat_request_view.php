@@ -14,6 +14,25 @@
     <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <script src="<?php echo base_url();?>/javascript/jquery.js" type="text/javascript"></script>
+    <script src="<?php echo base_url();?>/javascript/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+        <link href="<?php echo base_url();?>/javascript/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+        
+		<script type="text/javascript">
+            $(document).ready(function(){
+                $('.TabbedPanels .TabbedPanelsContent:first').hide();
+                $('#ok').hide();
+                 //$('#s_'+'2').slideToggle('slow');
+                //$('.TabbedPanels .TabbedPanelsContent:nth-child(2)').slideDown('slow');
+                
+                $('.TabbedPanelsTab').click(function(){
+                                                        var x=$(this).attr('id');
+                                                        //alert(x);
+                                                        $('#s_'+x).hide();
+                                                        $('#s_'+x).slideToggle('slow');
+                                                          $('#ok').fadeIn('slow');});
+            });
+        </script>
 </head>
 <body>
     <div id="wrapper">
@@ -140,61 +159,89 @@ font-size: 12px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                              Advanced Tables
                         </div>
                         <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                        	<th>Patient name</th>
-                                            <th>doctor name</th>
-                                            <th>analyse</th>
-                                             <th>date</th>
-                                            <th>state</th>
-                                           
-                                            <th>action</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-        <?php
-            
-            foreach ($records as $row) 
-            {
-                echo "<tr>";
-                echo "<td>".$row->Pname."</td>";
-                echo "<td>".$row->Dname."</td>";
-                echo "<td>".$row->Nname."</td>";
-                echo "<td>".$row->rdate."</td>";
-				if($row->state==0)
-				{
-					echo "<td> not confirm </td>";
-					echo "";
-					echo "<td>"."<a href=".base_url()."analyse/confirm_request/id/".$row->id.">"."confirm request"."</a><br/>";
-				}
-				elseif ($row->state==1)
-				 {
-					echo "<td> not uploaded </td>";
-					
-					echo "<td>"."<a href=".base_url()."analyse/upload/id/".$row->id.">"."upload result"."</a><br/>";
-				}
-				else
-					{
-						echo "<td> uploaded </td>";
-					echo "<td>"."<a href=".base_url()."analyse/edit_analyse/id/".$row->id.">"."edit" ."</td>";
-					}
-                echo "</tr>";
-            }
-			echo "<a href=".base_url()."analyse/confirm_request_all>"."confirm all request"."</a><br/>";
-        ?>
-     </tbody>
-                                </table>
-                            </div>
+         <form id="form1" name="form1" method="post" action="<?php echo base_url();?>doctor/new_analyse_request">
+         	<table width="50%" border="0">
+    <tr>
+      <td width="51%" height="41"><label for="patient_id">patient id</label>
+      <input type="text" name="patient_id" id="patient_id" /></td>
+      <td width="49%"><p>
+        <label for="doctor_id">doctor id</label>
+        <input type="text" name="doctor_id" id="doctor_id" />
+    </p></td>
+    </tr>
+    </table>
+		<div id="TabbedPanels1" class="TabbedPanels">
+        
+         <ul class="TabbedPanelsTabGroup">
+             
+             <?php
+                $tabindex_id=0;
+                    foreach ($records2 as $value) {
+                         echo " <li class=".'"TabbedPanelsTab"' ."tabindex=" . '" 0 "' ." id= "."'". $tabindex_id ."'".">".$value->catagoury_name."</li>";
+                        $tabindex_id++;
+                       
+                    }
+                
+             ?>
+         </ul>
+         <div class="TabbedPanelsContentGroup">
+             <?php
+             //echo "dshdgshjgds     ".count($y['records2']) ;
+             $c=0;
+             $i=0;
+			 
+             while($i<count($records2))
+             {
+                 $j=FALSE;
+                     $right=FALSE;
+             $left=TRUE;
+             $center=FALSE;
+                 echo "<div class=".'"TabbedPanelsContent"'."id="."'" ."s_". $i ."'".">";
+                 while(!$j)
+                 {
+                     if(($c==count($records))||($records[$c]->catagoury_id!=$records2[$i]->catagoury_id))
+                     {
+                         $j=TRUE;
+                     }
+                     else {
+                     	if($left)
+                         {
+                             echo "<div class= ".'"Lcheck"'.">";
+                             $left=FALSE;
+                             $center=TRUE;
+                         }
+                        elseif ($center) {
                             
-                        </div>
+                            echo "<div class= ".'"Ccheck"'.">";
+                            $center=FALSE;
+                            $right=TRUE;
+                        }
+                        else {
+                            echo "<div class= ".'"Rcheck"'.">";
+                            $right=FALSE;
+                            $left=TRUE        ;      
+                        }
+                        echo "<input type=".'"checkbox"'. "name=".'"check[]"'. "id="."'" . ($c+1) ."'". "value=". "'" . $records[$c]->id ."'" ."/>";
+                        //echo "id="."'" .$c+1 ."'";
+                        echo "<label for="."'" . ($c+1) ."'"."title= ". '"Sample required : '. $records[$c]->Sample_required .' &nbsp Required Time : '.$records[$c]->required_time .'"'.">".$records[$c]->analyse_name ."</label>";           
+                       echo "</div>";
+                        $c++;
+                     }
+                    
+                 }
+                  $i++;
+                  echo "</div>";
+             }
+             ?>
+          </div> 
+          <input type="submit" name="ok" id="ok" value="Submit" /></td>
+        </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
+            </div>
+           </form>
                 <!-- /. ROW  -->
                     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
@@ -211,6 +258,9 @@ font-size: 12px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
                 $('#dataTables-example').dataTable();
             });
     </script>
+    <script type="text/javascript">
+var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+</script>
          <!-- CUSTOM SCRIPTS -->
     <script src="<?php echo base_url();?>assets/js/custom.js"></script>
     

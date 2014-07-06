@@ -30,12 +30,7 @@ class Migration_patient_health_recored extends CI_Migration{
 			)
 		));
 
-<<<<<<< HEAD
-		$this->dbforge->add_field("created datetime NOT NULL ");
-=======
->>>>>>> a2133cd3b71bd7523644464d361c84183d009167
-
-		$this->dbforge->add_field("created datetime NOT NULL DEFAULT 0");
+		$this->dbforge->add_field("created datetime NOT NULL DEFAULT NOW()");
 		
 		$this->dbforge->add_field("last_edit timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
 
