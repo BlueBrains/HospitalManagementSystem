@@ -11,26 +11,48 @@ class Patient_model extends CI_Model{
 		return $patient;
 	}
 	public function find_by_name($name){
-		list($fname,$lname) = split(' ',$name);
-		$this->db->get_where('patients',array('fname'=>$fname,'lname'=>$lname))
-		->result()[0];
+		$result = explode(" ",$name);
+		if(isset($result[1])){
+			$data = $this->db->get_where('patients',array('fname'=>$result[0],'lname'=>$result[1]))->result();
+		}
+		else {
+			$data = $this->db->get_where('patients',array('fname'=>$result[0]))->result();
+		}
+		if($data){
+		return $data[0]->id;
+		}
 	}
 
-	/*public function terms($term){
-		$this->db->select('CONCAT(firstName, " " , lastName) As name , id',FALSE); $this->db->like('firstName', $q); $query = $this->db->get('patients'); if($query->num_rows > 0){ foreach ($query->result_array() as $row){ $new_row['label']=htmlentities(stripslashes($row['name'])); $new_row['value']=htmlentities(stripslashes($row['name'])); $new_row['image']=htmlentities(stripslashes($row['id']));['id'])); $row_set[] = $new_row; } echo json_encode($row_set); //format the array into json data } }
-	}*/
-
+	function terms($q){
+    	$this->db->select('CONCAT(fname, " " , lname) As name , id',FALSE);
+    	$this->db->like('fname', $q);
+    	$query = $this->db->get('patients');
+    	if($query->num_rows > 0){
+      		foreach ($query->result_array() as $row){
+      			$new_row['label']=htmlentities(stripslashes($row['name']));
+				$new_row['value']=htmlentities(stripslashes($row['name']));
+				$new_row['image']=htmlentities(stripslashes($row['id']));
+        		$row_set[] = $new_row;
+      		}
+      		echo json_encode($row_set); //format the array into json data
+    	}
+  	}
+	
 	public function names(){
 		$this->db->select('id,fname,lname');
 		return $this->db->get('patients')->result();
 	}
 
 	public function get_public_info($id){
-		return $this->db->get_where('patients', array('id' => $id),1)->result()[0];
+		if($data = $this->db->get_where('patients', array('id' => $id),1)->result()){
+			return $data[0];
+		}
 	}
 
 	public function get_private_info($id){
-		return $this->db->get_where('patient_private_info', array('patient_id' => $id),1)->result()[0];
+		if($data = $this->db->get_where('patient_private_info', array('patient_id' => $id),1)->result()){
+			return $data[0];
+		}
 	}
 
 	public function get_family_info($id){
