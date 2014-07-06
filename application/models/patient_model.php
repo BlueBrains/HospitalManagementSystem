@@ -12,11 +12,13 @@ class Patient_model extends CI_Model{
 	}
 
 	public function get_public_info($id){
-		return $this->db->get_where('patients', array('id' => $id),1)->result()[0];
+		$data = $this->db->get_where('patients', array('id' => $id),1)->result();
+		return $data[0];
 	}
 
 	public function get_private_info($id){
-		return $this->db->get_where('patient_private_info', array('patient_id' => $id),1)->result()[0];
+		$data = $this->db->get_where('patient_private_info', array('patient_id' => $id),1)->result();
+		return $data[0];
 	}
 
 	public function get_family_info($id){
