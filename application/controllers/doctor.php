@@ -107,8 +107,9 @@ class doctor extends REST_Controller
       		$this->medicine_model->terms($q);
     	}
  	 }
-	function patient_details($id){
-		//TODO tell Eyad to add this fun			
+	function patient_details_get(){
+		//TODO tell Eyad to add this fun
+		$id = $this->input->get('id');					
 		$data['patient'] = $this->patient_model->patient_details($id);
 		$data['main_content']='patient/patient_details_view';
 		$data['title']='Patient Profile';
