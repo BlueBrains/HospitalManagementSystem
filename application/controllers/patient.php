@@ -11,6 +11,7 @@ class patient extends REST_Controller{
 	function u_get(){
 		$patient = $this->patient_model->find($this->get('id'));
 		if($this->response->format == 'html'){
+			$data['title'] = 'Patient Information';
 			$data['patient'] = $patient;
 			$data['main_content']='patient/view.html';
 			
@@ -33,14 +34,33 @@ class patient extends REST_Controller{
 	}
 
 	function new_get(){
-		$this->load->view('patient/new.html');
+		$data['title'] = 'New Patient';
+		$data['main_content']='patient/new.html';
+		$this->load->view('includes/template',$data);
 	}
 
 	function new_post(){
 		
-		$patient = array($this->post());
+		$patient = array();
+		foreach ($this->post() as $key => $value) {
+			if($key == 'language'){
+				$patient['language']=str_replace('', '_', $value);
+			}
+			else if($key == 'marital_status'){
+				if ($value == 'single'){
+					$patient[$key] = 0;
+				}
+				else
+					$patient[$key] = 1;
+			}
+			else
+				$patient[$key]=$value;
+		}
 		
-		$this->patient_model->create($patient);
+		$this->patient_model->create(array($patient));
+		$name = $patient['fname']." ".$patient['lname'];
+		$id = $this->patient_model->find_by_name($name);
+		redirect("/patient/u/id/{$id}");
 	}
 
 	function pr_post(){
@@ -54,7 +74,6 @@ class patient extends REST_Controller{
 		
 		$family = array($this->post());
 
-		var_dump($family);
 		$this->patient_model->insert_family_info($family);
 
 		redirect("/patient/u/id/{$this->post('patient_id')}");
