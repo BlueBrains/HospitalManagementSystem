@@ -1,11 +1,13 @@
 <?php
 require(APPPATH.'libraries/rest_controller.php');
+require(APPPATH.'libraries/CI_Pusher.php');
  
 class patient extends REST_Controller{
 	
 	function __construct(){
 		parent::__construct();
 		$this->load->model('patient_model');
+		$this->p = new CI_Pusher();
 	}
 
 	function u_get(){
@@ -74,18 +76,32 @@ class patient extends REST_Controller{
 		
 		$family = array($this->post());
 
-		$this->patient_model->insert_family_info($family);
+		$id = $this->patient_model->insert_family_info($family);
+		$fm = array(
+			'name'=>$this->patient_model->get_name($this->post('s_patient_id')),
+			'relationship'=>$this->post('relationship'),
+			'id'=>$id,
+			'sid'=>$this->post('s_patient_id')
+		);
+		$this->p->trigger('patient','fm_add',$fm);
 
-		redirect("/patient/u/id/{$this->post('patient_id')}");
+		echo 200;
 	}
 
 	function hl_post(){
 		
 		$health = array($this->post());
 		
-		$this->patient_model->insert_health_info($health);
+		$id = $this->patient_model->insert_health_info($health);
+		$hl = array(
+			'recored_name'=>$this->post('recored_name'),
+			'status'=>$this->post('status'),
+			'category'=>$this->post('category'),
+			'id'=>$id
+		);
+		$this->p->trigger('patient','hl_add',$hl);
 
-		redirect("/patient/u/id/{$this->post('patient_id')}");
+		echo 200;
 	}
 
 	function edit_get(){
@@ -134,5 +150,17 @@ class patient extends REST_Controller{
 		}
 
 		$this->patient_model->update_health_info($id,$health);
+	}
+
+	function fm_delete(){
+		$id = $this->delete('id');
+		$this->patient_model->delete_family_info($id);
+		echo 200;
+	}
+
+	function hl_delete(){
+		$id = $this->delete('id');
+		$this->patient_model->delete_health_info($id);
+		echo 200;
 	}
 }

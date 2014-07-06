@@ -1,6 +1,5 @@
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
-    <script src="<?php  echo base_url();?>assets/js/jquery-1.10.2.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.ui.js"></script>
       <!-- BOOTSTRAP SCRIPTS -->
     <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>

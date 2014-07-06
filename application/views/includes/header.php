@@ -17,6 +17,7 @@
     <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />       
+   <script src="<?php  echo base_url();?>assets/js/jquery-1.10.2.js"></script>
    <title><?php echo $title ?></title>
 </head>
 <body>
