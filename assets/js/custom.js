@@ -12,20 +12,6 @@
    
     ========================================================  */
 
-$(function(){
-  			$("#patientName1").autocomplete({
-    			source: "<?php echo base_url();?>doctor/get_patients" 
-  			}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-        		var inner_html = '<a href="<?echo base_url();?>doctor/patient_details/' + item.image + '"><div style="width:300px;height:50px;padding:5px 0px 5px;"><div class="img-responsive" style="float:left;margin-right:10px;"><img height="42" width="42" src="<? echo base_url()?>/photos/patients/'+ item.image +'.png"></div><div style="font-size:16px;margin-top:8px">' + item.label + '</div></div></a>';
-        		return $( "<li></li>" )
-            		.data( "item.autocomplete", item )
-            		.append(inner_html)
-            		.appendTo( ul );
-    		};
-  			$("#medicineName1").autocomplete({
-    			source: "<?php echo base_url();?>doctor/get_medicines"
-  			});
-});
 
 (function ($) {
     "use strict";
@@ -227,5 +213,6 @@ $(function(){
     $(document).ready(function () {
         mainApp.main_fun();
     });
-
+}
+}
 }(jQuery));
