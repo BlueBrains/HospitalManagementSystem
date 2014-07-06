@@ -53,8 +53,11 @@ class patient extends REST_Controller{
 	function fm_post(){
 		
 		$family = array($this->post());
-		
+
+		var_dump($family);
 		$this->patient_model->insert_family_info($family);
+
+		redirect("/patient/u/id/{$this->post('patient_id')}");
 	}
 
 	function hl_post(){
@@ -62,6 +65,8 @@ class patient extends REST_Controller{
 		$health = array($this->post());
 		
 		$this->patient_model->insert_health_info($health);
+
+		redirect("/patient/u/id/{$this->post('patient_id')}");
 	}
 
 	function edit_get(){

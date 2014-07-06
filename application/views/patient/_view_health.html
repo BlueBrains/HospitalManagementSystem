@@ -22,3 +22,24 @@
 
 </table>
 </div>
+
+<?php echo form_open('patient/hl',array('role'=>'form'),array('patient_id'=>$patient['public']->id));?>
+    
+    <div class="form-group">
+        <label for="recored_name">Recored Name:</label>
+        <input type="text" class="form-control" name="recored_name" placeholder="Select a Name">
+    </div>
+
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <input type="text" class="form-control" name="status" placeholder="status">
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <input type="text" class="form-control" name="category" placeholder="status">
+    </div>
+
+<?php
+    echo form_submit('', 'Add New Health Recored'); 
+    echo form_close()?>

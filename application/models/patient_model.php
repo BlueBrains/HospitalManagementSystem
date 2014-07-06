@@ -16,9 +16,9 @@ class Patient_model extends CI_Model{
 		->result()[0];
 	}
 
-	public function terms($term){
+	/*public function terms($term){
 		$this->db->select('CONCAT(firstName, " " , lastName) As name , id',FALSE); $this->db->like('firstName', $q); $query = $this->db->get('patients'); if($query->num_rows > 0){ foreach ($query->result_array() as $row){ $new_row['label']=htmlentities(stripslashes($row['name'])); $new_row['value']=htmlentities(stripslashes($row['name'])); $new_row['image']=htmlentities(stripslashes($row['id']));['id'])); $row_set[] = $new_row; } echo json_encode($row_set); //format the array into json data } }
-	}
+	}*/
 
 	public function names(){
 		$this->db->select('id,fname,lname');
