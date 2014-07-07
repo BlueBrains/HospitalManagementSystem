@@ -3,8 +3,7 @@
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <script src="<?php  echo base_url();?>assets/js/jquery-1.10.2.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.ui.js"></script>
+    <title>Free Bootstrap Admin Template : Binary Admin</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet" />
      <!-- FONTAWESOME STYLES-->

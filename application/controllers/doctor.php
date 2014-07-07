@@ -4,6 +4,7 @@ class doctor extends REST_Controller
 {
 	function __construct() {
 		parent::__construct();
+		$this->load->model('radiograph_model');
 		// if (!$this->ion_auth->logged_in())
 		// {
 			// redirect('auth/login');
@@ -43,8 +44,19 @@ class doctor extends REST_Controller
          $this->load->view("analyse/creat_request_view",$data);
 	}
 
-
-
+	function total_radiograph_request_get($patient_id)
+	{
+		$request = $this->radiograph_model->fetch_req($this->get('id'));
+	
+		if($this->response->format == 'html'){
+			$data['request'] = $request;
+			$data['main_content'] = 'radiograph/radiograph_order_list_view';	
+			$data['section'] = 'radiograph';	
+			$this->load->view('includes/template',$data);	
+		}
+		else 
+			$this->response($request,200);
+	}
 
 
 

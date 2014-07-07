@@ -17,7 +17,7 @@
 					else 
 						{
 							echo'<li class="text-center">
-	                    	<img src="'.base_url().'assets/img/find_user.png" class="user-image img-responsive"/>
+	                    	<img src="<?echo base_url();?>assets/img/find_user.png" class="user-image img-responsive"/>
 						</li>';
 					
 						}

@@ -134,7 +134,7 @@ class radiograph_supervisor extends REST_Controller{
 		$data['record'] = $this->radiograph_model->create_req(-1);	
 		
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,True";
-			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,True";
+			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
 			$bar[3]=" fa-qrcode ,Out Order Requests,radiograph_supervisor/radiograph_external_request_done,False";
 			$bar[4]=" fa-table ,Implemented Request,radiograph_supervisor/order_list_implemented,False";
