@@ -69,7 +69,7 @@
          <form id="form1" name="form1" method="post" action="<?php echo base_url();?>analyse/new_analyse_request">
          	<table width="50%" border="0">
     <tr>
-      <td width="51%" height="41"><label for="patient_out">patient out</label>
+      <td width="51%" height="41"><label for="patient_out">patient Name</label>
       <input type="text" name="patient_out" id="patient_out" /></td>
       <td width="49%"><p>
     </p></td>

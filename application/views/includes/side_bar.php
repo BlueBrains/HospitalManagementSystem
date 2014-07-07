@@ -5,7 +5,7 @@
   
                 <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
+                <ul class="nav" id="main-menu" style="background-color: #0D4F7A;">
 				  <?php
                     
                     if (isset($pic))

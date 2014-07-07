@@ -113,7 +113,7 @@ class Migration_analyses_tables extends CI_Migration {
 				'analyse_name' => "PAP",		
 				'catagoury_id'=> '1',
 				'Sample_required'=> 'Urine',
-				'required_time' => '30 minutes',
+				'required_time' => '20 minutes',
 				 
 			);
 		$insert = $this->db->insert('analyse', $new_member);

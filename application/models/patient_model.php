@@ -38,6 +38,14 @@ class Patient_model extends CI_Model{
     	}
   	}
 	
+	public function get_name($id){
+		$this->db->select('fname,lname');
+		$res = $this->db->get_where('patients',array(
+			'id'=>$id))->result();
+		$res = $res[0];			
+		return $res->fname." ".$res->lname;
+	}
+	
 	public function names(){
 		$this->db->select('id,fname,lname');
 		return $this->db->get('patients')->result();
@@ -79,10 +87,12 @@ class Patient_model extends CI_Model{
 
 	public function insert_family_info($data){
 		$this->db->insert_batch('patient_family', $data);
+		return $this->db->insert_id();
 	}
 
 	public function insert_health_info($data){
 		$this->db->insert_batch('patient_health_recored', $data);
+		return $this->db->insert_id();
 	}
 
 	//update operations

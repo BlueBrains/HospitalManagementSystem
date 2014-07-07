@@ -27,7 +27,7 @@ class Migration_radiograph extends CI_Migration{
 		$this->dbforge->add_field("state set('0','1','2') NOT NULL DEFAULT 0");		
 		
 			$this->dbforge->add_field(array(
-			'out'=>array(
+			'out1'=>array(
 				'type'=>'BOOL',
 			),
 			'emergancy'=>array(
@@ -88,8 +88,10 @@ class Migration_radiograph extends CI_Migration{
 
   public function down()
   {
+  	$this->db->empty_table('rad_request');	
 	$this->dbforge->drop_table('radiology');
 	$this->dbforge->drop_table('rad_request');	
-
+	
+		
   }
 }

@@ -30,5 +30,11 @@
 		  			});
 		});
     </script>
+    
+    <script>
+            $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+            });
+    </script>
 </body>
 </html>
