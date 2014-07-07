@@ -6,8 +6,9 @@
 			<th>Patient</th>
 			<th>Medicine</th>
 			<th>Caliber</th>
-			<th>Accept</th>
-			<th>Reject</th>
+			<th>state</th>
+			<th>action</th>
+			<th>details</th>
 		</thead>
 		<tbody>
 	<?php
@@ -16,17 +17,24 @@
 			if($data->quantity == 0) $disabled = "disabled"; else $disabled = "";  			
 			echo "<tr>
 					<td>$data->id</td>
-					<td>$data->firstName $data->lastName</td>
-					<td>$data->pfirstName $data->plastName</td>
+					<td>$data->fname $data->lname</td>
+					<td>$data->pfname $data->plname</td>
 					<td>$data->tradeName</td>
 					<td>$data->caliber</td>";
-		if($data->confirmed)
-			echo 	"<td><button type='button' class='btn btn-success active'>Confirmed</button></td>
-					 <td><a class='btn btn-default' href='../detailOrder/$data->id' role='button'>Details</a></td>
+		if($data->state == 2)
+			echo 	"<td><button type='button' class='btn btn-success disabled'>Finished</button></td>
+					 <td></td>
+					 <td><a class='btn btn-default' href='".base_url()."pharmacy_supervisor/detail_request/id/$data->id' role='button'>Details</a></td>
 				 </tr>";
+		else if($data->state == 1)
+			echo 	"<td><button type='button' class='btn btn-success disabled'>Confirmed</button></td>
+					 <td><a class='btn btn-default' href='".base_url()."pharmacy_supervisor/finish_request/id/$data->id' role='button'>Finish</a></td>
+					 <td><a class='btn btn-default' href='".base_url()."pharmacy_supervisor/detail_request/id/$data->id' role='button'>Details</a></td>
+				 </tr>";				 
 		else				 								
-			echo	"<td><a class='btn btn-primary ".$disabled."' href='../confirmOrder/$data->id' role='button'>Accept</a></td>
-					<td><a class='btn btn-danger' href='../rejectOrder/$data->id' role='button'>Reject</a></td>
+			echo	"<td><button type='button' class='btn btn-success disabled'>waiting</button></td>
+					 <td><a class='btn btn-primary ".$disabled."' href='".base_url()."pharmacy_supervisor/confirm_request/id/$data->id' role='button'>Accept</a></td>
+				     <td><a class='btn btn-default' href='".base_url()."pharmacy_supervisor/detail_request/id/$data->id' role='button'>Details</a></td>
 				 </tr>";
 		}
 	?>

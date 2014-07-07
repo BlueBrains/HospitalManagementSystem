@@ -1,15 +1,16 @@
 <h1 class="text-info">Full Details for<small> order number : <?php  echo $result->id; ?></small></h1>
 <hr>
 <div class="container">
-<div class="row" style="margin-top:30px">
-	<table class="table table-hover table-bordered">
+<div class="row" style="margin-top:5px">
+	<div class="col-md-10" style='margin-left: 13px;'>
+	<table class="table table-hover table-bordered">		
 		<thead>
 			<th class="active" colspan="2">
-				<h3 class="text-danger text-center">Dr.<?php echo $result->firstName.' '.$result->lastName ;  ?>
+				<h3 class="text-danger text-center">Dr.<?php echo $result->fname.' '.$result->lname ;  ?>
 				<larg class="text-muted">offered </larg>
 				<?php echo $result->tradeName; ?>
 				<larg class="text-muted">to</larg>
-				<?php echo $result->pfirstName.' '.$result->plastName ;  ?>
+				<?php echo $result->pfname.' '.$result->plname ;  ?>
 				<larg class="text-muted">with this details: </larg></h3>
 			</th>
 		</thead>
@@ -17,13 +18,13 @@
 			<div class="row">
 				<tr class="info">				
 					<h4>										
-						<td style="width:12%">
-							<div class="col-sm-2">
+						<td style="width:20%; overflow: hidden">
+							<div>
 								<h4><strong class="text-info">Caliber:</strong></h4>
 							</div>
 						</td>			
-						<td>						
-							<div class="col-sm-4"> 
+						<td >						
+							<div> 
 								<p class="lead text-warning"><larg> <?php echo $result->caliber; ?></larg> </p>									
 							</div> 													
 						</td>				
@@ -32,13 +33,13 @@
 			</div>
 			<div class="row">
 				<tr>							
-					<td style="width:12%">
-						<div class="col-sm-2">
+					<td style="width:20%">
+						<div>
 							<h4><strong class="text-info">Dose:</strong></h4>
 						</div>
 					</td>
 					<td>					
-						<div class="col-sm-4">
+						<div>
 								<p class="lead text-warning"><larg> <?php echo $result->dose; ?></larg> </p>								
 						</div>									
 					</td>				
@@ -46,19 +47,21 @@
 			</div>
 			<div class="row">
 				<tr class="info">									
-					<td style="width:12%">
-							<div class="col-sm-2">
+					<td style="width:20%">
+							<div >
 								<h4><strong class="text-info">More Details:</strong></h4>
 							</div>
 					</td>
 					<td>
-						<div class="col-sm-4">
+						<div>
 							<p class="lead text-warning"><larg><?php echo $result->details; ?></larg></p>
 						</div>
 					</td>
 				</tr>
 			</div>			
-		</tbody>			
+		</tbody>	
+	</table>		
+	</div>
 	</div>
 </div>
 
