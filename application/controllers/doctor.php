@@ -14,24 +14,55 @@ class doctor extends REST_Controller
 		$this->load->model('patient_model');
 		$this->load->model('medicine_model');
 	}
-	function finish_analyse_request_get($patient_id)
+	function finish_analyse_request_get()
 	{
+		$patient_id=$this->get('id');
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->finish_order_list_patient($patient_id);
-		$this->load->view('analyse/finish_order_patient_view',$data);
+		$bar[0]=" fa-desktop ,ALL Requests,doctor/total_analyse_request/id/{$patient_id},false";
+			$bar[1]=" fa-qrcode ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$patient_id},False";
+			$bar[2]=" fa-table ,Implemented Request,doctor/finish_analyse_request/id/{$patient_id},True";
+			$data['side'] = $bar;
+			$data['main_content'] = 'analyse/analyses_order_list';	
+			$data['section'] = 'doctor';	
+		$this->load->view('includes/template',$data);
 	}
-	function total_analyse_request_get($patient_id)
+	
+	function total_analyse_request_get()
 	{
+		$patient_id=$this->get('id');
 		$this->load->model('analyse_model');
-		$this->analyse_model->total_order_list_patient($patient_id);
-		$this->load->view('analyse/finish_order_patient_view',$data);
+		$data['records']=$this->analyse_model->total_order_list_patient($patient_id);
+		$bar[0]=" fa-desktop ,ALL Analyse Requests,doctor/total_analyse_request/id/{$patient_id},True";
+			$bar[1]=" fa-qrcode ,Un Uploded Analuse Request,doctor/confirmed_analyse_request/id/{$patient_id},False";
+			$bar[2]=" fa-table ,Implemented Analyse Request,doctor/finish_analyse_request/id/{$patient_id},FALSE";
+			$data['side'] = $bar;
+			$data['main_content'] = 'analyse/analyses_order_list';	
+			$data['section'] = 'doctor';	
+		$this->load->view('includes/template',$data);
+		
 	}
+
+	function confirmed_analyse_request_get()
+	{
+		$patient_id=$this->get('id');
+		$this->load->model('analyse_model');
+		$data['records']=$this->analyse_model->confirmed_order_list_patient($patient_id);
+		$bar[0]=" fa-desktop ,ALL Requests,doctor/total_analyse_request/id/{$patient_id},FALSE";
+			$bar[1]=" fa-qrcode ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$patient_id},TRUE";
+			$bar[2]=" fa-table ,Implemented Request,doctor/finish_analyse_request/id/{$patient_id},FALSE";
+			$data['side'] = $bar;
+			$data['main_content'] = 'analyse/analyses_order_list';	
+			$data['section'] = 'doctor';	
+		$this->load->view('includes/template',$data);
+	}
+	
 	function new_analyse_request_post()
 	{
-		echo "amerrrrrrr";
+		 $doctor_id=$_SESSION['user_id'];
 		 $this->load->model('analyse_model');
-          $this->analyse_model->create_request();
-		  echo "done";
+         $this->analyse_model->create_request($doctor_id);
+		  
 		  //تحميل صفحة التملاية مرة اخرى
 	}
 
@@ -40,79 +71,9 @@ class doctor extends REST_Controller
 		 $this->load->model('analyse_model');
          $data['records']=$this->analyse_model->get_analyses();
          $data['records2']=$this->analyse_model->get_catagoury();
+		 
          $this->load->view("analyse/creat_request_view",$data);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	#################################pharmacy Requsets###############################

@@ -86,7 +86,14 @@
             {
                 echo "<tr>";
                 echo "<td>".$row->Pname."</td>";
-                echo "<td>".$row->Dname."</td>";
+                if(isset($row->Dname))
+				{
+					echo "<td>".$row->Dname."</td>";
+				}
+				else {
+					echo "<td>"."</td>";
+					
+				}
                 echo "<td>".$row->Nname."</td>";
                 echo "<td>".$row->rdate."</td>";
 				if($row->state==0)
@@ -98,8 +105,11 @@
 				elseif ($row->state==1)
 				 {
 					echo "<td> not uploaded </td>";
+					if($section!='doctor')
+					{
+						echo "<td>"."<a href=".base_url()."analyse/upload/id/".$row->id.">"."upload result"."</a><br/>";
+					}
 					
-					echo "<td>"."<a href=".base_url()."analyse/upload/id/".$row->id.">"."upload result"."</a><br/>";
 				}
 				else
 					{
