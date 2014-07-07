@@ -30,21 +30,21 @@
 
 <?php echo form_open('patient/hl',array('role'=>'form','class'=>'add'),array('patient_id'=>$patient['public']->id));?>
     
-    <div class="form-group">
-        <label for="recored_name">Recored Name:</label>
+    <div class="input-group">
+        <span class="input-group-addon">Recored Name:</span>
         <input type="text" class="form-control" name="recored_name" placeholder="Select a Name">
     </div>
-
-    <div class="form-group">
-        <label for="status">Status:</label>
+    <br>
+    <div class="input-group">
+       <span class="input-group-addon">Status:</span>
         <input type="text" class="form-control" name="status" placeholder="status">
     </div>
-
-    <div class="form-group">
-        <label for="category">Category:</label>
-        <input type="text" class="form-control" name="category" placeholder="status">
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon">Category:</span>
+        <input type="text" class="form-control" name="category" placeholder="public">
     </div>
-
+    <br>
 <?php
-    echo form_submit('', 'Add New Health Recored'); 
+    echo form_submit(array('class'=>'btn btn-primary'), 'Add New Health Recored'); 
     echo form_close()?>
