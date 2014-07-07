@@ -8,13 +8,14 @@ class Pharmacy_supervisor extends REST_Controller {
 	
 	function __construct() {
 		parent::__construct();
-		if (!$this->ion_auth->logged_in())
-		{
-			redirect('auth/login');
-		}	
-		else{
+		$this->load->library('ion_auth');
+		// if (!$this->ion_auth->logged_in()||!$this->ion_auth->in_group("pharmacy_supervisor"))
+		// {
+			// redirect('auth/login');
+		// }	
+		// else{
 			$this->load->model('pharmacy_model');
-		}
+		// }
 	}
 	
 	public function homepage_get()
@@ -28,7 +29,7 @@ class Pharmacy_supervisor extends REST_Controller {
 	public function order_list_get(){		
 		$this->load->library('pagination');
 		
-		$config['base_url'] = base_url()."pharmacy/order_list_get";
+		$config['base_url'] = base_url()."pharmacy_supervisor/order_list";
 		$config['per_page'] = 20;
 		$config['total_rows'] = 200; //should be reaplaced
 	
@@ -65,7 +66,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		
-		if(isset($this->get('type'))){
+		if($this->get('type') == 2){
 			$results = $this->pharmacy_model->getAllOrders($config["per_page"], $page);
 		}
 		else{
@@ -84,9 +85,15 @@ class Pharmacy_supervisor extends REST_Controller {
 	}
 
 	public function confirm_request_get(){
-		$value = $this->get('id');
+		$value = $this->get('id');		
 		$this->pharmacy_model->confirmOrder($value);		
-		redirect('Pharmacy/order_list_get/0');	
+		redirect('pharmacy_supervisor/order_list/0');	
+	}
+
+	public function finish_request_get(){
+		$value = $this->get('id');
+		$this->pharmacy_model->finishOrder($value);		
+		redirect('pharmacy_supervisor/order_list/0');	
 	}
 
 	public function detail_request_get()

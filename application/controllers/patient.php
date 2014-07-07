@@ -73,15 +73,18 @@ class patient extends REST_Controller{
 	}
 
 	function fm_post(){
-		
-		$family = array($this->post());
-
+		$s_patient_id = $this->patient_model->find_by_name($this->post('name'));
+		$family = array(array(
+			's_patient_id'=>$s_patient_id,
+			'relationship'=>$this->post('relationship'),
+			'patient_id'=>$this->post('patient_id')
+		));		
 		$id = $this->patient_model->insert_family_info($family);
 		$fm = array(
-			'name'=>$this->patient_model->get_name($this->post('s_patient_id')),
+			'name'=>$this->post('name'),
 			'relationship'=>$this->post('relationship'),
 			'id'=>$id,
-			'sid'=>$this->post('s_patient_id')
+			'sid'=>$s_patient_id
 		);
 		$this->p->trigger('patient','fm_add',$fm);
 

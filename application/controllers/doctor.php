@@ -14,6 +14,7 @@ class doctor extends REST_Controller
 		// }
 		$this->load->model('patient_model');
 		$this->load->model('medicine_model');
+		$this->load->model('pharmacy_model');
 	}
 	function finish_analyse_request_get($patient_id)
 	{
@@ -57,76 +58,6 @@ class doctor extends REST_Controller
 		else 
 			$this->response($request,200);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	#################################pharmacy Requsets###############################
 	public function new_med_request_get() 
 	{
@@ -154,6 +85,7 @@ class doctor extends REST_Controller
 				'doctor_id' => 3,//$this->session->userdata('doctor_id')
 				'medicine_id' => $medicineId,
 				'dose' => $this->input->post('dose'),
+				'state' => '0',
 				'details' => $this->input->post('details')	
 				);
 			if($query = $this->pharmacy_model->addOrder($data))

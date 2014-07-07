@@ -36,7 +36,7 @@ class Medicine_model extends CI_Model {
 		$this->db->update('medicines');
 	} 
 	
-	function get_medicine($q){
+	function terms($q){
     	$this->db->select('tradeName');
     	$this->db->like('tradeName', $q);
     	$query = $this->db->get('medicines');

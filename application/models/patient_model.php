@@ -41,7 +41,8 @@ class Patient_model extends CI_Model{
 	public function get_name($id){
 		$this->db->select('fname,lname');
 		$res = $this->db->get_where('patients',array(
-			'id'=>$id))->result()[0];
+			'id'=>$id))->result();
+		$res = $res[0];			
 		return $res->fname." ".$res->lname;
 	}
 	
