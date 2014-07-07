@@ -5,7 +5,7 @@
   
                 <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
+                <ul class="nav" id="main-menu" style="background-color: #0D4F7A;">
 				  <?php
                     
                     if (isset($pic))
@@ -17,7 +17,7 @@
 					else 
 						{
 							echo'<li class="text-center">
-	                    	<img src="'.base_url().'assets/img/find_user.png" class="user-image img-responsive"/>
+	                    	<img src="<?echo base_url();?>assets/img/find_user.png" class="user-image img-responsive"/>
 						</li>';
 					
 						}
