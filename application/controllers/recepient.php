@@ -16,8 +16,8 @@ class recepient extends REST_Controller{
 	function  homepage_get ()
 	{
 			$bar[0]=" fa-edit , Add Patient , add_patient ,False";
-			$bar[1]=" fa-qrcode ,Patient in Hospital,#,False";
-			$bar[2]=" fa-qrcode ,All hospital patients,radiograph_supervisor/order_list,False";
+			$bar[1]=" fa-qrcode ,Patient in Hospital,patients_in_hospital,False";
+			$bar[2]=" fa-qrcode ,All hospital patients,patients_visit_hospital,False";
 			
 			$data['main_content'] = 'reciption/reciption';	
 			$data['section'] = 'reception';	
@@ -41,10 +41,7 @@ class recepient extends REST_Controller{
 	{
 		
 	}
-	function patient_state_get()
-	{
-		
-	}
+
 	function patients_visit_hospital_get()
 	{
 		
