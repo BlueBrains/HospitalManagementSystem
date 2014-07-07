@@ -93,7 +93,7 @@ class recepient extends REST_Controller{
 				$bar[1]=" fa-qrcode ,Patient in Hospital,recepient/patients_in_hospital,False";
 				$bar[2]=" fa-qrcode ,All hospital patients,recepient/patients_visit_hospital,False";
 				$data['id']=$this->get('id');
-				$data['main_content'] = 'reciption/patient_state_view';	
+				$data['main_content'] = 'reciption/assgin_patient';	
 				$data['section'] = 'reception';	
 				$data['side'] = $bar;
 				$this->load->view('includes/template',$data);

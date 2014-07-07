@@ -121,7 +121,7 @@
 								             foreach($record as $row ) 
 								            {
 								                echo "<tr>";
-								                echo "<td>".$row->fname." ".$row->lname."</td>";
+								                echo "<td>".$row->doctors.fname." ".$row->doctors.lname."</td>";
 												
 								                echo "<td>".$row->state."</td>";
 								                echo "<td>  <a href = ".base_url()."recepient/end_visitng/id/".$row->patient_id.">end visitng</a></td>";
@@ -145,6 +145,8 @@
                     <!--End Advanced Tables -->
                 </div>
             </div>
+            
+            
  
 </body>
 </html>
