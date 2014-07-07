@@ -31,30 +31,7 @@
                 </div>
              </div>
 		     </div>
-             <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
-                <span class="icon-box bg-color-blue set-icon">
-                    <i class="fa fa-bell-o"></i>
-                </span>
-                <div class="text-box" >
-                    <p class="main-text">2 New</p></br>
-                    <p class="text-muted">Emergency Order</p>
-                </div>
-             </div>
-		     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-6">           
-			<div class="panel panel-back noti-box">
-                <span class="icon-box bg-color-brown set-icon">
-                    <i class="fa fa-rocket"></i>
-                </span>
-                <div class="text-box" >
-                    <p class="main-text">3 New</p></br>
-                    <p class="text-muted">Out Orders</p>
-                </div>
-             </div>
-             
-		     </div>
-			</div>
+		</div>
                  <!-- /. ROW  -->
                 <hr />                
                 <div class="row">

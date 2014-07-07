@@ -35,55 +35,55 @@ class Migration_radiograph extends CI_Migration{
 			)));	
 		$this->dbforge->add_key('id', TRUE);                           
         $this->dbforge->create_table('rad_request', TRUE);
-        
-		$new_member = array(
-				'image_id ' => '1',
-				'photo_kind' => " X-rays",
-				'price' => '0',					
-			);
-		$insert = $this->db->insert('radiology', $new_member);
-		
-		$new_member = array(
-				'image_id ' => '2',
-				'photo_kind' => "Computed Tomography",
-				'price' => '0',					
-			);
-		$insert = $this->db->insert('radiology', $new_member);
-		
-		$new_member = array(
-				'image_id ' => '3',
-				'photo_kind' => "Magnetic Resonance Imaging",
-				'price' => '0',					
-			);
-		$insert = $this->db->insert('radiology', $new_member);
-		
-		$new_member = array(
-				'image_id ' => '4',
-				'photo_kind' => "Ultrasound",
-				'price' => '0',					
-			);
-		$insert = $this->db->insert('radiology', $new_member);
-		
-		$new_member = array(
-				'image_id ' => '5',
-				'photo_kind' => "Nuclear Medicine",
-				'price' => '0',					
-			);
-		$insert = $this->db->insert('radiology', $new_member);
-
-		$new_member = array(
-				'image_id ' => '6',
-				'photo_kind' => "Invasive and Fluoroscopic Imaging",
-				'price' => '0',					
-			);
-		$insert = $this->db->insert('radiology', $new_member);
-		
-				$new_member = array(
-				'image_id ' => '7',
-				'photo_kind' => "Mammography Screening",
-				'price' => '0',					
-			);
-		$insert = $this->db->insert('radiology', $new_member);	
+//         
+		// $new_member = array(
+				// 'image_id ' => '1',
+				// 'photo_kind' => " X-rays",
+				// 'price' => '0',					
+			// );
+		// $insert = $this->db->insert('radiology', $new_member);
+// 		
+		// $new_member = array(
+				// 'image_id ' => '2',
+				// 'photo_kind' => "Computed Tomography",
+				// 'price' => '0',					
+			// );
+		// $insert = $this->db->insert('radiology', $new_member);
+// 		
+		// $new_member = array(
+				// 'image_id ' => '3',
+				// 'photo_kind' => "Magnetic Resonance Imaging",
+				// 'price' => '0',					
+			// );
+		// $insert = $this->db->insert('radiology', $new_member);
+// 		
+		// $new_member = array(
+				// 'image_id ' => '4',
+				// 'photo_kind' => "Ultrasound",
+				// 'price' => '0',					
+			// );
+		// $insert = $this->db->insert('radiology', $new_member);
+// 		
+		// $new_member = array(
+				// 'image_id ' => '5',
+				// 'photo_kind' => "Nuclear Medicine",
+				// 'price' => '0',					
+			// );
+		// $insert = $this->db->insert('radiology', $new_member);
+// 
+		// $new_member = array(
+				// 'image_id ' => '6',
+				// 'photo_kind' => "Invasive and Fluoroscopic Imaging",
+				// 'price' => '0',					
+			// );
+		// $insert = $this->db->insert('radiology', $new_member);
+// 		
+				// $new_member = array(
+				// 'image_id ' => '7',
+				// 'photo_kind' => "Mammography Screening",
+				// 'price' => '0',					
+			// );
+		// $insert = $this->db->insert('radiology', $new_member);	
   }
 
   public function down()
