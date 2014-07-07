@@ -15,6 +15,9 @@
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
    <script src="<?php echo base_url();?>assets/js/jquery-1.10.2.js"></script>
+  <script src="<?php echo base_url();?>/javascript/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+  <link href="<?php echo base_url();?>/javascript/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+        
 </head>
 <body>
     <div id="wrapper" style="background-color: #0D4F7A;">
