@@ -12,6 +12,7 @@ class doctor extends REST_Controller
 			// $this->load->model('patient_model');
 		// }
 		$this->load->model('patient_model');
+		$this->load->model('medicine_model');
 	}
 	function finish_analyse_request_get($patient_id)
 	{
@@ -25,12 +26,95 @@ class doctor extends REST_Controller
 		$this->analyse_model->total_order_list_patient($patient_id);
 		$this->load->view('analyse/finish_order_patient_view',$data);
 	}
-	function new_analyse_request_post($doctor_id,$patient_id)
+	function new_analyse_request_post()
 	{
+		echo "amerrrrrrr";
 		 $this->load->model('analyse_model');
-          $this->analyse_model->create_request($doctor_id,$patient_id);
+          $this->analyse_model->create_request();
+		  echo "done";
 		  //تحميل صفحة التملاية مرة اخرى
 	}
+
+	function Fill_order_get()
+	{
+		 $this->load->model('analyse_model');
+         $data['records']=$this->analyse_model->get_analyses();
+         $data['records2']=$this->analyse_model->get_catagoury();
+         $this->load->view("analyse/creat_request_view",$data);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	#################################pharmacy Requsets###############################
 	public function new_med_request_get() 
 	{
@@ -78,7 +162,7 @@ class doctor extends REST_Controller
 		if($this->patient_model->find_by_name($patientname))
 			return TRUE;
 		else {
-			$this->form_validation->set_message('find_patientName', 'The %s field does not exist yet, check you write correctness');
+			$this->form_validation->set_message('find_patientName_get', 'The %s field does not exist yet, check you write correctness');
 			return FALSE;
 		}
 	}
@@ -87,7 +171,7 @@ class doctor extends REST_Controller
 		if($this->medicine_model->findMedicine($medicinename,$caliber))
 			return TRUE;
 		else {		
-			$this->form_validation->set_message('find_medicineName', 'The %s field does not exist yet, check you write correctness');
+			$this->form_validation->set_message('find_medicineName_get', 'The %s field does not exist yet, check you write correctness');
 			return FALSE;
 		}
 	}
@@ -106,13 +190,15 @@ class doctor extends REST_Controller
       		$this->medicine_model->terms($q);
     	}
  	 }
-	function patient_details($id){
-		//TODO tell Eyad to add this fun			
+	function patient_details_get(){
+		//TODO tell Eyad to add this fun
+		$id = $this->input->get('id');					
 		$data['patient'] = $this->patient_model->patient_details($id);
 		$data['main_content']='patient/patient_details_view';
 		$data['title']='Patient Profile';
 		$this->load->view('includes/template',$data);
 	}
 	################################### end auto_complete_functions BLOCK #########################################	
+
 }
 ?>
