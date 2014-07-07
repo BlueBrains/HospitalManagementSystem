@@ -29,6 +29,9 @@
 		    			source: "<?php echo base_url();?>doctor/get_medicines"
 		  			});
 		});
+        $(document).ready(function () {
+                $('#dataTables-example').dataTable();
+        });		
     </script>
 </body>
 </html>
