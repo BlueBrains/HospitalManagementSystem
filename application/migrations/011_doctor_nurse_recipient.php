@@ -42,7 +42,10 @@ class Migration_Doctor_nurse_recipient extends CI_Migration {
 		$query1 = "INSERT INTO `groups` (`id`, `name`, `description`) VALUES
 		     (3,'doctors','General User'),
 		     (4,'nurses','General User'),
-		     (5,'recipients','General User');";
+		     (5,'recipients','General User'),
+		     (6,'pharmacy_supervisor','General User'),
+		     (7,'analysis_supervisor','General User'),
+		     (8,'radiograph_supervisor','General User');";
 
 		$query2 = "INSERT INTO `doctors` (`id`, `fname`, `lname` ,`department_id`) VALUES
 			 (1,'Eyad','Arnabeh',1),
