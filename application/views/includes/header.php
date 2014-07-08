@@ -6,14 +6,10 @@
     <title><?php echo $title ?></title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet" />
-<<<<<<< HEAD
     <!-- TABLE STYLES-->
     <link href="<?php echo base_url();?>assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />   
     <!-- JQUERY.UI STYLES-->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery.ui.css" type="text/css" media="screen" />
-    <script src="<?php  echo base_url();?>assets/js/jquery-1.10.2.js"></script>    
-=======
->>>>>>> 0c09d5907c3a73bf734643fbd6eaa9b3f2cd67cd
      <!-- FONTAWESOME STYLES-->
     <link href="<?php echo base_url();?>assets/css/font-awesome.css" rel="stylesheet" />
      <!-- MORRIS CHART STYLES-->
@@ -38,7 +34,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a href="#"><img src="<?echo base_url();?>/logo2.png" class="img-responsive" alt="Responsive image" style="margin-right: 50px;"></a>
+                <a href="#"><img src="<?php echo base_url();?>assets/img/logo2.png" class="img-responsive" alt="Responsive image" style="margin-right: 50px;"></a>
                 <!--<a class="navbar-brand" href="index.html"><?php $section ?></a>-->
                  
             </div>
