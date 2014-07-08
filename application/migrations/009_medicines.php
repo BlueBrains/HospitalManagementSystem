@@ -27,6 +27,7 @@ class Migration_Medicines extends CI_Migration {
 		$this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
         $this->dbforge->add_field("doctor_id int(11) unsigned NOT NULL ");
 		$this->dbforge->add_field("patient_id int(11) unsigned NOT NULL ");
+		$this->dbforge->add_field("nurse_id int(11) unsigned ");
 		$this->dbforge->add_field("medicine_id int(11) unsigned NOT NULL ");       
  		$this->dbforge->add_field("caliber int(11) unsigned NOT NULL ");
  		$this->dbforge->add_field("dose varchar(255) NOT NULL DEFAULT ''");

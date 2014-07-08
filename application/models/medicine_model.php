@@ -113,6 +113,10 @@ class Medicine_model extends CI_Model {
         }		
 		
 	}
+	public function assignTask($request_id,$nurse_id)
+	{		
+		$this->db->update('medicine_request', array('nurse_id'=>$nurse_id), array('id' => $request_id));
+	}	
 }
 
 ?>

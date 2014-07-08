@@ -29,7 +29,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[5]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/homepage';
@@ -87,7 +87,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[5]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/order_list_view';
@@ -152,7 +152,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[5]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$this->load->view('includes/template',$data);
@@ -163,8 +163,31 @@ class Pharmacy_supervisor extends REST_Controller {
 	}
 
 	public function confirm_request_get(){
-		$value = $this->get('id');		
-		$this->pharmacy_model->confirmOrder($value);		
+		$data['id'] = $this->get('id');		
+		$data['main_content'] = 'pharmacy/send_task_view';
+		$data['title'] = "Send Task";
+		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
+		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
+		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
+		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
+		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
+		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$data['side'] = $bar;
+		$data['section'] = 'pharmacy';		
+		$this->load->view('includes/template',$data);			
+	}
+	public function confirm_request_post(){
+		$this->load->model('nurse_model');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('name','Nurse Name','trim|required');
+		if($this->form_validation->run()==FALSE)
+		{
+			$this->confirm_requset_get();	
+		}				
+		$nurse_id = $this->nurse_model->find_by_name($this->input->post('name'));
+		$this->medicine_model->assignTask($this->input->post('id'),$nurse_id);
+		$this->pharmacy_model->confirmOrder($this->input->post('id'));		
 		redirect('pharmacy_supervisor/order_list/0');	
 	}
 
@@ -192,7 +215,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[5]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/sale_med_view';
@@ -228,7 +251,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[5]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/enter_med_view';
@@ -279,7 +302,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[5]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/all_med_view';
@@ -296,7 +319,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[5]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/saled_med_view';
@@ -313,7 +336,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[5]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/update_medquan_view';
@@ -336,7 +359,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[5]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';				
 		$data['main_content'] = 'pharmacy/update_med_view';
@@ -369,7 +392,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[5]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';				
 		$data['main_content'] = 'pharmacy/med_insert_view';
