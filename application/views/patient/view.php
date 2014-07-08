@@ -8,18 +8,19 @@
 </ul>
 <div class='tab-content'>
 	<div class="tab-pane active" id="public">
-		<?php $this->load->view('patient/_view_public.html'); ?>
+		<?php $this->load->view('patient/_view_public'); ?>
 	</div>
 
 	<div class='tab-pane' id='private'>
-		<?php $this->load->view('patient/_view_private.html'); ?>
+		<?php $this->load->view('patient/_view_private'); ?>
 	</div>
 
 	<div class='tab-pane' id='family'>
-		<?php $this->load->view('patient/_view_family.html'); ?>
+		<?php $this->load->view('patient/_view_family'); ?>
 	</div>
 
 	<div class='tab-pane' id='health'>
-		<?php $this->load->view('patient/_view_health.html'); ?>
+		<?php $this->load->view('patient/_view_health'); ?>
 	</div>
+</div>
 </div>

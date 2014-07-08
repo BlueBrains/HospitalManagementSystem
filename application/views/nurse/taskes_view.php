@@ -69,59 +69,31 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                        	<th>Patient name</th>
-                                            <th>doctor name</th>
-                                            <th>analyse</th>
-                                             <th>date</th>
-                                            <th>state</th>
-                                            <th>action</th>
-                                            
+                                        	<th>doctor name</th>
+                                            <th>patient name</th>
+                                            <th>medicine name</th>
+                                            <th>caliber</th>
+                                            <th>dose</th>
+                                            <th>request date</th>                                            
+                                            <th>see patient</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
         <?php
-            if(isset($records))
-			{
-				foreach ($records as $row) 
-            	{
-	                echo "<tr>";
-	                echo "<td>".$row->Pname."</td>";
-	                if(isset($row->Dname))
-					{
-						echo "<td>".$row->Dname."</td>";
-					}
-					else {
-						echo "<td>"."</td>";
-						
-					}
-	                echo "<td>".$row->Nname."</td>";
-	                echo "<td>".$row->rdate."</td>";
-					if($row->state==0)
-					{
-						echo "<td> not confirm </td>";
-						echo "";
-						echo "<td>"."<a href=".base_url()."analyse/confirm_request/id/".$row->id.">"."confirm request"."</a><br/>";
-					}
-					elseif ($row->state==1)
-					 {
-						echo "<td> not uploaded </td>";
-						if($section!='doctor')
-						{
-							echo "<td>"."<a href=".base_url()."analyse/upload/id/".$row->id.">"."upload result"."</a><br/>";
-						}
-						
-					}
-					else
-						{
-							echo "<td> uploaded </td>";
-						echo "<td>"."<a href=".base_url()."analyse/edit_analyse/id/".$row->id.">"."edit" ."</td>";
-						}
-	                echo "</tr>";
-	            }
-				echo "<a href=".base_url()."analyse/confirm_request_all>"."confirm all request"."</a><br/>";
-			}
             
+            foreach ($records as $row) 
+            {
+                echo "<tr>";
+                echo "<td>".$row->dfname." ".$row->dlname."</td>";
+                echo "<td>".$row->pfname." ".$row->plname."</td>";
+                echo "<td>".$row->tradeName."</td>";
+				echo "<td>".$row->caliber."</td>";
+                echo "<td>".$row->dose."</td>";
+				echo "<td>".$row->offerdate."</td>";
+				echo "<td>"."<a href=".base_url()."patient/u/id/".$row->patient_id.">"."patient profile"."</a><br/>";				
+                echo "</tr>";
+            }
         ?>
      </tbody>
                                 </table>

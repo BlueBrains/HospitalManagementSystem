@@ -34,6 +34,7 @@ class Medicine_model extends CI_Model {
 		$this->db->set('quantity',"quantity + ".(int)$def,FALSE);
 		$this->db->where('id',$id);
 		$this->db->update('medicines');
+		$this->db->insert('medicine_insertion',array('medicine_id'=>$id,'quantity'=>$def));
 	} 
 	
 	function terms($q){
@@ -47,6 +48,75 @@ class Medicine_model extends CI_Model {
       		echo json_encode($row_set); //format the array into json data
     	}
   	}
+	public function updateMed($id,$data)
+	{
+		$this->db->update('medicines', $data, array('id' => $id));		
+	}
+	public function getMed($id)
+	{
+		$q = $this->db->get_where('medicines', array('id' => $id));
+		if($q->num_rows()>0)
+        {
+        	$data = $q->result();             
+           	return $data[0];           
+        }		
+	}
+	public function getAllMed()
+	{
+		$q = $this->db->select('*')->from('medicines')->get();
+		if($q->num_rows()>0)
+        {
+        	foreach ($q->result() as $raw ) {
+               $data[]=$raw;
+           	}
+           return $data;           
+        }		
+		
+	}
+	
+	public function saleMed($data)
+	{
+		$this->db->insert('medicine_exrequest',$data);
+		$result = $this->db->get_where('medicines', array('id' => $data['medicine_id']))->result();
+		$last_quantity = $result[0]->quantity;
+		$new_quantity = $last_quantity - $data['quantity'];
+		$this->db->update('medicines', array('quantity'=>$new_quantity), array('id' => $data['medicine_id']));
+	}
+	
+	public function getSaledMed()
+	{
+		$q = $this->db->select('customerName,medicine_exrequest.quantity,tradeName,caliber,sale_date')
+		->from('medicine_exrequest')
+		->join('medicines', 'medicine_exrequest.medicine_id = medicines.id','inner')
+		->get();
+		if($q->num_rows()>0)
+        {
+        	foreach ($q->result() as $raw ) {
+               $data[]=$raw;
+           	}
+           return $data;           
+        }		
+			
+	}
+	public function getMedInsertion()
+	{
+		$q = $this->db->select('tradeName,caliber,date,medicine_insertion.quantity')
+		->from('medicine_insertion')
+		->join('medicines', 'medicine_insertion.medicine_id = medicines.id','inner')
+		->get();
+		if($q->num_rows()>0)
+        {
+        	foreach ($q->result() as $raw ) {
+               $data[]=$raw;
+           	}
+           return $data;           
+        }		
+		
+	}
+	public function assignTask($request_id,$nurse_id)
+	{		
+		$this->db->update('medicine_request', array('nurse_id'=>$nurse_id), array('id' => $request_id));
+	}	
 }
 
 ?>

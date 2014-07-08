@@ -26,7 +26,6 @@ $(document).ready(function(){
 
 		    data[name] = value;
 		});
-
 		$.ajax({
 			url: url,
 			type: method,
@@ -59,5 +58,13 @@ $(document).ready(function(){
                                 	<span class=' glyphicon glyphicon-remove-sign'></span>\
                            	 	</button>\
                         	   </td></tr>");
+    });
+
+    channel.bind('pr_edit',function(data){
+    	$('#'+data.field).text(data.value);
+    });
+
+    channel.bind('p_edit',function(data){
+    	$('#'+data.field).text(data.value);
     });
 });

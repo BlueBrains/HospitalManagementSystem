@@ -70,12 +70,8 @@
                                     <thead>
                                         <tr>
                                         	<th>Patient name</th>
-                                            <th>doctor name</th>
-                                            <th>analyse</th>
-                                             <th>date</th>
-                                            <th>state</th>
-                                            <th>action</th>
-                                            
+                                            <th>Rom Number</th>
+                                            <th>Date Entry</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,40 +82,12 @@
 				foreach ($records as $row) 
             	{
 	                echo "<tr>";
-	                echo "<td>".$row->Pname."</td>";
-	                if(isset($row->Dname))
-					{
-						echo "<td>".$row->Dname."</td>";
-					}
-					else {
-						echo "<td>"."</td>";
-						
-					}
-	                echo "<td>".$row->Nname."</td>";
-	                echo "<td>".$row->rdate."</td>";
-					if($row->state==0)
-					{
-						echo "<td> not confirm </td>";
-						echo "";
-						echo "<td>"."<a href=".base_url()."analyse/confirm_request/id/".$row->id.">"."confirm request"."</a><br/>";
-					}
-					elseif ($row->state==1)
-					 {
-						echo "<td> not uploaded </td>";
-						if($section!='doctor')
-						{
-							echo "<td>"."<a href=".base_url()."analyse/upload/id/".$row->id.">"."upload result"."</a><br/>";
-						}
-						
-					}
-					else
-						{
-							echo "<td> uploaded </td>";
-						echo "<td>"."<a href=".base_url()."analyse/edit_analyse/id/".$row->id.">"."edit" ."</td>";
-						}
+	                echo "<td>"."<a href=".base_url()."patient/u/id/".$row->id.">".$row->Pname."</td>";
+	                echo "<td>".$row->room."</td>";
+	                echo "<td>".$row->date_in."</td>";
 	                echo "</tr>";
 	            }
-				echo "<a href=".base_url()."analyse/confirm_request_all>"."confirm all request"."</a><br/>";
+				
 			}
             
         ?>

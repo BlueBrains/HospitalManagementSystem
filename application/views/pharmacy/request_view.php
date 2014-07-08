@@ -1,3 +1,19 @@
+	    <script>    	
+		$(function(){
+		  			$("#patientName1").autocomplete({
+		    			source: "<?php echo base_url();?>doctor/get_patients" 
+		  			}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+		        		var inner_html = '<a href="<?php echo base_url();?>patient/u/id/' + item.image + '"><div style="width:300px;height:50px;padding:5px 0px 5px;"><div class="img-responsive" style="float:left;margin-right:10px;"><img height="42" width="42" src="<? echo base_url()?>/photos/patients/'+ item.image +'.png"></div><div style="font-size:16px;margin-top:8px">' + item.label + '</div></div></a>';
+		        		return $( "<li></li>" )
+		            		.data( "item.autocomplete", item )
+		            		.append(inner_html)
+		            		.appendTo( ul );
+		    		};
+		  			$("#medicineName1").autocomplete({
+		    			source: "<?php echo base_url();?>doctor/get_medicines"
+		  			});
+		});
+	</script>
 	<div class="page-header">
   		<h1>personal information<small> add this info please</small></h1>
 	</div>

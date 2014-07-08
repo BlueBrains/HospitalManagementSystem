@@ -71,7 +71,18 @@ class Auth extends CI_Controller {
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				if($this->ion_auth->user->in_group('radiology')){
+					redirect('radiology_supervisor/homepage');
+				}
+				else if($this->ion_auth->user->in_group('pharmacy')){
+					redirect('pharmacy_supervisor/homepage');
+				}
+				else if($this->ion_auth->user->in_group('analysis')){
+					redirect('analyse/homepage');
+				}
+				else if($this->ion_auth->user->in_group('doctor')){
+					redirect('doctor/homepage');
+				}
 			}
 			else
 			{
