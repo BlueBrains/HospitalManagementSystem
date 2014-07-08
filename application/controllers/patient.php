@@ -107,30 +107,25 @@ class patient extends REST_Controller{
 		echo 200;
 	}
 
-	function edit_get(){
-		$this->load->view('patient/edit.html');
-	}
 
 	function edit_put(){
 		$id = $this->put('id');
-		$patient = array();
-		foreach ($this->put() as $key => $value) {
-			if($key != '_method' || $key != 'id' )
-				$patient[$key] = $value;
-		}
+		$patient = array($this->put('field')=>$this->put('value'));
 
 		$this->patient_model->update($id,$patient);
+		$p = array('field'=>$this->put('field'),'value'=>$this->put('value'));
+		$this->p->trigger('patient','p_edit',$p);
+		echo 200;
 	}
 
 	function pr_put(){
 		$id = $this->put('id');
-		$private = array();
-		foreach ($this->put() as $key => $value) {
-			if($key != '_method' || $key != 'id' )
-				$private[$key] = $value;
-		}
-
+		$private = array($this->put('field')=>$this->put('value'));
+		
 		$this->patient_model->update_private_info($id,$private);
+		$pr = array('field'=>$this->put('field'),'value'=>$this->put('value'));
+		$this->p->trigger('patient','pr_edit',$pr);
+		echo 200;
 	}
 
 	function fm_put(){
