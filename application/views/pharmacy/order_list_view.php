@@ -33,7 +33,7 @@
 				 </tr>";				 
 		else				 								
 			echo	"<td><button type='button' class='btn btn-success disabled'>waiting</button></td>
-					 <td><a class='btn btn-primary ".$disabled."' href='".base_url()."pharmacy_supervisor/confirm_request/id/$data->id' role='button'>Accept</a></td>
+					 <td><a class='btn btn-primary ".$disabled."' href='".base_url()."pharmacy_supervisor/confirm_request/id/$data->id' role='button'>Confirm</a></td>
 				     <td><a class='btn btn-default' href='".base_url()."pharmacy_supervisor/detail_request/id/$data->id' role='button'>Details</a></td>
 				 </tr>";
 		}

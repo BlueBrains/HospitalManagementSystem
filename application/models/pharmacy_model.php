@@ -28,7 +28,7 @@ class Pharmacy_model extends CI_Model {
 		->join('doctors', 'medicine_request.doctor_id = doctors.id','inner')
 		->join('patients', 'medicine_request.patient_id = patients.id','inner')
 		->where('medicine_request.state','0')
-		->where('medicine_request.state','1')
+		->or_where('medicine_request.state','1')
 		->limit($limit, $start);			
 		if($q = $this->db->get()){		
 			$data = $q->result();
