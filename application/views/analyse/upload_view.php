@@ -1,7 +1,6 @@
 
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
-            <div id="page-inner">
+            
                 <div class="row">
                     <div class="col-md-12">
                      <h2>Admin Dashboard</h2>   
@@ -92,14 +91,11 @@
                
                </p>
                <p>
-                <input type="hidden" name="MAX_FILE_SIZE" value="250000" />
-        		<input type="file" name="fic" id="fic" size="250000" />
+                <input type="hidden" name="MAX_FILE_SIZE" value="25000000" />
+        		<input type="file" name="fic" id="fic" size="25000000" />
         		<input type="submit" value="send"/>
                </p>
 				         </form>
                       </div>
                     </div>
                     <!--End Advanced Tables -->
-                </div>
-            </div>
-                  

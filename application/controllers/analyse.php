@@ -15,11 +15,10 @@ class analyse extends REST_Controller
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->order_list();
 			$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
-			$bar[1]=" fa-qrcode ,Un Seen Request,analyse/un_seen,False";
-			$bar[2]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,True";
-			$bar[3]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
-			$bar[4]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
-			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
+			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,True";
+			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
+			$bar[3]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
+			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/analyses_order_list';
 			$data['section'] = 'analyse';
@@ -32,11 +31,10 @@ class analyse extends REST_Controller
 		$data['records']=$this->analyse_model->confirmed_order_list();
 		
 		$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
-			$bar[1]=" fa-qrcode ,Un Seen Request,analyse/un_seen,False";
-			$bar[2]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,false";
-			$bar[3]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,True";
-			$bar[4]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
-			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
+			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,false";
+			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,True";
+			$bar[3]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
+			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/analyses_order_list';	
 			$data['section'] = 'analyse';	
@@ -48,11 +46,10 @@ class analyse extends REST_Controller
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->finished_order_list();
 		$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
-			$bar[1]=" fa-qrcode ,Un Seen Request,analyse/un_seen,False";
-			$bar[2]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,false";
-			$bar[3]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
-			$bar[4]=" fa-table ,Implemented Request,analyse/finished_order_list,True";
-			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
+			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,false";
+			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
+			$bar[3]=" fa-table ,Implemented Request,analyse/finished_order_list,True";
+			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/analyses_order_list';	
 			$data['section'] = 'analyse';	
@@ -64,11 +61,10 @@ class analyse extends REST_Controller
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->total_order_list();
 		 $bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,True";
-			$bar[1]=" fa-qrcode ,Un Seen Request,analyse/un_seen,False";
-			$bar[2]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
-			$bar[3]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
-			$bar[4]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
-			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
+			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
+			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
+			$bar[3]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
+			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/analyses_order_list';	
 			$data['section'] = 'analyse';	
@@ -107,12 +103,11 @@ class analyse extends REST_Controller
 		$request_id=$this->get('id');
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->upload($request_id);
-		$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
-			$bar[1]=" fa-qrcode ,Un Seen Request,analyse/un_seen,False";
-			$bar[2]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,false";
-			$bar[3]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
-			$bar[4]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
-			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
+		$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,False";
+			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
+			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
+			$bar[3]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
+			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,false";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/upload_view';	
 			$data['section'] = 'analyse';	
@@ -133,6 +128,45 @@ class analyse extends REST_Controller
 	    $this->load->model('analyse_model');
 	    $data['records']=$this->analyse_model->edit_Analyse($request_id);
 	    $this->load->view("analyse/edit_result",$data);
+	}
+	
+	function out_order_list_get()
+	{
+		$this->load->model('analyse_model');
+		$data['records']=$this->analyse_model->out_order_list();
+			$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
+			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
+			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
+			$bar[3]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
+			$bar[4]=" fa-edit ,Out Order List,analyse/out_order_list,True";
+			$bar[5]=" fa-edit ,Out Order Manege,analyse/out_order,False";
+			$data['side'] = $bar;
+			$data['main_content'] = 'analyse/analyses_order_list';	
+			$data['section'] = 'analyse';	
+		$this->load->view('includes/template',$data);
+	}
+	
+	function out_order_get()
+	{
+		$this->load->model('analyse_model');
+         $data['records']=$this->analyse_model->get_analyses();
+         $data['records2']=$this->analyse_model->get_catagoury();
+		 $bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
+			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
+			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
+			$bar[3]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
+			$bar[4]=" fa-edit ,Out Order List,analyse/out_order_list,False";
+			$data['side'] = $bar;
+			$data['main_content'] = 'analyse/create_out_request_view';	
+			$data['section'] = 'analyse';	
+		$this->load->view('includes/template',$data);
+	}
+	
+	function new_analyse_request_post()
+	{
+		 $this->load->model('analyse_model');
+         $this->analyse_model->create_request();
+		  //تحميل صفحة التملاية مرة اخرى
 	}
 }
 ?>

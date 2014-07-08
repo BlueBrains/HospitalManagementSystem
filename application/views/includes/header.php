@@ -3,38 +3,49 @@
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><?php echo $title ?></title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet" />
+<<<<<<< HEAD
     <!-- TABLE STYLES-->
     <link href="<?php echo base_url();?>assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />   
     <!-- JQUERY.UI STYLES-->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery.ui.css" type="text/css" media="screen" />
     <script src="<?php  echo base_url();?>assets/js/jquery-1.10.2.js"></script>    
+=======
+>>>>>>> 0c09d5907c3a73bf734643fbd6eaa9b3f2cd67cd
      <!-- FONTAWESOME STYLES-->
     <link href="<?php echo base_url();?>assets/css/font-awesome.css" rel="stylesheet" />
-    <!-- MORRIS CHART STYLES-->
-    <link href="<?php echo base_url();?>assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />    
+     <!-- MORRIS CHART STYLES-->
+    <link href="<?php echo base_url();?>assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
     <link href="<?php echo base_url();?>assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
-   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />       
-   <title><?php echo $title ?></title>
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+   <script src="<?php echo base_url();?>assets/js/jquery-1.10.2.js"></script>
+  <script src="<?php echo base_url();?>/javascript/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
+  <link href="<?php echo base_url();?>/javascript/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+        
 </head>
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
+    <div id="wrapper" style="background-color: #0D4F7A;">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0;background-color: #0D4F7A;">
+            <div class="navbar-header" style="margin-left: 2px; padding-left: 22px;background-color: #0D4F7A;">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><?php echo $section ?></a> 
+
+                <a href="#"><img src="<?echo base_url();?>/logo2.png" class="img-responsive" alt="Responsive image" style="margin-right: 50px;"></a>
+                <!--<a class="navbar-brand" href="index.html"><?php $section ?></a>-->
+                 
             </div>
   <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+font-size: 12px;margin-top: 7px;"> 
+ Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-danger square-btn-adjust" style="background-color: #0F275A;">Logout</a> </div>
         </nav>   
            <!-- /. NAV TOP  -->

@@ -3,9 +3,11 @@ class Migration_recepient extends CI_Migration {
     public function up(){
         $this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
 		$this->dbforge->add_field("id_patient int(11) unsigned NOT NULL");
-		$this->dbforge->add_field("ward varchar(255) NOT NULL DEFAULT ''");
-		$this->dbforge->add_field("room varchar(255) NOT NULL DEFAULT ''");
-		$this->dbforge->add_field("date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
+		$this->dbforge->add_field("ward int(11) unsigned NOT NULL");
+		$this->dbforge->add_field("dep_id int(11) unsigned NOT NULL");
+		$this->dbforge->add_field("room int(11) unsigned NOT NULL");
+		$this->dbforge->add_field("date_in TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
+		$this->dbforge->add_field("date_out TIMESTAMP ");
 		$this->dbforge->add_field("p_entry_state set('Normal','Emergancy','another_hospital') NOT NULL DEFAULT 'Normal'");
 		
         $this->dbforge->add_key('id', TRUE);        

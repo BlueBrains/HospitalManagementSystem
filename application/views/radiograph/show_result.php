@@ -114,13 +114,13 @@ echo'
 	
 	<div class="row" style="margin-bottom:20px" >
 			<button class="btn btn-default" type="button">Comment</button>
-    		<textarea name="comment"cols="60" rows="4" class="form-control" value='.$row->comment.' disabled="True"></textarea>
+    		<textarea name="comment"cols="60" rows="4" disable="true" class="form-control" value='.$row->comment.' disabled="True"></textarea>
     </div>		
 
 	
 	<div class="row" style="margin-bottom:20px" >
 			<button class="btn btn-default" type="button">Description</button>
-    		<textarea name="comment"cols="60" rows="4" class="form-control" value='.$row->description .' disabled="True"></textarea>
+    		<textarea name="comment"cols="60" disable="true" rows="4" class="form-control" value='.$row->description .' disabled="True"></textarea>
     </div>		
 
     <div class="row" style="margin-bottom:20px" >		
@@ -131,8 +131,8 @@ echo'
 
 <div class="col-md-6">
 			<div class="media">
-				  <a class="pull-right" href="#">
-				   		 <img class="media-object" src="'.base_url().'\\uploads\\radiograph\\'.$row->file_name.'"/>
+				  <a class="pull-right" href="'.base_url().'\\uploads\\radiograph\\'.$row->file_name.'">
+				   		 <img  class="media-object" height="300" width="300" src="'.base_url().'\\uploads\\radiograph\\'.$row->file_name.'"/>
 				  </a>
 			</div>	
 		</div> 
@@ -144,5 +144,6 @@ echo'
 		 
 		
     ?>	
+    			   	
 </body>
 </html>
