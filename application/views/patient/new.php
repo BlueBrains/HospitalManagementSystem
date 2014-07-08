@@ -1,5 +1,15 @@
 <html>
-	<?php echo form_open('patient/new',array('role'=>'form')); ?>
+
+	<?php if(isset($error)) 
+		echo "<div class='alert alert-danger alert-dismissible' role='alert'>
+  		<button type='button' class='close' data-dismiss='alert'>
+  			<span aria-hidden='true'>&times;</span>
+  			<span class='sr-only'>Close</span>
+  		</button>
+  		{$error}
+  	</div>"; ?>
+  	
+	<?php echo form_open_multipart('patient/new',array('role'=>'form')); ?>
 	<div class="input-group">
   		<span class="input-group-addon">First Name:</span>
   		<input type="text" class="form-control" placeholder="First Name" name='fname'>
@@ -50,7 +60,12 @@
   		<input type="text" class="form-control" placeholder='write your comment here' name='comments'>
 	</div>
 	<br>
-	<?php echo form_submit('', 'Create Patient');?>
+	<div class="input-group">
+    	<span class="input-group-addon">Photo:</span>
+    	<input type="file" name="photo">
+  </div>
+  <br>
+	<?php echo form_submit(array('class'=>'btn btn-primary'), 'Add Patient');?>
 	<?php form_close();?>
 
 </html>
