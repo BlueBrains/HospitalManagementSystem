@@ -21,8 +21,8 @@ class analyse extends REST_Controller
 			$bar[4]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
 			$data['side'] = $bar;
-			$data['main_content'] = 'analyse/analyses_order_list';	
-			$data['section'] = 'analyse';	
+			$data['main_content'] = 'analyse/analyses_order_list';
+			$data['section'] = 'analyse';
 		$this->load->view('includes/template',$data);
 	}
 	
