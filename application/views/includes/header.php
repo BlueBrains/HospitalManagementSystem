@@ -8,7 +8,8 @@
     <!-- TABLE STYLES-->
     <link href="<?php echo base_url();?>assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />   
     <!-- JQUERY.UI STYLES-->
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery.ui.css" type="text/css" media="screen" />    
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery.ui.css" type="text/css" media="screen" />
+    <script src="<?php  echo base_url();?>assets/js/jquery-1.10.2.js"></script>    
      <!-- FONTAWESOME STYLES-->
     <link href="<?php echo base_url();?>assets/css/font-awesome.css" rel="stylesheet" />
     <!-- MORRIS CHART STYLES-->
@@ -29,7 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><?php $section ?></a> 
+                <a class="navbar-brand" href="index.html"><?php echo $section ?></a> 
             </div>
   <div style="color: white;
 padding: 15px 50px 5px 50px;
