@@ -15,7 +15,7 @@ class patient extends REST_Controller{
 		if($this->response->format == 'html'){
 			$data['title'] = 'Patient Information';
 			$data['patient'] = $patient;
-			$data['main_content']='patient/view.html';
+			$data['main_content']='patient/view';
 			
 			$this->load->view('includes/template',$data);
 		}
@@ -37,7 +37,7 @@ class patient extends REST_Controller{
 
 	function new_get(){
 		$data['title'] = 'New Patient';
-		$data['main_content']='patient/new.html';
+		$data['main_content']='patient/new';
 		$this->load->view('includes/template',$data);
 	}
 
