@@ -65,7 +65,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Advanced Tables
+                             Patients 
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive" >
@@ -75,7 +75,7 @@
                                         	<th>Patient name</th>
                                             <th>Date enter</th>
                                             <th>ward num</th>
-                                            <th>room num</th>                                            
+                                            <th>Date - time</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -87,8 +87,8 @@
 							            {
 							                echo "<tr>";
 							                echo "<td>".$row->fname." ".$row->lname."</td>";
-											if (isset($row->date))
-							                echo "<td>".$row->date."</td>";
+											
+							                echo "<td>".$row->date_in."</td>";
 							                echo "<td>".$row->ward."</td>";
 							                echo "<td>".$row->room."</td>";
 							                echo "</tr>";
@@ -109,8 +109,7 @@
                                     <thead>
                                         <tr>
                                         	<th>Doctor Name</th>
-                                            <th>State</th>   
-                                            <th>Action</th>                                            
+                                            <th>State</th>                                          
                                         </tr>
                                     </thead>
 			                   <tbody>
@@ -121,9 +120,10 @@
 								             foreach($record as $row ) 
 								            {
 								                echo "<tr>";
-								                echo "<td>".$row->doctors.fname." ".$row->doctors.lname."</td>";
+								                echo "<td>".$row->Dfname." ".$row->Dlname."</td>";
 												
 								                echo "<td>".$row->state."</td>";
+												if ($row->date_out == '0000-00-00 00:00:00')
 								                echo "<td>  <a href = ".base_url()."recepient/end_visitng/id/".$row->patient_id.">end visitng</a></td>";
 								                echo "</tr>";
 												
@@ -143,9 +143,12 @@
                         </div>
                     </div>
                     <!--End Advanced Tables -->
-                </div>
+                </div>      
             </div>
-            
+                  <div class='row' style="margin-bottom:20px" >
+					<button class="btn btn-default" type="button">New State</button>
+		    		<textarea name="comment"cols="60" rows="4" class="form-control"></textarea>
+		   		 </div>		
             
  
 </body>

@@ -65,7 +65,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Advanced Tables
+                             Visitors Table
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -74,8 +74,7 @@
                                         <tr>
                                         	<th>Patient name</th>
                                             <th>Date enter</th>
-                                            <th>ward num</th>
-                                            <th>room num</th>
+                                            <th>W - R - B num</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -88,17 +87,16 @@
             {
                 echo "<tr>";
                 echo "<td>  <a href = ".base_url()."recepient/patient_state/id/".$row->id.">".$row->fname." ".$row->lname."</a></td>";
-				if (isset($row->date))
+				if (isset($row->date_in) && ($row->date_out == '0000-00-00 00:00:00'))
 				{
-                echo "<td>".$row->date."</td>";
-                echo "<td>".$row->ward."</td>";
-                echo "<td>".$row->room."</td>";
+                echo "<td>".$row->date_in."</td>";
+                echo "<td>".$row->ward." - ".$row->room." - ".$row->bed."</td>";
                 echo "<td> <a href = ".base_url()."recepient/end_visitng/id/".$row->id." '>end visitng period</a></td>";
                 echo "</tr>";
 				}
-				else {
+				else 
+				{
 				echo "<td> -- </td>";
-                echo "<td> -- </td>";
                 echo "<td> -- </td>";
 				echo "<td> <a href = ".base_url()."recepient/enter/id/".$row->id." '>Enter Patient</a> </td>";
                 echo "</tr>";	
