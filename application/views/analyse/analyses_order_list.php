@@ -110,6 +110,11 @@
 						{
 							echo "<td>"."<a href=".base_url()."analyse/upload/id/".$row->id.">"."upload result"."</a><br/>";
 						}
+						else {
+							{
+								echo "<td>No Action Avaliable</td>";
+							}
+						}
 						
 					}
 					else

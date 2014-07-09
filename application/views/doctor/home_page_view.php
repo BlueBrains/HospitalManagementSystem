@@ -82,7 +82,7 @@
 				foreach ($records as $row) 
             	{
 	                echo "<tr>";
-	                echo "<td>"."<a href=".base_url()."patient/u/id/".$row->id.">".$row->Pname."</td>";
+	                echo "<td>"."<a href=".base_url()."doctor/patient_info/id/".$row->id.">".$row->Pname."</td>";
 	                echo "<td>".$row->room."</td>";
 	                echo "<td>".$row->date_in."</td>";
 	                echo "</tr>";
