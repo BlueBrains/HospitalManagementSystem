@@ -78,7 +78,10 @@ class Patient_model extends CI_Model{
 	// create operations
 
 	public function create($data){
-		$this->db->insert_batch('patients', $data); 
+		$this->db->insert_batch('patients', $data);
+		$id = $this->db->insert_id();
+		$this->db->insert('patient_private_info', array('patient_id'
+														=>$id)); 
 	}
 
 	public function insert_private_info($data){
