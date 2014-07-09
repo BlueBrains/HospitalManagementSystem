@@ -93,7 +93,7 @@ class analyse_model extends CI_Model
 		$q=$this->db->query("SELECT analyse_request.id as id,state,patient_out as Pname,analyse_name as Nname,request_date as rdate FROM analyse_request
                               INNER JOIN analyse on analyse_request.analyse_id=analyse.id
                               WHERE out1='1'
-                              ORDER BY  state");
+                              ORDER BY  state,request_date DESC");
 		 if($q->num_rows()>0)
          {
               foreach ($q->result() as $raw ) {
@@ -214,13 +214,13 @@ class analyse_model extends CI_Model
               	if(isset($doctor_id))
 				{
 					  $q=$this->db->query("INSERT INTO analyse_request(patient_id,doctor_id,analyse_id,request_date,state)
-                 VALUES('".$_POST['patient_id']."','".$_POST['doctor_id']."','".$value."','". $nowDate."','". $state."')");
+                 VALUES('".$_POST['patient_id']."','".$doctor_id."','".$value."','". $nowDate."','". $state."')");
 				}
 				else{
 					$state=1;
 					$out1=1;
 					 $q=$this->db->query("INSERT INTO analyse_request(patient_out,analyse_id,request_date,state,out1)
-                 VALUES('".$_POST['patient_out']."','".$value."','". $nowDate."','". $state."','".$out1."')");
+                 VALUES('".$_POST['patient_name']."','".$value."','". $nowDate."','". $state."','".$out1."')");
 				}
                
               }
