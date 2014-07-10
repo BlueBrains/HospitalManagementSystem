@@ -65,34 +65,40 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Patients 
+                             <a style="margin-right: 50px">Patients</a> 
+                             <a class='btn btn-success' href = '<?php echo base_url()?>recepient/end_visitng/id/<?php echo $id; ?>' role='button'>Finish patient visit</a>                        												
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive" >
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                                     <thead>
                                         <tr>
                                         	<th>Patient name</th>
                                             <th>Date enter</th>
-                                            <th>ward num</th>
-                                            <th>Date - time</th>                                            
+                                            <th>W - R - B num</th>
+                                            <th>Date - in </th>    
+                                                                          
                                         </tr>
                                     </thead>
                                     <tbody>
 								   <?php
-							      if (isset($record))
+							      if (isset($r))
 									{
-									 if(is_array($record)){
-							             foreach($record as $row ) 
+										
+									 if(is_array($r)){
+							            
+										 foreach($r as $row ) 
 							            {
+							            	//$i=0;
 							                echo "<tr>";
+											
 							                echo "<td>".$row->fname." ".$row->lname."</td>";
-											
 							                echo "<td>".$row->date_in."</td>";
-							                echo "<td>".$row->ward."</td>";
-							                echo "<td>".$row->room."</td>";
+							                echo "<td>".$row->ward." - ".$row->room." - ".$row->bed."</td>";
+											echo "<td>".$row->date_in."</td>";
 							                echo "</tr>";
-											
+									//		if ($i==0)
+									//			break;
 							            }
 							         }
 									  else
@@ -104,12 +110,26 @@
                                     </tbody>
                                 </table>
                             </div>
+                    <!--End Advanced Tables -->
+                </div>      
+            </div>
+           </div>
+          </div> 
+        <div class="row">
+                <div class="col-md-12">    
+ 		<div class="panel panel-default">
+                        <div class="panel-heading">
+                             Patient - doctor visit 
+                        </div>
+                        <div class="panel-body">
+
 						      <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                         	<th>Doctor Name</th>
-                                            <th>State</th>                                          
+                                            <th>State</th>   
+                                            <th>Visit Time</th>                                       
                                         </tr>
                                     </thead>
 			                   <tbody>
@@ -121,12 +141,10 @@
 								            {
 								                echo "<tr>";
 								                echo "<td>".$row->Dfname." ".$row->Dlname."</td>";
-												
 								                echo "<td>".$row->state."</td>";
-												if ($row->date_out == '0000-00-00 00:00:00')
-								                echo "<td>  <a href = ".base_url()."recepient/end_visitng/id/".$row->patient_id.">end visitng</a></td>";
-								                echo "</tr>";
-												
+												echo "<td>".$row->visit_time."</td>";
+												echo "</tr>";
+								               
 								            }
 								         }
 										  else
@@ -139,17 +157,11 @@
                                 </table>
                             </div>
 
-                            
+                            </div> 
+ 		</div>
                         </div>
                     </div>
-                    <!--End Advanced Tables -->
-                </div>      
-            </div>
-                  <div class='row' style="margin-bottom:20px" >
-					<button class="btn btn-default" type="button">New State</button>
-		    		<textarea name="comment"cols="60" rows="4" class="form-control"></textarea>
-		   		 </div>		
-            
- 
+                </div>    
+                    
 </body>
 </html>

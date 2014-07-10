@@ -3,11 +3,10 @@
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<<<<<<< HEAD
-    <title>Hospital Management System</title>
-=======
-    <title><?php echo $title ?></title>
->>>>>>> 91d4a04abcb776522bf3ccfd3b5a0e1dd6d1c924
+
+    
+    <title><?php echo "title" ?></title>
+
 	<!-- BOOTSTRAP STYLES-->
     <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet" />
     <!-- TABLE STYLES-->

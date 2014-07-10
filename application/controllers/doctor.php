@@ -5,6 +5,7 @@ class doctor extends REST_Controller
 	function __construct() {
 		parent::__construct();
 		$this->load->model('radiograph_model');
+		$this->load->model('doctor_model');
 		// if (!$this->ion_auth->logged_in())
 		// {
 			// redirect('auth/login');
@@ -168,6 +169,27 @@ class doctor extends REST_Controller
 		}
 
 	}
+
+	function doctor_req_get()
+		{
+		$sql=$this->doctor_model->get_doctor_info($_SESSION['user_id']);
+		foreach ($sql->result() as $raw ) {
+                $data[]=$raw;
+            }
+		
+		if (isset($data))
+		{	
+			$data['side'] = $bar;
+			$data['name']=$raw->fname." ".$raw->lname;
+			$data['dep']=$raw->name;			
+			$data['main_content'] = 'radiograph/doctor_rad_request';	
+			//$data['id'] = $this->get('id');	
+			$this->load->view('includes/template',$data);
+
+		}
+		}
+	
+
 	public function find_patientName_get($patientname)
 	{	
 		if($this->patient_model->find_by_name($patientname))

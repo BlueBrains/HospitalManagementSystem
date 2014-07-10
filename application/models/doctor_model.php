@@ -18,6 +18,19 @@ class doctor_model extends CI_Model
          }		
 	}
 	
+	function get_doctor_info($id)
+	{
+		
+		$sql=$this->db->query("SELECT * FROM doctors INNER JOIN department ON doctors.department_id = department.id WHERE doctors.id = '".$id."'");
+		if ($sql->num_rows >= 1)
+           { return $sql;}
+		else {
+			$f=0;	
+			return $f;
+		}
+           
+	}
+	
 	
 }
 
