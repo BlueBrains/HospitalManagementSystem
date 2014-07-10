@@ -21,8 +21,7 @@
 						</li>';
 					
 						}
-                    
-                    
+                   
                     if (isset($side))
 					{
 					
@@ -51,6 +50,48 @@
                    </li>";
 						}
 							}
+							
+					 if(isset($sub_menue))
+					{
+						 if (is_array($sub_menue)){
+						 	$array_rows=count($sub_menue);
+						  for($i=0;$i<$array_rows;$i++) {
+						  	$arrlength=count($sub_menue[$i]);
+						  	for($j=0;$j<$arrlength;$j++)
+							{
+								$subbar = explode(',', $sub_menue[$i][$j]);
+							  	if($j==0)
+									{
+										if ($subbar[3]=="True")
+											$active = "active-menu";
+										else 
+											$active = "";
+										echo "<li><a href='#' class=".$active.">
+										<i class='fa ". $subbar[0]." fa-3x'></i> ".$subbar[1]."<span class='fa arrow'></span></a>";
+										echo " <ul class='nav nav-second-level'>";
+									}
+								else
+									{
+										if ($subbar[3]=="True")
+											$active = "active-menu";
+										else 
+											$active = "";
+										echo"<li>
+	                                		<a href=".base_url().$subbar[2]." class=".$active.">".$subbar[1]."</a>".
+	                            			"</li>";
+										
+									}
+							}
+						  	echo "</ul>
+                      		</li>  "; 
+								
+						  }
+							
+						  
+						 }
+						 
+						
+					}
 					?>
                     <!--
                       <li>

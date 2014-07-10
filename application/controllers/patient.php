@@ -45,24 +45,43 @@ class patient extends REST_Controller{
 		
 		$patient = array();
 		foreach ($this->post() as $key => $value) {
-			if($key == 'language'){
-				$patient['language']=str_replace('_', '', $value);
-			}
-			else if($key == 'marital_status'){
-				if ($value == 'single'){
-					$patient[$key] = 0;
+			if($key !='photo'){
+				if($key == 'language'){
+					$patient['language']=str_replace('_', '', $value);
+				}
+				else if($key == 'marital_status'){
+					if ($value == 'single'){
+						$patient[$key] = 0;
+					}
+					else
+						$patient[$key] = 1;
 				}
 				else
-					$patient[$key] = 1;
+					$patient[$key]=$value;
 			}
-			else
-				$patient[$key]=$value;
 		}
 		
 		$this->patient_model->create(array($patient));
 		$name = $patient['fname']." ".$patient['lname'];
 		$id = $this->patient_model->find_by_name($name);
-		redirect("/patient/u/id/{$id}");
+		
+		$config['file_name'] = $id;
+		$config['upload_path'] = '././uploads/avatar/';
+		$config['allowed_types'] = 'gif|jpg|png';
+
+		$this->load->library('upload',$config);
+		if($this->upload->do_upload('photo')){
+			$this->patient_model->update($id,array('avatar'=>"
+													avatar/{$id}"));
+			redirect("/patient/u/id/{$id}");			
+		}
+		else{
+			$data['main_content'] = 'patient/new';
+			$data['title'] = 'New Patient';
+			$data['error'] = $this->upload->display_errors();
+			$this->load->view('includes/template',$data);
+		}
+		
 	}
 
 	function pr_post(){

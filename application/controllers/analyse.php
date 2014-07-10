@@ -2,12 +2,29 @@
 require(APPPATH.'libraries/rest_controller.php');
 class analyse extends REST_Controller
 {
-	function homepage_get()
+	
+		function  homepage_get ()
 	{
-		$id=$_SESSION['user_id'];
-		$this->load->model('analyse_model');
-		$data['records']=$this->analyse_model->get_info($id);
+	//	$info = $this->radiograph_model->radiograph_supervisor_info($this->session->userdata('id'));
+		
+	//		$data['nam']=$info->firstName." ".$info->lastName;
+			//$data['main_content'] = 'radiograph/radiograph_index';
+			$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
+			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
+			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
+			$bar[3]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
+			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,False";
+			
+			$data['main_content'] = 'radiograph/test';	
+			$data['title'] = 'Home Page';	
+			$data['section'] = 'analyse';	
+			$data['side'] = $bar;
+			$data['idd']="2";
+			$this->load->view('includes/template',$data);
+			//$this->load->view('radiograph/test',$data);
+		
 	}
+	
 	
 	function order_list_get ()
 	{
@@ -21,6 +38,7 @@ class analyse extends REST_Controller
 			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/analyses_order_list';
+			$data['title']='Un Confirmed Order';
 			$data['section'] = 'analyse';
 		$this->load->view('includes/template',$data);
 	}
@@ -37,6 +55,7 @@ class analyse extends REST_Controller
 			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/analyses_order_list';	
+			$data['title']='confirmed Order';
 			$data['section'] = 'analyse';	
 		$this->load->view('includes/template',$data);
 	}
@@ -52,6 +71,7 @@ class analyse extends REST_Controller
 			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/analyses_order_list';	
+					$data['title']='Finished Order';
 			$data['section'] = 'analyse';	
 		$this->load->view('includes/template',$data);
 	}
@@ -67,6 +87,7 @@ class analyse extends REST_Controller
 			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/analyses_order_list';	
+					$data['title']='Total Order';
 			$data['section'] = 'analyse';	
 		$this->load->view('includes/template',$data);
 	}
@@ -96,6 +117,7 @@ class analyse extends REST_Controller
 	{
 		$this->load->model('analyse_model');
 		$this->analyse_model->upload_result();
+		
 	}
 	
 	function upload_get()
@@ -110,6 +132,7 @@ class analyse extends REST_Controller
 			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,false";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/upload_view';	
+			$data['title']='Upload Page';
 			$data['section'] = 'analyse';	
 		$this->load->view('includes/template',$data);
 	}
@@ -142,6 +165,7 @@ class analyse extends REST_Controller
 			$bar[5]=" fa-edit ,Out Order Manege,analyse/out_order,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'analyse/analyses_order_list';	
+			$data['title'] = 'Out Order List';	
 			$data['section'] = 'analyse';	
 		$this->load->view('includes/template',$data);
 	}
@@ -157,7 +181,8 @@ class analyse extends REST_Controller
 			$bar[3]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
 			$bar[4]=" fa-edit ,Out Order List,analyse/out_order_list,False";
 			$data['side'] = $bar;
-			$data['main_content'] = 'analyse/create_out_request_view';	
+			$data['main_content'] = 'analyse/creat_request_view';	
+			$data['title'] = 'Out Order';	
 			$data['section'] = 'analyse';	
 		$this->load->view('includes/template',$data);
 	}
@@ -166,6 +191,7 @@ class analyse extends REST_Controller
 	{
 		 $this->load->model('analyse_model');
          $this->analyse_model->create_request();
+		 $this->out_order_list_get();
 		  //تحميل صفحة التملاية مرة اخرى
 	}
 }
