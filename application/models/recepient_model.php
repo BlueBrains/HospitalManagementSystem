@@ -3,7 +3,7 @@
 class recepient_model extends CI_Model {
 		function p_i_h()
 		{
-			$sql=$this->db->query("SELECT * FROM entries INNER JOIN patients ON entries.id_patient = patients.id  where entries.date_out = '0000-00-00 00:00:00'");
+			$sql=$this->db->query("SELECT * FROM entries INNER JOIN patients ON entries.id_patient = patients.id  where entries.checkout = '0'");
 			foreach ($sql->result() as $raw ) {
                 $data[]=$raw;
             }
@@ -17,7 +17,7 @@ class recepient_model extends CI_Model {
 		
 		function p_r()
 		{
-			$sql=$this->db->query("SELECT * FROM entries INNER JOIN patients ON entries.id_patient = patients.id  ");
+			$sql=$this->db->query("SELECT * FROM entries INNER JOIN patients ON entries.id_patient = patients.id where checkout = 1 ");
 			foreach ($sql->result() as $raw ) {
                 $data[]=$raw;
             }
@@ -31,7 +31,8 @@ class recepient_model extends CI_Model {
 	
 		function p_r_d($id)
 		{
-			$sql=$this->db->query("SELECT date_in, date_out , ward , room , state , patient_id , doctors.fname as Dfname , doctors.lname as Dlname , patients.fname , patients.lname FROM entries INNER JOIN patients ON entries.id_patient = patients.id  INNER JOIN visit ON entries.id_patient = visit.patient_id  INNER JOIN doctors ON doctors.id = visit.doctor_id WHERE visit.patient_id='".$id."' and entries.date_out = '0000-00-00 00:00:00'");
+			
+			$sql=$this->db->query("SELECT entries.id,bed,visit_time,date_in, date_out , ward , room , state , patient_id , doctors.fname as Dfname , doctors.lname as Dlname , patients.fname , patients.lname FROM entries INNER JOIN patients ON entries.id_patient = patients.id  INNER JOIN visit ON entries.id = visit.entry_id  INNER JOIN doctors ON doctors.id = visit.doctor_id WHERE checkout = '0' and entries.id_patient='".$id."'");
 			foreach ($sql->result() as $raw ) {
                 $data[]=$raw;
             }
@@ -45,8 +46,8 @@ class recepient_model extends CI_Model {
 	
 		function e_v($id)
 		{
-			
-		$sql="UPDATE entries SET  date_out = now() WHERE id='".$id."' and date_out !='0000-00-00 00:00:00'";
+			echo "string".$id;
+		$sql="UPDATE entries SET  date_out = now() , checkout = 1 WHERE id_patient='".$id."' and checkout='0' ";
 			$result=$this->db->query($sql)or die (mysql_error ());
         	return true;
 		}
@@ -56,7 +57,7 @@ class recepient_model extends CI_Model {
 			
 		 $now=getdate();
         $nowDate=$now['year']."-".$now['mon']."-".$now['mday'];
-		$sql="UPDATE entries SET  date_out".$nowDate." WHERE id='".$id."'";
+		$sql="UPDATE entries SET  date_out".$nowDate."  WHERE id_patient='".$id."'";
 			$result=$this->db->query($sql)or die (mysql_error ());
         	return true;
 		}
@@ -99,9 +100,13 @@ class recepient_model extends CI_Model {
 		
 		function findEntry($id)
 		{
-			$sql=$this->db->query("SELECT * FROM entries INNER JOIN patients ON entries.id_patient = patients.id  where entries.date_out != '0000-00-00 00:00:00' and entries.id_patient='".$id."'");
+			//echo "string".$id;
+			$sql=$this->db->query("SELECT * FROM entries INNER JOIN patients ON entries.id_patient = patients.id  where entries.checkout = '0' and entries.id_patient='".$id."'");
+		foreach ($sql->result() as $raw ) {
+                $data[]=$raw;
+            }
 		if ($sql->num_rows >= 1)
-           { return TRUE;}
+           { return $data;}
 		else {
 				
 			return FALSE;

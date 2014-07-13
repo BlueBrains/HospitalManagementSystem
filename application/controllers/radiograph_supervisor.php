@@ -6,6 +6,9 @@ class radiograph_supervisor extends REST_Controller{
 	{
 		parent::__construct();
 		$this->load->model('radiograph_model');
+		$this->load->model('doctor_model');
+		
+		
 		// if (!isset($this->session->userdata('tag') || $this->session->userdata('tag') != "radiograph_supervisor")
 		// {
 			// echo "You dont have permission to start this action";
@@ -29,6 +32,7 @@ class radiograph_supervisor extends REST_Controller{
 			$data['main_content'] = 'radiograph/test';	
 			$data['section'] = 'radiograph';	
 			$data['side'] = $bar;
+				$data['title'] = 'radiograph';
 			$data['idd']="2";
 			$this->load->view('includes/template',$data);
 			//$this->load->view('radiograph/test',$data);
@@ -46,7 +50,8 @@ class radiograph_supervisor extends REST_Controller{
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'radiograph/radiograph_order_list_view';	
-			$data['section'] = 'radiograph';	
+			$data['section'] = 'radiograph';
+			$data['title'] = 'radiograph';	
 			$this->load->view('includes/template',$data);
 	}
 	
@@ -59,7 +64,7 @@ class radiograph_supervisor extends REST_Controller{
 			$bar[3]=" fa-qrcode ,Out Order Requests,radiograph_supervisor/radiograph_external_request_done,False";
 			$bar[4]=" fa-table ,Implemented Request,radiograph_supervisor/order_list_implemented,True";
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
-			
+			$data['title'] = 'radiograph';
 			$data['main_content'] = 'radiograph/radiograph_order_list_view';	
 			$data['section'] = 'radiograph';
 			$data['side'] = $bar;	
@@ -77,7 +82,8 @@ class radiograph_supervisor extends REST_Controller{
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'radiograph/radiograph_order_list_view';	
-			$data['section'] = 'radiograph';	
+			$data['section'] = 'radiograph';
+			$data['title'] = 'radiograph';	
 			$this->load->view('includes/template',$data);
 		
 	}
@@ -93,9 +99,10 @@ class radiograph_supervisor extends REST_Controller{
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'radiograph/radiograph_order_list_view';	
-			$data['section'] = 'radiograph';	
+			$data['section'] = 'radiograph';
+			$data['title'] = 'radiograph';	
 			$this->load->view('includes/template',$data);
-		
+		$data['title'] = 'radiograph';
 	}
 	 
 	function un_seen_get()
@@ -109,7 +116,8 @@ class radiograph_supervisor extends REST_Controller{
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
 			$data['side'] = $bar;
 			$data['main_content'] = 'radiograph/radiograph_order_list_view';	
-			$data['section'] = 'radiograph';	
+			$data['section'] = 'radiograph';
+			$data['title'] = 'radiograph';	
 			$this->load->view('includes/template',$data);
 	} 	
 	
@@ -125,6 +133,7 @@ class radiograph_supervisor extends REST_Controller{
 			$data['side'] = $bar;
 			$data['main_content'] = 'radiograph/radiograph_external_request_view';	
 			$data['section'] = 'radiograph';	
+			$data['title'] = 'radiograph';
 			$this->load->view('includes/template',$data);	
 	}
 	
@@ -141,8 +150,30 @@ class radiograph_supervisor extends REST_Controller{
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
 			$data['side'] = $bar;			
 			$data['main_content'] = 'radiograph/radiograph_order_list_view';	
-			$data['section'] = 'radiograph';	
+			$data['section'] = 'radiograph';
+			$data['title'] = 'radiograph';	
 			$this->load->view('includes/template',$data);	
+		
+	}
+	
+	
+	
+	
+	function radiograph_request_sign_get()
+	{
+		
+		$data['record'] = $this->radiograph_model->create_req($this->get('patient_id'));	
+		
+			// $bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,True";
+			// $bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
+			// $bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
+			// $bar[3]=" fa-qrcode ,Out Order Requests,radiograph_supervisor/radiograph_external_request_done,False";
+			// $bar[4]=" fa-table ,Implemented Request,radiograph_supervisor/order_list_implemented,False";
+			// $bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
+			// $data['side'] = $bar;			
+			// $data['main_content'] = 'radiograph/radiograph_order_list_view';	
+			// $data['section'] = 'radiograph';	
+			// $this->load->view('includes/template',$data);	
 		
 	}
 	
@@ -151,7 +182,7 @@ class radiograph_supervisor extends REST_Controller{
 		if($this->response->format == 'html'){
 			$data['request'] = $request;
 			$data['main_content']='radiograph/test';
-			
+			$data['title'] = 'radiograph';
 			$this->load->view('includes/template',$data);
 		}
 		else 
@@ -170,7 +201,7 @@ class radiograph_supervisor extends REST_Controller{
 	function finish_request_get()
 	{
 		$data['req_id']=$this->get('id');
-
+			$data['record'] = $this->radiograph_model->fetch_req(0);
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,True";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
@@ -178,6 +209,7 @@ class radiograph_supervisor extends REST_Controller{
 			$bar[4]=" fa-table ,Implemented Request,radiograph_supervisor/order_list_implemented,False";
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
 			$data['side'] = $bar;			
+			$data['title'] = 'radiograph';
 			$data['main_content'] = 'radiograph/upload_form';	
 			$data['section'] = 'radiograph';	
 			$this->load->view('includes/template',$data);		
@@ -194,6 +226,7 @@ class radiograph_supervisor extends REST_Controller{
 			$bar[4]=" fa-table ,Implemented Request,radiograph_supervisor/order_list_implemented,False";
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
 			$data['side'] = $bar;			
+			$data['title'] = 'radiograph';
 			$data['main_content'] = 'radiograph/radiograph_order_list_view';	
 			$data['section'] = 'radiograph';	
 			$this->load->view('includes/template',$data);
@@ -208,6 +241,7 @@ class radiograph_supervisor extends REST_Controller{
 			$bar[4]=" fa-table ,Implemented Request,radiograph_supervisor/order_list_implemented,False";
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
 			$data['side'] = $bar;			
+			$data['title'] = 'radiograph';
 			$data['main_content'] = 'radiograph/upload_form';	
 			$data['section'] = 'radiograph';	
 		//	$this->load->view('includes/template',$data);	
@@ -226,6 +260,7 @@ class radiograph_supervisor extends REST_Controller{
 			$bar[4]=" fa-table ,Implemented Request,radiograph_supervisor/order_list_implemented,False";
 			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
 			$data['side'] = $bar;			
+			$data['title'] = 'radiograph';
 			$data['main_content'] = 'radiograph/show_result';	
 			$data['section'] = 'radiograph';	
 			$this->load->view('includes/template',$data);
@@ -234,8 +269,40 @@ class radiograph_supervisor extends REST_Controller{
 		
 		
 	}
+
+	function doctor_req()
+		{
+		$sql=$this->doctor_model->get_doctor_info($this->get('id'));
+		
+		foreach ($sql->result() as $raw ) {
+                $data[]=$raw;
+            }
+		
+		if (isset($data))
+		{	
+			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
+			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
+			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
+			$bar[3]=" fa-qrcode ,Out Order Requests,radiograph_supervisor/radiograph_external_request_done,False";
+			$bar[4]=" fa-table ,Implemented Request,radiograph_supervisor/order_list_implemented,False";
+			$bar[5]=" fa-edit ,Out Order Manage,radiograph_supervisor/radiograph_external_request,False";
+			$data['side'] = $bar;
+			$data['name']=$raw->fname." ".$raw->lname;
+			$data['dep']=$raw->name;		
+			$data['title'] = 'radiograph';	
+			$data['main_content'] = 'radiograph/show_result';	
+			$data['section'] = 'radiograph';	
+			$this->load->view('includes/template',$data);
+
+		}
+		}
+	function add_request_comment_get()
+	{
+			$this->radiograph_model->update_req($this->get('id'));
+			$this->total_order_list_get ();
+	}	
 	function delete($id)
 	{
 		
 	}
-}
+}	

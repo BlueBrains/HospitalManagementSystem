@@ -74,7 +74,7 @@ echo'
 					<button class="btn btn-default" type="button">Patient Name</button>
     			</span>
 				<input type="text" name="patient_id" id="patient_id" value="'.$row->patient_name.'" class="form-control" disabled="True">
-				
+				<input type="hidden" name="req_id" id="req_id" value="'.$row->id.'">
 			</div>	
 		</div>	
 		<div class="row" style="margin-bottom:20px">
@@ -100,33 +100,39 @@ echo'
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">Part of Body</button>
     			</span>
-				<input type="text" name="part_of_body" id="part" value='. $row->part_of_body .' class="form-control" disabled="True">
+				<input type="text" name="part_of_body" id="part" value="'. $row->part_of_body .'" class="form-control" disabled="True">
 			</div>
 	</div>		
-	<div class="row" style="margin-bottom:20px" >	
+	<div class="row" style="margin-bottom:40px" >	
 			<div class="input-group">
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">position</button>
     			</span>
-				<input type="text" name="position" id="position" value= '.$row->position .' class="form-control" disabled="True">
+				<input type="text" name="position" id="position" value= "'.$row->position.'" class="form-control" disabled="True">
 			</div>
 	</div>	
 	
 	<div class="row" style="margin-bottom:20px" >
 			<button class="btn btn-default" type="button">Comment</button>
-    		<textarea name="comment"cols="60" rows="4" disable="true" class="form-control" value='.$row->comment.' disabled="True"></textarea>
-    </div>		
-
-	
-	<div class="row" style="margin-bottom:20px" >
-			<button class="btn btn-default" type="button">Description</button>
-    		<textarea name="comment"cols="60" disable="true" rows="4" class="form-control" value='.$row->description .' disabled="True"></textarea>
-    </div>		
-
+    		<textarea name="comment" cols="60"  rows="4" class="form-control" disabled="True">'.$row->comment.'</textarea>
+    </div>	
     <div class="row" style="margin-bottom:20px" >		
 			<button type="submit" class="btn btn-primary">Re-Take Photo </button>
 	</div>
 </form>
+
+
+</form>
+<form action="'.base_url().'radiograph_supervisor/add_request_comment/id/'.$row->id.'" method="get">
+<div class="row" style="margin-bottom:20px" >
+			<button class="btn btn-default" type="button">Description</button>
+    		<textarea name="description" cols="60"  rows="4" class="form-control" >'.$row->description .'</textarea>
+    </div>		
+<div class="row" style="margin-bottom:20px" >		
+			<button type="submit" class="btn btn-primary">Submit Doctor Comment </button>
+	</div>
+</form>
+
 </div>
 
 <div class="col-md-6">

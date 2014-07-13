@@ -43,7 +43,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$config['per_page'] = 20;
 		$config['total_rows'] = 200; //should be reaplaced
 	
-		$config['per_page'] = 5;
+		$config['per_page'] = 100;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 2;
 
@@ -106,7 +106,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$config['per_page'] = 20;
 		$config['total_rows'] = 200; //should be reaplaced
 	
-		$config['per_page'] = 5;
+		$config['per_page'] = 100;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 2;
 

@@ -83,8 +83,7 @@
                                     </thead>
                                     <tbody>
 									<?php
-									$disabled;	
-										foreach ($results as $data) {  			
+										foreach ($results as $data) {											  	
 											echo "<tr>
 													<td>$data->id</td>
 													<td>$data->fname $data->lname</td>
@@ -95,17 +94,17 @@
 										if($data->state == 2)
 											echo 	"<td><button type='button' class='btn btn-success disabled'>Finished</button></td>
 													 <td></td>
-													 <td><a class='btn btn-default' href='".base_url()."pharmacy_supervisor/detail_request/id/$data->id' role='button'>Details</a></td>
+													 <td><a class='btn btn-default' href='".base_url()."doctor/detail_request/id/$data->id' role='button'>Details</a></td>
 												 </tr>";
 										else if($data->state == 1)
 											echo 	"<td><button type='button' class='btn btn-success disabled'>Confirmed</button></td>
-													 <td></td>
-													 <td><a class='btn btn-default' href='".base_url()."pharmacy_supervisor/detail_request/id/$data->id' role='button'>Details</a></td>
+													 <td><a class='btn btn-default' href='".base_url()."doctor/finish_request/id/$data->id' role='button'>Finish</a></td>
+													 <td><a class='btn btn-default' href='".base_url()."doctor/detail_request/id/$data->id' role='button'>Details</a></td>
 												 </tr>";				 
 										else				 								
-											echo	"<td><button type='button' class='btn btn-success disabled'>waiting</button></td>
-													 <td><a class='btn btn-primary' href='".base_url()."pharmacy_supervisor/confirm_request/id/$data->id' role='button'>Confirm</a></td>
-												     <td><a class='btn btn-default' href='".base_url()."pharmacy_supervisor/detail_request/id/$data->id' role='button'>Details</a></td>
+											echo	"<td><button type='button' class='btn btn-primary disabled'>waiting</button></td>
+													 <td></td>
+												     <td><a class='btn btn-default' href='".base_url()."doctor/detail_request/id/$data->id' role='button'>Details</a></td>
 												 </tr>";
 										}
 									?>

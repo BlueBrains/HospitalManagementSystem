@@ -11,8 +11,12 @@
 		    		};
 		  			$("#medicineName1").autocomplete({
 		    			source: "<?php echo base_url();?>doctor/get_medicines"
-		  			});
+		  			});		  			
 		});
+		$(function(){
+		    $(".chosen-select").chosen();
+		});		
+		
 	</script>
 	<div class="page-header">
   		<h1>personal information<small> add this info please</small></h1>
@@ -36,9 +40,16 @@
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">medicine name</button>
     			</span>
-    			<?php echo form_input(array('name' => 'medicineName','id' => 'medicineName1', 'class' =>
+    			<!-- <?php echo form_input(array('name' => 'medicineName','id' => 'medicineName1', 'class' =>
      			'form-control','tabIndex'=>'2')); 
-    			?>
+    			?> -->
+        		<?php            
+           			foreach ($records as $row){
+           				$res[$row->tradeName] = $row->tradeName;		
+           			} 
+           		?>
+            		    			
+    			<?php echo form_dropdown('medicineName', $res, '','id ="bla" class ="form-control chosen-select" tabIndex="2"'); ?>
     		</div>
 		</div>
 	</div>
