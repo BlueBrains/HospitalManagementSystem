@@ -10,6 +10,8 @@
     <link href="<?php echo base_url();?>assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />   
     <!-- JQUERY.UI STYLES-->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery.ui.css" type="text/css" media="screen" />
+    <!-- CHOSEN.JQUERY STYLES-->
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/css/chosen.min.css" type="text/css" media="screen" />    
      <!-- FONTAWESOME STYLES-->
     <link href="<?php echo base_url();?>assets/css/font-awesome.css" rel="stylesheet" />
      <!-- MORRIS CHART STYLES-->

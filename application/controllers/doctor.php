@@ -128,6 +128,7 @@ class doctor extends REST_Controller
 	#################################pharmacy Requsets###############################
 	public function new_med_request_get() 
 	{
+		$data['records'] = $this->medicine_model->getAllMed();
 		$data['title'] = 'Request a medicine';	
 		$data['bar1'] = "Log In";
 		$data['linkbar1'] ="/login";
