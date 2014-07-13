@@ -3,7 +3,9 @@
 <head>
       <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?php echo $title ?></title>
+
+    
+    <title><?php echo "title" ?></title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet" />
     <!-- TABLE STYLES-->
@@ -23,7 +25,21 @@
    <script src="<?php echo base_url();?>assets/js/jquery-1.10.2.js"></script>
   <script src="<?php echo base_url();?>/javascript/SpryAssets/SpryTabbedPanels.js" type="text/javascript"></script>
   <link href="<?php echo base_url();?>/javascript/SpryAssets/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
-        
+  <script type="text/javascript">
+            $(document).ready(function(){
+                $('.TabbedPanels .TabbedPanelsContent:first').hide();
+                $('#ok').hide();
+                 //$('#s_'+'2').slideToggle('slow');
+                //$('.TabbedPanels .TabbedPanelsContent:nth-child(2)').slideDown('slow');
+                
+                $('.TabbedPanelsTab').click(function(){
+                                                        var x=$(this).attr('id');
+                                                        //alert(x);
+                                                        $('#s_'+x).hide();
+                                                        $('#s_'+x).slideToggle('slow');
+                                                          $('#ok').fadeIn('slow');});
+            });
+        </script>
 </head>
 <body>
     <div id="wrapper" style="background-color: #0D4F7A;">

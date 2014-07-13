@@ -125,7 +125,7 @@ class radiograph_model extends CI_Model {
         	 $tmp_name=$_FILES['fic']['tmp_name'];
         	 $location=realpath($_SERVER['DOCUMENT_ROOT'])."\\project-1\\uploads\\radiograph\\".$filename;
         	 move_uploaded_file($tmp_name, $location);
-        	  $sql="UPDATE rad_request SET file_name='".$filename."' ,date='".$nowDate."',description='".$_POST['description']."', state = '2' WHERE id='".$request_id."'";
+        	  $sql="UPDATE rad_request SET file_name='".$filename."' ,date='".$nowDate."',comment='".$_POST['description']."', state = '2' WHERE id='".$request_id."'";
         	  $result=$this->db->query($sql)or die (mysql_error ());
         	return true;
        	}	
@@ -142,4 +142,10 @@ class radiograph_model extends CI_Model {
         return $data;
         
     }
+	function update_req($id)
+	{
+		$sql="UPDATE rad_request SET description= '".$this->input->get('description')."' WHERE id = '".$id."'";
+		$result=$this->db->query($sql)or die (mysql_error ());
+        	return true;
+	}
 } 

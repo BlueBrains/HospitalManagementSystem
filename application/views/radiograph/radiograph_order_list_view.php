@@ -65,7 +65,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Advanced Tables
+                             Radiograph Requests Table
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -77,7 +77,7 @@
                                             <th>Date</th>
                                             <th>photo kind</th>
                                             <th>part of body</th>
-                                            <th>description</th>
+                                            <th>comment</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -100,7 +100,7 @@
                 echo "<td>".$row->date."</td>";
                 echo "<td>".$row->photo_kind."</td>";
                 echo "<td>".$row->part_of_body."</td>";
-                echo "<td>".$row->description."</td>";
+                echo "<td>".$row->comment."</td>";
 				if ($row->state ==0)
               		echo "<td>"."<a href = ".base_url()."radiograph_supervisor/confirm_request/id/".$row->id." class='glyphicon glyphicon-eye-open'></a>";
 				else if ($row->state ==1)

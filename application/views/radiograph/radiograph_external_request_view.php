@@ -134,11 +134,11 @@ else if (name=="Spine")
 				<input type="text" name="position" id="position" class="form-control">
 			</div>
 	</div>	
-	
+<!--	
 	<div class='row' style="margin-bottom:20px" >
 			<button class="btn btn-default" type="button">Comment</button>
     		<textarea name="comment"cols="60" rows="4" class="form-control"></textarea>
-    </div>		
+    </div> -->		
     <div class='row' style="margin-bottom:20px" >
 		<button type="button" class="btn btn-default btn-lg">
 		  <span class="glyphicon glyphicon-pushpin"></span> 

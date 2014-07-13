@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:81/project-1/';
+$config['base_url']	= 'http://localhost/project-1/';
 
 /*
 |--------------------------------------------------------------------------
