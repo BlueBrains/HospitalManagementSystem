@@ -6,7 +6,9 @@
     <script src="<?php echo base_url();?>assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="<?php echo base_url();?>assets/js/dataTables/dataTables.bootstrap.js"></script>
     <!-- JQUERY.UI SCRIPTS -->
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.ui.js"></script>   
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery.ui.js"></script>
+    <!-- CHOSEN.JQUERY SCRIPTS -->
+    <script src="<?php echo base_url();?>assets/js/chosen.jquery.min.js"></script>   
 	<script>
 
             $(document).ready(function () {

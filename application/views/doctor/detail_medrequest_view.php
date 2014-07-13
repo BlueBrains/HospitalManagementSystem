@@ -6,8 +6,8 @@
 	<table class="table table-hover table-bordered">		
 		<thead>
 			<th class="active" colspan="2">
-				<h3 class="text-danger text-center">Dr.<?php echo $result->fname.' '.$result->lname ;  ?>
-				<larg class="text-muted">offered </larg>
+				<h3 class="text-danger text-center">you 
+				<larg class="text-muted">have offered </larg>
 				<?php echo $result->tradeName; ?>
 				<larg class="text-muted">to</larg>
 				<?php echo $result->pfname.' '.$result->plname ;  ?>
