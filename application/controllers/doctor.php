@@ -348,6 +348,146 @@ class doctor extends REST_Controller
 			return FALSE;
 		}
 	}
+	public function medorder_list_get(){		
+		$this->load->library('pagination');
+		
+		$config['base_url'] = base_url()."doctor/medorder_list";
+		$config['per_page'] = 20;
+		$config['total_rows'] = 200; //should be reaplaced
+	
+		$config['per_page'] = 100;
+		$config['uri_segment'] = 3;
+		$config['num_links'] = 2;
+
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+
+		$config['first_link'] = '&laquo; First';
+		$config['first_tag_open'] = '<li class="prev page">';
+		$config['first_tag_close'] = '</li>';
+
+		$config['last_link'] = 'Last &raquo;';
+		$config['last_tag_open'] = '<li class="next page">';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_link'] = 'Next &rarr;';
+		$config['next_tag_open'] = '<li class="next page">';
+		$config['next_tag_close'] = '</li>';
+
+		$config['prev_link'] = '&larr; Previous';
+		$config['prev_tag_open'] = '<li class="prev page">';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="active"><a href="">';
+		$config['cur_tag_close'] = '</a></li>';
+
+		$config['num_tag_open'] = '<li class="page">';
+		$config['num_tag_close'] = '</li>';
+
+		$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		
+		$results = $this->pharmacy_model->getDoctorOrders($config["per_page"], $page, 3);//$doctor_id);			
+
+		if($this->response->format == 'html'){		
+		$data["results"] = $results;
+		$data["links"] = $this->pagination->create_links();
+		// $bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
+		// $bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
+		// $bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
+		// $bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
+		// $bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
+		// $bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
+		// $bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		// $data['side'] = $bar;
+		$data['section'] = 'doctor';		
+		$data['main_content'] = 'doctor/medorder_list_view';
+		$data['title'] = "Requests";
+		$this->load->view('includes/template',$data);
+		}
+		else {
+			$this->response($results,200);
+		}
+	}	
+	public function total_medorder_list_get(){		
+		$this->load->library('pagination');
+		
+		$config['base_url'] = base_url()."doctor/total_medorder_list";
+		$config['per_page'] = 20;
+		$config['total_rows'] = 200; //should be reaplaced
+	
+		$config['per_page'] = 100;
+		$config['uri_segment'] = 3;
+		$config['num_links'] = 2;
+
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+
+		$config['first_link'] = '&laquo; First';
+		$config['first_tag_open'] = '<li class="prev page">';
+		$config['first_tag_close'] = '</li>';
+
+		$config['last_link'] = 'Last &raquo;';
+		$config['last_tag_open'] = '<li class="next page">';
+		$config['last_tag_close'] = '</li>';
+
+		$config['next_link'] = 'Next &rarr;';
+		$config['next_tag_open'] = '<li class="next page">';
+		$config['next_tag_close'] = '</li>';
+
+		$config['prev_link'] = '&larr; Previous';
+		$config['prev_tag_open'] = '<li class="prev page">';
+		$config['prev_tag_close'] = '</li>';
+
+		$config['cur_tag_open'] = '<li class="active"><a href="">';
+		$config['cur_tag_close'] = '</a></li>';
+
+		$config['num_tag_open'] = '<li class="page">';
+		$config['num_tag_close'] = '</li>';
+
+		$this->pagination->initialize($config);
+		
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		
+		$results = $this->pharmacy_model->getAllDoctorOrders($config["per_page"], $page, 3);//$doctor_id);
+		
+		if($this->response->format == 'html'){		
+		$data["results"] = $results;
+		$data["links"] = $this->pagination->create_links();
+		$data['main_content'] = 'doctor/medorder_list_view';
+		$data['title'] = "medicines requests";
+		// $bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
+		// $bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
+		// $bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
+		// $bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
+		// $bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
+		// $bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
+		// $bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		// $data['side'] = $bar;
+		$data['section'] = 'doctor';		
+		$this->load->view('includes/template',$data);
+		}
+		else {
+			$this->response($results,200);
+		}
+	}
+	public function finish_request_get(){
+		$value = $this->get('id');
+		$this->pharmacy_model->finishOrder($value);		
+		redirect('doctor/medorder_list/0');	
+	}
+
+	public function detail_request_get()
+	{
+		$value = $this->get('id');		
+		if($q = $this->pharmacy_model->detailOrder($value)){
+			$data['main_content'] = 'doctor/detail_medrequest_view';
+			$data['title'] = "Details";
+			$data['result'] = $q[0];			
+			$this->load->view('includes/template',$data);
+		}		
+	}	
 	################################### END PHARMACY BLOCK ########################################################
 	
 	################################### auto_complete_functions ###################################################
