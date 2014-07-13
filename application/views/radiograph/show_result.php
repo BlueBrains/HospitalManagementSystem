@@ -100,7 +100,7 @@ echo'
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">Part of Body</button>
     			</span>
-				<input type="text" name="part_of_body" id="part" value='. $row->part_of_body .' class="form-control" disabled="True">
+				<input type="text" name="part_of_body" id="part" value="'. $row->part_of_body .'" class="form-control" disabled="True">
 			</div>
 	</div>		
 	<div class="row" style="margin-bottom:40px" >	

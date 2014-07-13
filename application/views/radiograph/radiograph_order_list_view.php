@@ -95,12 +95,17 @@
 				else 
 					$active ='class="success"';    	
                 echo "<tr".$active.">";
+				if(count($row->patient_name)<2)
                 echo "<td>".$row->patient_name."</td>";
+				else {
+					echo "<td>".$row->fname." ".$row->lname."</td>";
+				}
                 echo "<td>".$row->section_name."</td>";
                 echo "<td>".$row->date."</td>";
                 echo "<td>".$row->photo_kind."</td>";
                 echo "<td>".$row->part_of_body."</td>";
                 echo "<td>".$row->comment."</td>";
+				if (isset($section) && ($section !='doctor')) {
 				if ($row->state ==0)
               		echo "<td>"."<a href = ".base_url()."radiograph_supervisor/confirm_request/id/".$row->id." class='glyphicon glyphicon-eye-open'></a>";
 				else if ($row->state ==1)
@@ -109,8 +114,20 @@
 					echo "<td>"."<a href = ".base_url()."radiograph_supervisor/show_result/id/".$row->id." class='glyphicon glyphicon-ok-sign'></a>";
 				}
 				echo "<a href ".base_url()."radiology/delete/id/".$row->id." class='glyphicon glyphicon-eye-close' > </a><br/></td>";
-                echo "</tr>";
+				}
+				else 
+					{
+						if ($row->state ==0)
+              				echo "<td>"."<a  class='glyphicon glyphicon-eye-open'></a>";
+						else if ($row->state ==1)
+							echo "<td>"."<a class='glyphicon glyphicon-refresh'></a>";
+						else {
+							echo "<td>"."<a href = ".base_url()."doctor/show_result/id/".$row->id." class='glyphicon glyphicon-ok-sign'></a>";
+							}
+               
             }
+					 echo "</tr>";
+         }
          }
 		  else
 		  	{
