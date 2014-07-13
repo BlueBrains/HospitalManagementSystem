@@ -55,7 +55,7 @@ class analyse_model extends CI_Model
 	}
 	function finished_order_list()
 	{
-		$q=$this->db->query("SELECT analyse_request.id as id,state,CONCAT(patients.fname,' ',patients.lname) as Pname,CONCAT(doctors.fname,' ',doctors.lname) as Dname,analyse_name as Nname,request_date as rdate FROM analyse_request
+		$q=$this->db->query("SELECT analyse_request.id as id,state,CONCAT(patients.fname,' ',patients.lname) as Pname,CONCAT(doctors.fname,' ',doctors.lname) as Dname,analyse_name as Nname,request_date as rdate,description FROM analyse_request
                              INNER JOIN patients on patients.id=analyse_request.patient_id
                               INNER JOIN analyse on analyse_request.analyse_id=analyse.id
                               INNER JOIN doctors on analyse_request.doctor_id=doctors.id
@@ -72,7 +72,7 @@ class analyse_model extends CI_Model
 	
 	function total_order_list()
 	{
-		$q=$this->db->query("SELECT analyse_request.id as id,state,CONCAT(patients.fname,' ',patients.lname) as Pname,CONCAT(doctors.fname,' ',doctors.lname) as Dname,analyse_name as Nname,request_date as rdate FROM analyse_request
+		$q=$this->db->query("SELECT analyse_request.id as id,state,CONCAT(patients.fname,' ',patients.lname) as Pname,CONCAT(doctors.fname,' ',doctors.lname) as Dname,analyse_name as Nname,request_date as rdate,description FROM analyse_request
                              INNER JOIN patients on patients.id=analyse_request.patient_id
                               INNER JOIN analyse on analyse_request.analyse_id=analyse.id
                               INNER JOIN doctors on analyse_request.doctor_id=doctors.id
@@ -182,6 +182,22 @@ class analyse_model extends CI_Model
             
          }
 	}
+	
+	
+	function upload_external($request_id)
+	{
+		$q=$this->db->query("SELECT analyse_request.id as id,patient_out  as Pname,analyse_name as Nname FROM analyse_request
+                              INNER JOIN analyse on analyse_request.analyse_id=analyse.id
+                              WHERE analyse_request.id=".$request_id);
+		 if($q->num_rows()>0)
+         {
+              foreach ($q->result() as $raw ) {
+                $data[]=$raw;
+            }
+            return $data;
+            
+         }
+	}
 	function upload_result()
 	{
 		 $now=getdate();
@@ -204,14 +220,14 @@ class analyse_model extends CI_Model
         	return true;
        	}
 	}
-	function create_request()
+	function create_request($doctor_id=-1)
 	{
 		$now=getdate();
            $state=0;
            $nowDate=$now['year']."-".$now['mon']."-".$now['mday'];
            foreach($_POST['check'] as $value)
               {
-              	if(isset($doctor_id))
+              	if($doctor_id>0)
 				{
 					  $q=$this->db->query("INSERT INTO analyse_request(patient_id,doctor_id,analyse_id,request_date,state)
                  VALUES('".$_POST['patient_id']."','".$doctor_id."','".$value."','". $nowDate."','". $state."')");

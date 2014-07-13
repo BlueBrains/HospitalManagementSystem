@@ -51,7 +51,7 @@ class doctor extends REST_Controller
 			$data['side'] = $bar;
 			
 			$sub[0]="fa-qrcode ,Creat Request,#,False";
-			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{id},False";
+			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},False";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/Fill_order,False";
 			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/Fill_order,False";
 			$sub_menue[0] = $sub;
@@ -68,6 +68,13 @@ class doctor extends REST_Controller
 			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$id},FALSE";
 			$sub_menue[2] = $sub;
 			
+			$sub[0]="fa-qrcode ,Edit Medicin Request,#,false";
+			$sub[1]="fa-desktop ,ALL Radiology Requests,doctor/total_radiograph_request/id/{$id},false";
+			$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$id},FALSE";
+			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$id},FALSE";
+			$sub_menue[3] = $sub;
+			
+			
 			$data['sub_menue']=$sub_menue;
 			$data['main_content'] = 'doctor/patient_info_view';	
 			$data['title']='Patient info';
@@ -78,6 +85,7 @@ class doctor extends REST_Controller
 	function finish_analyse_request_get()
 	{
 		$patient_id=$this->get('id');
+		//$patient_id=$id;
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->finish_order_list_patient($patient_id);
 			$bar[0]=" fa-desktop ,Home Page,doctor/homepage,false";
@@ -97,9 +105,9 @@ class doctor extends REST_Controller
 			$sub_menue[1] = $sub;
 			
 			$sub[0]="fa-qrcode ,Edit radiology Request,#,false";
-			$sub[1]="fa-desktop ,ALL Radiology Requests,doctor/total_radiograph_request/id/{$id},false";
-			$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$id},FALSE";
-			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$id},FALSE";
+			$sub[1]="fa-desktop ,ALL Radiology Requests,doctor/total_radiograph_request/id/{$patient_id},false";
+			$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$patient_id},FALSE";
+			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$patient_id},FALSE";
 			$sub_menue[2] = $sub;
 			
 			$data['sub_menue']=$sub_menue;
@@ -131,9 +139,9 @@ class doctor extends REST_Controller
 			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$patient_id},FALSE";
 			$sub_menue[1] = $sub;
 			$sub[0]="fa-qrcode ,Edit radiology Request,#,false";
-			$sub[1]="fa-desktop ,ALL Radiology Requests,doctor/total_radiograph_request/id/{$id},false";
-			$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$id},FALSE";
-			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$id},FALSE";
+			$sub[1]="fa-desktop ,ALL Radiology Requests,doctor/total_radiograph_request/id/{$patient_id},false";
+			$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$patient_id},FALSE";
+			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$patient_id},FALSE";
 			$sub_menue[2] = $sub;
 			
 			$data['sub_menue']=$sub_menue;
@@ -166,9 +174,9 @@ class doctor extends REST_Controller
 			$sub_menue[1] = $sub;
 			
 			$sub[0]="fa-qrcode ,Edit radiology Request,#,false";
-			$sub[1]="fa-desktop ,ALL Radiology Requests,doctor/total_radiograph_request/id/{$id},false";
-			$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$id},FALSE";
-			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$id},FALSE";
+			$sub[1]="fa-desktop ,ALL Radiology Requests,doctor/total_radiograph_request/id/{$patient_id},false";
+			$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$patient_id},FALSE";
+			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$patient_id},FALSE";
 			$sub_menue[2] = $sub;
 			
 			$data['sub_menue']=$sub_menue;
@@ -186,9 +194,11 @@ class doctor extends REST_Controller
 		 $doctor_id=1;
 		 $this->load->model('analyse_model');
          $this->analyse_model->create_request($doctor_id);
+		 redirect(base_url()."doctor/total_analyse_request/id/".$_POST['patient_id']);
 		  
 		  //تحميل صفحة التملاية مرة اخرى
 	}
+	
 	function Fill_order_patient_get()
 	{
 		$this->load->model('doctor_model');

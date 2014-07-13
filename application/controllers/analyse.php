@@ -117,6 +117,7 @@ class analyse extends REST_Controller
 	{
 		$this->load->model('analyse_model');
 		$this->analyse_model->upload_result();
+		$this->homepage_get();
 		
 	}
 	
@@ -134,8 +135,28 @@ class analyse extends REST_Controller
 			$data['main_content'] = 'analyse/upload_view';	
 			$data['title']='Upload Page';
 			$data['section'] = 'analyse';	
+		
 		$this->load->view('includes/template',$data);
 	}
+	
+	function upload_outer_get()
+	{
+		$request_id=$this->get('id');
+		$this->load->model('analyse_model');
+		$data['records']=$this->analyse_model->upload_external($request_id);
+		$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,False";
+			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
+			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
+			$bar[3]=" fa-table ,Implemented Request,analyse/finished_order_list,False";
+			$bar[4]=" fa-edit ,Out Order Manage,analyse/out_order,false";
+			$data['side'] = $bar;
+			$data['main_content'] = 'analyse/upload_view';	
+			$data['title']='Upload Page';
+			$data['section'] = 'analyse';	
+		
+		$this->load->view('includes/template',$data);
+	}
+	
 /**
 // this function for doctor to create request 
 	function new_request_post($doctor_id,$patient_id)
@@ -167,6 +188,7 @@ class analyse extends REST_Controller
 			$data['main_content'] = 'analyse/analyses_order_list';	
 			$data['title'] = 'Out Order List';	
 			$data['section'] = 'analyse';	
+			$data['outer']="true";
 		$this->load->view('includes/template',$data);
 	}
 	
