@@ -78,8 +78,10 @@
                   					<input type="text" name="patient_id" id="patient_id" value="<?php echo $records[0]->Pname;?>"/>
                         	 	</p>
                    <p>
+                   	<?php if(isset($records[0]->Dname)):?>
                    	<label for="doctor_id">Doctor Name</label>
                    	<input type="text" name="doctor_id" id="doctor_id" value="<?php echo $records[0]->Dname;?>" />
+                   	<?php endif ?>
                    </p>
                   <p>
                   	<label for="analyse_id">Analyse Name</label>
@@ -98,4 +100,7 @@
 				         </form>
                       </div>
                     </div>
+                    </div>
+                    </div>
+                   
                     <!--End Advanced Tables -->
