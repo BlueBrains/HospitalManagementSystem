@@ -189,7 +189,7 @@ else if (name=="Spine")
 </div>
 <div class="col-md-6">
 			<div class="media">
-				  <a class="pull-right" href="#">
+				  <a class="pull-right" >
 				   		 <img class="media-object" src="<?php echo base_url();?>/images/bone.jpg" alt="HTML Map"  border="0" usemap="#tutorials"/>
 				  </a>
 			</div>	

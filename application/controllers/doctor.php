@@ -776,7 +776,12 @@ function show_result_get()
 	}
 	################################### end auto_complete_functions BLOCK #########################################	
 
+	function v_get()
+	{
+		$data['main_content']='doctor/visit_patient';
+		$data['title']='Patient Profile';
+		$this->load->view('includes/template',$data);
+	}
 }
-
 
 ?>
