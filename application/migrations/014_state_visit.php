@@ -49,12 +49,12 @@ class Migration_state_visit extends CI_Migration {
     }
  
     public function down(){
-    	$this->dbforge->drop_column('Temperature','visit');
-		$this->dbforge->drop_column('pulse','visit');
-		$this->dbforge->drop_column('Respiration','visit');
-		$this->dbforge->drop_column('blood_pressure','visit');
+    	$this->dbforge->drop_column('visit','Temperature');
+		$this->dbforge->drop_column('visit','pulse');
+		$this->dbforge->drop_column('visit','Respiration');
+		$this->dbforge->drop_column('visit','blood_pressure');
 		
-    	$this->dbforge->drop_column('doctor_id','rad_request');
+    	$this->dbforge->drop_column('rad_request','doctor_id');
 
 
         $this->dbforge->drop_table('request_state');
