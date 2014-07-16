@@ -1,22 +1,66 @@
 <?php 
 class supervisor_model extends CI_Model {
-	function create_call()
+	function create_call($val='null',$l)
 	{
+		if ($val=='null'){
 		$pieces = explode(" ", $this->input->post('stuff_name'));
 		//$sql=$this->db->query("SELECT * FROM users  where  fname ='".$pieces[0] ."' and lname ='".$pieces[1] ."'");
+		if ($l==1)
 		$sql=$this->db->query("SELECT * FROM doctors  where  fname ='".$pieces[0] ."' and lname ='".$pieces[1] ."'");
+		else {
+			$sql=$this->db->query("SELECT * FROM nurses where  fname ='".$pieces[0] ."' and lname ='".$pieces[1] ."'");
+		}
 		foreach ($sql->result() as $raw ) {
                 	
-                $doctor_id=$raw->id;
+                $stuff_id=$raw->id;
             }
 		$new_member = array(
 		
 				'sender_id' => $this->ion_auth->user()->row()->profile_id,
-				'reciever_id' => $doctor_id,
+				'reciever_id' => $stuff_id,
 				'w_r_b' => $this->input->post('w').','.$this->input->post('r').','.$this->input->post('b'),
+			);
+		}
+		else 
+		{
+			$pieces = explode(" ", $this->input->post('stuff_name'));	
+			$sql=$this->db->query("SELECT * FROM entries INNER JOIN patients ON entries.id_patient = patients.id  where entries.checkout = '0' and entries.id_patient='".$val."'");
+			foreach ($sql->result() as $raw ) {
+                	
+                $w=$raw->ward;
+				$r=$raw->room;
+				$b=$raw->bed;
+            }
+            $sql=$this->db->query("SELECT * FROM nurses where  fname ='".$pieces[0] ."' and lname ='".$pieces[1] ."'");
+			foreach ($sql->result() as $raw ) {
+                	
+             	$rec=$raw->id;
+            }
+		$new_member = array(		
+				'sender_id' => $this->ion_auth->user()->row()->profile_id,
+				'reciever_id' => $rec,
+				'w_r_b' => $w.','.$r.','.$b
+			);
+		}		
+		$insert = $this->db->insert('calls', $new_member);
+		
+	}
+	
+	
+	function create_call_super()
+	{
+		$sql=$this->db->query("SELECT * FROM users_groups  where  group_id ='".$this->input->post('section')."'");
+		foreach ($sql->result() as $raw ) {
+                	
+                $rec_id=$raw->user_id;
+            }
+			$new_member = array(
+				'sender_id' => $this->ion_auth->user()->row()->profile_id,
+				'reciever_id' =>$rec_id ,
 			);
 		$insert = $this->db->insert('calls', $new_member);
 	}
+	
 	
 	function p_i_h()
 	{

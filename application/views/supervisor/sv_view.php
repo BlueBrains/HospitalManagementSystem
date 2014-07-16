@@ -110,7 +110,7 @@
                                         	<th>Patient name</th>
                                             <th>W-R-B</th>
                                             <th>Date in </th>
-                                            <th>Action </th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -124,7 +124,6 @@
 				echo "<td>".$row->fname." ".$row->lname."</td>";
                 echo "<td>".$row->ward." - ".$row->room." - ".$row->bed."</td>";
                 echo "<td>".$row->date_in."</td>";
-				echo "<td><a class='btn btn-primary' href='".base_url()."pharmacy_supervisor/confirm_request/id/$row->id_patient' role='button'>Call</a></td>";
 				echo "</tr>";
 			}		 
          }

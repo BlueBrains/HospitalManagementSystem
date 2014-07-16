@@ -108,12 +108,25 @@
                               	</div>
                               	<div class="col-md-4 ">
 								<div class='row' >		
+									<form method="post" action="<?php echo base_url();?>supervisor/caller_1">
+									< <input type="hidden" name="p_id" value="<?php $row->id_patient ?>" id="p_id"/>	
 									<button type="button" class="btn btn-primary">Call Nurse </button>
+									</form>
 								</div>
 								</div>
 								<div class="col-md-4 ">
 								<div class='row' >		
+									<form method="post" action="<?php echo base_url();?>supervisor/caller_sv">
+									<select class='form-control' placeholder='' name='section'>
+																  <option value='2'>Accident and emergency (A&E)</option>
+																  <option value='3'>Haematology</option>
+																  <option value='4'>Pain management clinics</option>
+																  <option value='5'>Ear nose and throat (ENT)</option>
+																  <option value='6'>Obstetrics and Gynaecology</option>
+																  <option value='6'>Intensive care unit (ICU) </option>
+															</select>		
 									<button type="button" class="btn btn-primary">Helper Doctor</button>
+									</form>
 								</div>
                                </div>
                             </div>

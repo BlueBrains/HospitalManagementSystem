@@ -23,11 +23,21 @@ class supervisor extends REST_Controller{
 			$this->load->view('includes/template',$data);
 	}
 	
+	function caller_1_post()
+	{
+		$this->supervisor_model->create_call($this->input->post("p_id"),2);
+	}
+	
+	function caller_sv_post()
+	{
+		$this->supervisor_model->create_call_super();
+	}
+	
 	function caller_post()
 	{
-		$this->supervisor_model->create_call();
+		$this->supervisor_model->create_call('null',$this->input->post('caller'));
 		if( $this->input->post('caller')==1)
-		$this->add_p_t_d_post();
+			$this->add_p_t_d_post();
 			$data['main_content'] = 'supervisor/sv_view';	
 			$data['section'] = 'SuperVisor';	
 			//$data['side'] = $bar;
