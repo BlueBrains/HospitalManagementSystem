@@ -2,13 +2,25 @@
 require(APPPATH.'libraries/rest_controller.php');
 class analyse extends REST_Controller
 {
-	
+		
+	function __construct() {
+		parent::__construct();
+		$this->load->library('ion_auth');
+		if (!$this->ion_auth->logged_in()||!$this->ion_auth->in_group("analysis"))
+		{
+			redirect('auth/login');
+		}	
+		else{
+			$this->load->model('analyse_model');
+		}
+	}
 		function  homepage_get ()
 	{
 	//	$info = $this->radiograph_model->radiograph_supervisor_info($this->session->userdata('id'));
 		
 	//		$data['nam']=$info->firstName." ".$info->lastName;
 			//$data['main_content'] = 'radiograph/radiograph_index';
+			$data['user'] = $this->ion_auth->user()->row();
 			$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
 			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
 			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
@@ -31,6 +43,7 @@ class analyse extends REST_Controller
 		
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->order_list();
+		$data['user'] = $this->ion_auth->user()->row();
 			$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
 			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,True";
 			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
@@ -47,7 +60,7 @@ class analyse extends REST_Controller
 	{
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->confirmed_order_list();
-		
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
 			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,false";
 			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,True";
@@ -64,6 +77,7 @@ class analyse extends REST_Controller
 	{
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->finished_order_list();
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
 			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,false";
 			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
@@ -80,6 +94,7 @@ class analyse extends REST_Controller
 	{
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->total_order_list();
+		$data['user'] = $this->ion_auth->user()->row();
 		 $bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,True";
 			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
 			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
@@ -126,6 +141,7 @@ class analyse extends REST_Controller
 		$request_id=$this->get('id');
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->upload($request_id);
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
 			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
@@ -144,6 +160,7 @@ class analyse extends REST_Controller
 		$request_id=$this->get('id');
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->upload_external($request_id);
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
 			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
@@ -178,6 +195,7 @@ class analyse extends REST_Controller
 	{
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->out_order_list();
+		$data['user'] = $this->ion_auth->user()->row();
 			$bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
 			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
 			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
@@ -197,6 +215,7 @@ class analyse extends REST_Controller
 		$this->load->model('analyse_model');
          $data['records']=$this->analyse_model->get_analyses();
          $data['records2']=$this->analyse_model->get_catagoury();
+		 $data['user'] = $this->ion_auth->user()->row();
 		 $bar[0]=" fa-desktop ,ALL Requests,analyse/total_order_list,false";
 			$bar[1]=" fa-qrcode ,Un Confirmed Request,analyse/order_list,False";
 			$bar[2]=" fa-qrcode ,Un Uploded Request,analyse/confirmed_order_list,False";
