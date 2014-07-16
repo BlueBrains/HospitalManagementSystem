@@ -1392,6 +1392,31 @@ class Ion_auth_model extends CI_Model
 
 		if ($return = $this->db->insert($this->tables['users_groups'], array( $this->join['groups'] => (int)$group_id, $this->join['users'] => (int)$user_id)))
 		{
+			if((int)$group_id == 3){
+				$table = "doctors";
+			}else if((int)$group_id == 4){
+				$table = "nurses";
+			}else if((int)$group_id == 5){
+				$table = "recipients";
+			}
+			if(isset($table)){
+				$query = $this->db->get_where('users', array('id' => (int)$user_id))->result();
+				if((int)$group_id == 3 || (int)$qroup_id == 4){
+					$data = array(
+		   				'fname' => $query[0]->first_name ,
+		   				'lname' => $query[0]->last_name ,
+		   				'department_id' => (int)$group_id
+					);						
+				}else {
+					$data = array(
+		   				'fname' => $query[0]->first_name ,
+		   				'lname' => $query[0]->last_name 		   				
+					);					
+				}
+				$this->db->insert($table, $data);
+				$id = $this->db->insert_id();
+				$this->db->update('users', array('profile_id'=>$id), array('id' => (int)$user_id));
+			} 
 			if (isset($this->_cache_groups[$group_id])) {
 				$group_name = $this->_cache_groups[$group_id];
 			}
@@ -1432,6 +1457,17 @@ class Ion_auth_model extends CI_Model
 			foreach($group_ids as $group_id)
 			{
 				$this->db->delete($this->tables['users_groups'], array($this->join['groups'] => (int)$group_id, $this->join['users'] => (int)$user_id));
+				if((int)$group_id == 3){
+					$table = "doctors";
+				}else if((int)$group_id == 4){
+					$table = "nurses";
+				}else if((int)$group_id == 5){
+					$table = "recipients";
+				}
+				if(isset($table)){
+					$query = $this->db->get_where('users', array('id' => (int)$user_id))->result();									
+					$this->db->delete($table, array('id' => $query[0]->profile_id));
+				} 
 				if (isset($this->_cache_user_in_group[$user_id]) && isset($this->_cache_user_in_group[$user_id][$group_id]))
 				{
 					unset($this->_cache_user_in_group[$user_id][$group_id]);

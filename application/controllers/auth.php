@@ -71,7 +71,26 @@ class Auth extends MY_Controller {
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				if($this->ion_auth->in_group('radiograph')){
+					redirect('radiology_supervisor/homepage');
+				}
+				else if($this->ion_auth->in_group('pharmacy')){
+					redirect('pharmacy_supervisor/homepage');
+				}
+				else if($this->ion_auth->in_group('analysis')){
+					redirect('analyse/homepage');
+				}
+				else if($this->ion_auth->in_group('doctors')){
+					redirect('doctor/homepage');
+				}
+				else if($this->ion_auth->in_group('nurses')){
+					redirect('nurses/homepage');
+				}
+				else if($this->ion_auth->in_group('recipients')){
+					redirect('recipients/homepage');
+				}
+				else												
+					redirect('/', 'refresh');
 			}
 			else
 			{
@@ -522,7 +541,7 @@ class Auth extends MY_Controller {
 
 			if (isset($groupData) && !empty($groupData)) {
 
-				$this->ion_auth->remove_from_group('', $id);
+				$this->ion_auth->remove_from_group(array(1,2,3,4,5,6,7,8), $id);
 
 				foreach ($groupData as $grp) {
 					$this->ion_auth->add_to_group($grp, $id);
