@@ -236,15 +236,14 @@ class Ion_auth_model extends CI_Model
 			if ($this->random_rounds)
 			{
 				$rand = rand($this->min_rounds,$this->max_rounds);
-				$params = array('rounds' => $rand);
+				$rounds = array('rounds' => $rand);
 			}
 			else
 			{
-				$params = array('rounds' => $this->default_rounds);
+				$rounds = array('rounds' => $this->default_rounds);
 			}
 
-			$params['salt_prefix'] = $this->config->item('salt_prefix', 'ion_auth');
-			$this->load->library('bcrypt',$params);
+			$this->load->library('bcrypt',$rounds);
 		}
 
 		$this->trigger_events('model_constructor');
@@ -456,7 +455,6 @@ class Ion_auth_model extends CI_Model
 		{
 			$query = $this->db->select($this->identity_column)
 			                  ->where('activation_code', $code)
-			                  ->where('id', $id)
 			                  ->limit(1)
 			                  ->get($this->tables['users']);
 
@@ -469,13 +467,15 @@ class Ion_auth_model extends CI_Model
 				return FALSE;
 			}
 
+			$identity = $result->{$this->identity_column};
+
 			$data = array(
 			    'activation_code' => NULL,
 			    'active'          => 1
 			);
 
 			$this->trigger_events('extra_where');
-			$this->db->update($this->tables['users'], $data, array('id' => $id));
+			$this->db->update($this->tables['users'], $data, array($this->identity_column => $identity));
 		}
 		else
 		{
@@ -773,17 +773,6 @@ class Ion_auth_model extends CI_Model
 
 		$key = $this->hash_code($activation_code_part.$identity);
 
-		// If enable query strings is set, then we need to replace any unsafe characters so that the code can still work
-		if ($key != '' && $this->config->item('permitted_uri_chars') != '' && $this->config->item('enable_query_strings') == FALSE)
-		{
-			// preg_quote() in PHP 5.3 escapes -, so the str_replace() and addition of - to preg_quote() is to maintain backwards
-			// compatibility as many are unaware of how characters in the permitted_uri_chars will be parsed as a regex pattern
-			if ( ! preg_match("|^[".str_replace(array('\\-', '\-'), '-', preg_quote($this->config->item('permitted_uri_chars'), '-'))."]+$|i", $key))
-			{
-				$key = preg_replace("/[^".$this->config->item('permitted_uri_chars')."]+/i", "-", $key);
-			}
-		}
-
 		$this->forgotten_password_code = $key;
 
 		$this->trigger_events('extra_where');
@@ -961,7 +950,7 @@ class Ion_auth_model extends CI_Model
 		$this->trigger_events('extra_where');
 
 		$query = $this->db->select($this->identity_column . ', username, email, id, password, active, last_login')
-		                  ->where($this->identity_column, $identity)
+		                  ->where($this->identity_column, $this->db->escape_str($identity))
 		                  ->limit(1)
 		                  ->get($this->tables['users']);
 
@@ -1403,6 +1392,31 @@ class Ion_auth_model extends CI_Model
 
 		if ($return = $this->db->insert($this->tables['users_groups'], array( $this->join['groups'] => (int)$group_id, $this->join['users'] => (int)$user_id)))
 		{
+			if((int)$group_id == 3){
+				$table = "doctors";
+			}else if((int)$group_id == 4){
+				$table = "nurses";
+			}else if((int)$group_id == 5){
+				$table = "recipients";
+			}
+			if(isset($table)){
+				$query = $this->db->get_where('users', array('id' => (int)$user_id))->result();
+				if((int)$group_id == 3 || (int)$qroup_id == 4){
+					$data = array(
+		   				'fname' => $query[0]->first_name ,
+		   				'lname' => $query[0]->last_name ,
+		   				'department_id' => (int)$group_id
+					);						
+				}else {
+					$data = array(
+		   				'fname' => $query[0]->first_name ,
+		   				'lname' => $query[0]->last_name 		   				
+					);					
+				}
+				$this->db->insert($table, $data);
+				$id = $this->db->insert_id();
+				$this->db->update('users', array('profile_id'=>$id), array('id' => (int)$user_id));
+			} 
 			if (isset($this->_cache_groups[$group_id])) {
 				$group_name = $this->_cache_groups[$group_id];
 			}
@@ -1443,6 +1457,17 @@ class Ion_auth_model extends CI_Model
 			foreach($group_ids as $group_id)
 			{
 				$this->db->delete($this->tables['users_groups'], array($this->join['groups'] => (int)$group_id, $this->join['users'] => (int)$user_id));
+				if((int)$group_id == 3){
+					$table = "doctors";
+				}else if((int)$group_id == 4){
+					$table = "nurses";
+				}else if((int)$group_id == 5){
+					$table = "recipients";
+				}
+				if(isset($table)){
+					$query = $this->db->get_where('users', array('id' => (int)$user_id))->result();									
+					$this->db->delete($table, array('id' => $query[0]->profile_id));
+				} 
 				if (isset($this->_cache_user_in_group[$user_id]) && isset($this->_cache_user_in_group[$user_id][$group_id]))
 				{
 					unset($this->_cache_user_in_group[$user_id][$group_id]);

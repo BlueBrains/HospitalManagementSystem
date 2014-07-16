@@ -38,34 +38,27 @@ class Migration_Doctor_nurse_recipient extends CI_Migration {
        
         $this->dbforge->create_table('recipients', TRUE);
         
-        
-		$query1 = "INSERT INTO `groups` (`id`, `name`, `description`) VALUES
-		     (3,'doctors','General User'),
-		     (4,'nurses','General User'),
-		     (5,'recipients','General User'),
-		     (6,'pharmacy_supervisor','General User'),
-		     (7,'analysis_supervisor','General User'),
-		     (8,'radiograph_supervisor','General User');";
 
-		$query2 = "INSERT INTO `doctors` (`id`, `fname`, `lname` ,`department_id`) VALUES
-			 (1,'Eyad','Arnabeh',1),
-		     (2,'Amer','AlHosary',2),
-		     (3,'Luay','AlAssadi',3),
-		     (4,'mario','luigi',4);";
-
-		$query3 = "INSERT INTO `nurses` (`id`, `fname`, `lname` ,`department_id`) VALUES
-			 (1,'Ahmad','AlHamoy',1),
-		     (2,'Amar','AlHelo',2),
-		     (3,'Amjad','AlKadry',3),
-		     (4,'pinky','brain',4);";
-
-		$query4 = "INSERT INTO `nurses` (`id`, `fname`, `lname`) VALUES
-			 (1,'Hassan','AlMahros'),
-		     (2,'detective','conan');";		     		     		     		     		     
-		
-		mysql_query($query1);		     
-		mysql_query($query2);
-		mysql_query($query3);
+		// $query1 = "INSERT INTO `doctors` (`id`, `fname`, `lname` ,`department_id`) VALUES
+			 // (1,'Eyad','Arnabeh',1),
+		     // (2,'Amer','AlHosary',2),
+		     // (3,'Luay','AlAssadi',3),
+		     // (4,'mario','luigi',4);";
+// 
+		// $query2 = "INSERT INTO `nurses` (`id`, `fname`, `lname` ,`department_id`) VALUES
+			 // (1,'Ahmad','AlHamoy',1),
+		     // (2,'Amar','AlHelo',2),
+		     // (3,'Amjad','AlKadry',3),
+		     // (4,'pinky','brain',4);";
+// 
+		// $query3 = "INSERT INTO `nurses` (`id`, `fname`, `lname`) VALUES
+			 // (1,'Hassan','AlMahros'),
+		     // (2,'detective','conan');";		     		     		     		     		     
+// 		
+// 		     
+		// mysql_query($query1);
+		// mysql_query($query2);
+		// mysql_query($query2);
                 
     }
  

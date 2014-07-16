@@ -62,7 +62,7 @@
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                             Advanced Tables
+                             order number  <?php echo $id?>
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -71,8 +71,7 @@
                                         <tr>
                                         	<th>trade name</th>
                                              <th>caliber</th>
-                                            <th>quantity</th>
-                                            <th>date</th>                                            
+                                            <th>quantity</th>                                          
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -81,11 +80,10 @@
             
             foreach ($records as $row) 
             {
-                echo "<tr>";
+                echo "<tr>";				
                 echo "<td>".$row->tradeName."</td>";
 				echo "<td>".$row->caliber."</td>";
                 echo "<td>".$row->quantity."</td>";
-				echo "<td>".$row->date."</td>";
                 echo "</tr>";
             }
         ?>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     
-    <title><?php echo "title" ?></title>
+    <title><?php if (isset($title)) echo $title; else echo "title"; ?></title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="<?php echo base_url();?>assets/css/bootstrap.css" rel="stylesheet" />
     <!-- TABLE STYLES-->
@@ -60,6 +60,6 @@
 padding: 15px 50px 5px 50px;
 float: right;
 font-size: 12px;margin-top: 7px;"> 
- Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-danger square-btn-adjust" style="background-color: #0F275A;">Logout</a> </div>
+ Last access : <?php echo(date("Y-m-d",$user->last_login));?> &nbsp; <a href="<?php echo base_url()?>auth/logout" class="btn btn-danger square-btn-adjust" style="background-color: #0F275A;">Logout</a> </div>
         </nav>   
            <!-- /. NAV TOP  -->

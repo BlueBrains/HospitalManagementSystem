@@ -35,7 +35,7 @@ class Pharmacy_model extends CI_Model {
 			return $data;
 		}
 	}
-	public function getDoctorOrders($limit,$start,$id){
+	public function getDoctorOrders($limit, $start, $doctor_id, $patient_id){
 		$where = "(medicine_request.state='0' or medicine_request.state='1')"; 		
 		$this->db->select('medicine_request.id,medicine_request.state,medicines.tradeName,medicines.caliber,medicines.quantity,doctors.fname,doctors.lname,patients.fname pfname,patients.lname plname,date')   		
 		->from('medicine_request')
@@ -43,7 +43,8 @@ class Pharmacy_model extends CI_Model {
 		->join('doctors', 'medicine_request.doctor_id = doctors.id','inner')
 		->join('patients', 'medicine_request.patient_id = patients.id','inner')
 		->where($where)
-		->where('medicine_request.doctor_id',$id)
+		->where('medicine_request.doctor_id',$doctor_id)
+		->where('medicine_request.patient_id',$patient_id)		
 		->limit($limit, $start);			
 		if($q = $this->db->get()){		
 			$data = $q->result();
@@ -62,13 +63,14 @@ class Pharmacy_model extends CI_Model {
 			return $data;
 		}
 	}
-	public function getAllDoctorOrders($limit,$start,$id){		
+	public function getAllDoctorOrders($limit,$start,$doctor_id,$patient_id){		
 		$this->db->select('medicine_request.id,medicine_request.state,medicines.tradeName,medicines.caliber,medicines.quantity,doctors.fname,doctors.lname,patients.fname pfname,patients.lname plname,date')   		
 		->from('medicine_request')
 		->join('medicines', 'medicine_request.medicine_id = medicines.id','inner')		
 		->join('doctors', 'medicine_request.doctor_id = doctors.id','inner')
 		->join('patients', 'medicine_request.patient_id = patients.id','inner')
-		->where('medicine_request.doctor_id',$id)
+		->where('medicine_request.doctor_id',$doctor_id)
+		->where('medicine_request.patient_id',$patient_id)
 		->limit($limit, $start);					
 		if($q = $this->db->get()){		
 			$data = $q->result();

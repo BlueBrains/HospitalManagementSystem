@@ -9,31 +9,32 @@ class Pharmacy_supervisor extends REST_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->library('ion_auth');
-		// if (!$this->ion_auth->logged_in()||!$this->ion_auth->in_group("pharmacy_supervisor"))
-		// {
-			// redirect('auth/login');
-		// }	
-		// else{
+		if (!$this->ion_auth->logged_in()||!$this->ion_auth->in_group("pharmacy"))
+		{
+			redirect('auth/login');
+		}	
+		else{
 			$this->load->model('pharmacy_model');
 			$this->load->model('medicine_model');
-		// }
+		}
 	}
 	
 	public function homepage_get()
 	{
-		$id = $this->seeion->userdate('user_id');
-		$data = $this->pharmacy_model->supervisor_info($id);
+		$data['user'] = $this->ion_auth->user()->row();		
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
 		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
-		$data['section'] = 'pharmacy';		
-		$data['main_content'] = 'pharmacy/homepage';
-		$this->load->view('include/template',$data);
+		$data['section'] = 'pharmacy';
+		$data['title'] = 'homepage| pharmacy';		
+		$data['main_content'] = 'pharmacy/homepage_view';
+		$this->load->view('includes/template',$data);
 	}
 	
 	public function order_list_get(){		
@@ -81,13 +82,15 @@ class Pharmacy_supervisor extends REST_Controller {
 		if($this->response->format == 'html'){		
 		$data["results"] = $results;
 		$data["links"] = $this->pagination->create_links();
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
 		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/order_list_view';
@@ -95,7 +98,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$this->load->view('includes/template',$data);
 		}
 		else {
-			$this->response($results,200);
+			$this->response(json_encode($results),200);
 		}
 	}
 
@@ -145,6 +148,7 @@ class Pharmacy_supervisor extends REST_Controller {
 		$data["results"] = $results;
 		$data["links"] = $this->pagination->create_links();
 		$data['main_content'] = 'pharmacy/order_list_view';
+		$data['user'] = $this->ion_auth->user()->row();
 		$data['title'] = "Orders";
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
@@ -152,7 +156,8 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$this->load->view('includes/template',$data);
@@ -165,6 +170,7 @@ class Pharmacy_supervisor extends REST_Controller {
 	public function confirm_request_get(){
 		$data['id'] = $this->get('id');		
 		$data['main_content'] = 'pharmacy/send_task_view';
+		$data['user'] = $this->ion_auth->user()->row();
 		$data['title'] = "Send Task";
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
@@ -172,7 +178,8 @@ class Pharmacy_supervisor extends REST_Controller {
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$this->load->view('includes/template',$data);			
@@ -209,13 +216,15 @@ class Pharmacy_supervisor extends REST_Controller {
 	}
 	public function sale_medicine_get()
 	{
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
 		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/sale_med_view';
@@ -245,13 +254,15 @@ class Pharmacy_supervisor extends REST_Controller {
 
 	public function enter_medicine_get()
 	{
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
 		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/enter_med_view';
@@ -296,13 +307,15 @@ class Pharmacy_supervisor extends REST_Controller {
 	public function all_med_get()
 	{		
 		$data['records'] = $this->medicine_model->getAllMed();
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
 		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/all_med_view';
@@ -313,13 +326,15 @@ class Pharmacy_supervisor extends REST_Controller {
 	public function saled_med_get()
 	{
 		$data['records'] = $this->medicine_model->getSaledMed();
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
 		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/saled_med_view';
@@ -329,14 +344,16 @@ class Pharmacy_supervisor extends REST_Controller {
 			
 	public function update_medquan_get()
 	{
-		$data['id'] = $this->get('id');		
+		$data['id'] = $this->get('id');
+		$data['user'] = $this->ion_auth->user()->row();		
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
 		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';		
 		$data['main_content'] = 'pharmacy/update_medquan_view';
@@ -353,13 +370,15 @@ class Pharmacy_supervisor extends REST_Controller {
 	public function update_medicine_get()
 	{
 		$data['result'] = $this->medicine_model->getMed($this->get('id'));
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
 		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';				
 		$data['main_content'] = 'pharmacy/update_med_view';
@@ -383,22 +402,77 @@ class Pharmacy_supervisor extends REST_Controller {
 		$this->medicine_model->updateMed($this->input->post('id'),$med);
 		redirect('pharmacy_supervisor/all_med');			
 	}
+	
 	public function medicine_insertion_get()
 	{
-		$data['records'] = $this->medicine_model->getMedInsertion();
+		$id = $this->get('id');
+		$data['id'] = $id;
+		$data['records'] = $this->medicine_model->getMedInsertion($id);
+		$data['user'] = $this->ion_auth->user()->row();
 		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
 		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
 		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
 		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
 		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
 		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
-		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_insertion,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
 		$data['side'] = $bar;
 		$data['section'] = 'pharmacy';				
 		$data['main_content'] = 'pharmacy/med_insert_view';
 		$data['title'] = "Medicine Insertion";
 		$this->load->view('includes/template',$data);			
 	}
+		
+	public function medicine_orders_get()
+	{
+		$data['records'] = $this->medicine_model->getOrders();
+		$data['user'] = $this->ion_auth->user()->row();
+		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
+		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
+		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
+		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
+		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
+		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
+		$data['side'] = $bar;
+		$data['section'] = 'pharmacy';				
+		$data['main_content'] = 'pharmacy/med_orders_view';
+		$data['title'] = "Medicine Insertion";
+		$this->load->view('includes/template',$data);			
+	}	
+	public function order_entry_get()
+	{
+		$data['records'] = $this->medicine_model->getAllMed();
+		$data['user'] = $this->ion_auth->user()->row();
+		$bar[0]=" fa-desktop ,ALL Requests,pharmacy_supervisor/total_order_list,False";
+		$bar[1]=" fa-qrcode ,Active Requests,pharmacy_supervisor/order_list,False";				
+		$bar[2]=" fa-table ,Sale Medicine,pharmacy_supervisor/sale_medicine,False";
+		$bar[3]=" fa-table ,Enter Medicine,pharmacy_supervisor/enter_medicine,False";
+		$bar[4]=" fa-edit ,Existing Medicines,pharmacy_supervisor/all_med,False";
+		$bar[5]=" fa-edit ,External Sales,pharmacy_supervisor/saled_med,False";
+		$bar[6]=" fa-edit ,inserted medicines,pharmacy_supervisor/medicine_orders,False";
+		$bar[7]=" fa-edit ,Order Entry,pharmacy_supervisor/order_entry,False";
+		$data['side'] = $bar;
+		$data['section'] = 'pharmacy';				
+		$data['main_content'] = 'pharmacy/order_entry_view';
+		$data['title'] = "Order Entry";
+		$this->load->view('includes/template',$data);			
+	}	
+	public function order_entry_post()
+	{
+		$name = $this->input->post('medicineName');
+		$quantity = $this->input->post('quantity');
+		$caliber = $this->input->post('caliber');
+		$this->db->insert('pharmacy_order',array('num'=>sizeof($name)));
+		$order_id = $this->db->insert_id();
+		foreach ($quantity as $key => $value) {
+			$id = $this->medicine_model->findMedicine($name[$key],$caliber[$key]);
+			$this->medicine_model->updateQuantity($quantity[$key],$id,$order_id);			
+		}
+		$this->medicine_orders_get();		
+	}	
 
 }
 

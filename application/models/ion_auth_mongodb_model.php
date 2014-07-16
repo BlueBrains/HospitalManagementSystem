@@ -216,15 +216,13 @@ class Ion_auth_mongodb_model extends CI_Model {
 			if ($this->random_rounds)
 			{
 				$rand   = rand($this->min_rounds,$this->max_rounds);
-				$params = array('rounds' => $rand);
+				$rounds = array('rounds' => $rand);
 			}
 			else
 			{
-				$params = array('rounds' => $this->default_rounds);
+				$rounds = array('rounds' => $this->default_rounds);
 			}
-			
-			$params['salt_prefix'] = $this->config->item('salt_prefix', 'ion_auth');
-			$this->load->library('bcrypt',$params);
+			$this->load->library('bcrypt',$rounds);
 		}
 
 		$this->trigger_events('model_constructor');

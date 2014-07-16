@@ -38,7 +38,37 @@ class Migration_Install_ion_auth extends CI_Migration {
 				'id' => '2',
 				'name' => 'members',
 				'description' => 'General User'
-			)
+			),
+			array(
+				'id' => '3',
+				'name' => 'doctors',
+				'description' => 'General User'
+			),
+			array(
+				'id' => '4',
+				'name' => 'nurses',
+				'description' => 'General User'
+			),
+			array(
+				'id' => '5',
+				'name' => 'recipients',
+				'description' => 'General User'
+			),
+			array(
+				'id' => '6',
+				'name' => 'pharmacy',
+				'description' => 'General User'
+			),
+			array(
+				'id' => '7',
+				'name' => 'analysis',
+				'description' => 'General User'
+			),
+			array(
+				'id' => '8',
+				'name' => 'radiograph',
+				'description' => 'General User'
+			)			
 		);
 		$this->db->insert_batch('groups', $data);
 
@@ -147,8 +177,8 @@ class Migration_Install_ion_auth extends CI_Migration {
 			'id' => '1',
 			'ip_address' => 0x7f000001,
 			'username' => 'administrator',
-			'password' => '59beecdf7fc966e2f17fd8f65a4a9aeb09d4a3d4',
-			'salt' => '9462e8eee0',
+			'password' => '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36',
+			'salt' => '',
 			'email' => 'admin@admin.com',
 			'activation_code' => '',
 			'forgotten_password_code' => NULL,

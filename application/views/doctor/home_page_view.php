@@ -1,8 +1,8 @@
 <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Admin Dashboard</h2>   
-                        <h5>Welcome Jhon Deo , Love to see you back. </h5>
+                     <h2>Doctor Dashboard</h2>   
+                        <h5>Welcome <?php echo "Dr.".$user->first_name." ".$user->last_name?> , Love to see you back. </h5>
                     </div>
                 </div>              
                  <!-- /. ROW  -->
