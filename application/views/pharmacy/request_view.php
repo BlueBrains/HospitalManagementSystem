@@ -30,9 +30,15 @@
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">patient name</button>
     			</span>
+    			<?php if(isset($patient)): ?>
+    			<?php echo form_input(array('name' => 'patientName','id' => 'patientName1', 'class' =>
+     			'form-control','tabIndex'=>'1','value'=>$patient[0]->Pname)); 
+    			?>
+    			<?php else: ?>
     			<?php echo form_input(array('name' => 'patientName','id' => 'patientName1', 'class' =>
      			'form-control','tabIndex'=>'1')); 
     			?>
+    			<?php endif; ?>    				
 			</div>
 		</div>
 		<div class="col-md-6">

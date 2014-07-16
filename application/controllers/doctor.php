@@ -57,7 +57,7 @@ class doctor extends REST_Controller
 			$sub[0]="fa-qrcode ,Creat Request,#,False";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},False";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 
 			$sub_menue[0] = $sub;
 			
@@ -106,7 +106,7 @@ class doctor extends REST_Controller
 			$sub[0]="fa-qrcode ,Creat Request,#,False";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$patient_id},False";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$patient_id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/Fill_order,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
 			
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,True";
@@ -148,7 +148,7 @@ class doctor extends REST_Controller
 			$sub[0]="fa-qrcode ,Creat Request,#,False";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$patient_id},False";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 
 			$sub_menue[0] = $sub;
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,true";
@@ -189,7 +189,7 @@ class doctor extends REST_Controller
 			$sub[0]="fa-qrcode ,Creat Request,#,False";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$patient_id},False";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$patient_id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$patient_id},False";
 			
 			$sub_menue[0] = $sub;
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,True";
@@ -243,7 +243,7 @@ class doctor extends REST_Controller
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 
 			$sub_menue[0] = $sub;
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,false";
@@ -314,7 +314,7 @@ class doctor extends REST_Controller
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/Fill_order,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,false";
 			$sub[1]="fa-desktop ,ALL Analyse Requests,doctor/total_analyse_request/id/{$id},false";
@@ -357,7 +357,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/Fill_order,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,false";
 			$sub[1]="fa-desktop ,ALL Analyse Requests,doctor/total_analyse_request/id/{$id},false";
@@ -386,6 +386,8 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 	public function new_med_request_get() 
 	{
 			$id = $this->get('id');
+			if($this->get())
+				$data['patient']=$this->doctor_model->get_patient_name($id);			
 			$data['user'] = $this->ion_auth->user()->row();		
 			$data['records'] = $this->medicine_model->getAllMed();
 			$bar[0]=" fa-desktop ,Home Page,doctor/homepage,false";
@@ -395,7 +397,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			$sub[0]="fa-qrcode ,Creat Request,#,False";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{id},False";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/Fill_order,False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
 			
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,False";
@@ -412,7 +414,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			
 			$sub[0]="fa-qrcode ,Edit medicine Request,#,false";
 			$sub[1]="fa-desktop ,ALL medicine Requests,doctor/total_medorder_list/id/{$id},false";
-			$sub[2]="fa-desktop ,Un finished Requests,doctor/medorder_list/id/{$id},FALSE";
+			$sub[2]="fa-desktop ,Un finished Requests,doctor/medorder_list/id/{$id},FALSE";					
 			$sub_menue[3] = $sub;			
 			
 			$data['sub_menue']=$sub_menue;
@@ -477,7 +479,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/Fill_order,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,false";
 			$sub[1]="fa-desktop ,ALL Analyse Requests,doctor/total_analyse_request/id/{$id},false";
@@ -509,7 +511,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			$sub[0]="fa-qrcode ,Creat Request,#,False";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order,False";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req,False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/Fill_order,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request,False";
 			$sub_menue[0] = $sub;
 			$data['sub_menue']=$sub_menue;
 
@@ -561,7 +563,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/Fill_order,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,false";
 			$sub[1]="fa-desktop ,ALL Analyse Requests,doctor/total_analyse_request/id/{$id},false";
@@ -604,7 +606,7 @@ function finished_radiology_request_get()
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/Fill_order,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,false";
 			$sub[1]="fa-desktop ,ALL Analyse Requests,doctor/total_analyse_request/id/{$id},false";
@@ -646,7 +648,7 @@ function show_result_get()
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/Fill_order,False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,false";
 			$sub[1]="fa-desktop ,ALL Analyse Requests,doctor/total_analyse_request/id/{$id},false";
@@ -744,9 +746,9 @@ function show_result_get()
 			$data['side'] = $bar;
 			
 			$sub[0]="fa-qrcode ,Creat Request,#,False";
-			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{id},False";
-			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/Fill_order,False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request,False";
+			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},False";
+			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/Fill_order/id/{$id},False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
 			
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,False";
@@ -834,9 +836,9 @@ function show_result_get()
 			$data['side'] = $bar;
 			
 			$sub[0]="fa-qrcode ,Creat Request,#,False";
-			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{id},False";
-			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/Fill_order,False";
-			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request,False";
+			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},False";
+			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/Fill_order/id/{$id},False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
 			
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,False";
