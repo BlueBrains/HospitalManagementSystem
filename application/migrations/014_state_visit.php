@@ -14,12 +14,6 @@ class Migration_state_visit extends CI_Migration {
 		$Fields = array( "doctor_id int(11) unsigned");
 		$this->dbforge->add_column('rad_request', $Fields);
 		
-		$Fields = array( "pic varchar(255)");
-		$this->dbforge->add_column('doctors', $Fields);
-		
-		$Fields = array( "pic varchar(255)");
-		$this->dbforge->add_column('patients', $Fields);
-		
 		$Fields = array( "Temperature varchar(255)");
 		$this->dbforge->add_column('visit', $Fields);
 		$Fields = array( "pulse varchar(255)");
@@ -35,6 +29,23 @@ class Migration_state_visit extends CI_Migration {
 		$this->dbforge->add_field("mesuare_value varchar(255) ");
         $this->dbforge->add_key('id', TRUE);        
         $this->dbforge->create_table('mesuare', TRUE);
+		
+		
+		$this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
+		$this->dbforge->add_field("sender_id int(11) unsigned NOT NULL");
+		$this->dbforge->add_field("reciever_id int(11) unsigned NOT NULL");
+		$this->dbforge->add_field("w_r_b varchar(255) NOT NULL DEFAULT ''");
+		
+		
+        $this->dbforge->add_key('id', TRUE);        
+        $this->dbforge->create_table('calls', TRUE);
+		
+		$this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
+		$this->dbforge->add_field("doctor_id int(11) unsigned NOT NULL");
+		$this->dbforge->add_field("patient_id int(11) unsigned NOT NULL");
+		
+        $this->dbforge->add_key('id', TRUE);        
+        $this->dbforge->create_table('my_patients', TRUE);
     }
  
     public function down(){
@@ -44,10 +55,12 @@ class Migration_state_visit extends CI_Migration {
 		$this->dbforge->drop_column('blood_pressure','visit');
 		
     	$this->dbforge->drop_column('doctor_id','rad_request');
-		$this->dbforge->drop_column('pic','doctors');
-		$this->dbforge->drop_column('pic','patients');
-		
+
+
         $this->dbforge->drop_table('request_state');
-		$this->dbforge->drop_table('mesuarment');
+		$this->dbforge->drop_table('mesuare');
+		
+		$this->dbforge->drop_table('calls');
+		$this->dbforge->drop_table('my_patients');
     }
 }

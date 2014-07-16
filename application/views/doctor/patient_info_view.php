@@ -98,12 +98,24 @@
         ?>
      </tbody>
                                 </table>
+                                <div class="row" style="margin-bottom: 20px" ></div>
+                                	
+                              <div class="row">
+                              	<div class="col-md-4 " >      
                                 <form method="get" action="patient/u/id/<?php echo $records[0]->id;?>">
-                                <a class='btn btn-primary ".$disabled."' href="<?php echo base_url();?>patient/u/id/<?php echo $records[0]->id;?>" role='button'>Edit amer Patient Info</a>
+                                <a class='btn btn-primary ".$disabled."' href="<?php echo base_url();?>patient/u/id/<?php echo $records[0]->id;?>" role='button'>Show Patient Info</a>
                                 </form>
-                              
-                                <p></p>
-                               
+                              	</div>
+                              	<div class="col-md-4 ">
+								<div class='row' >		
+									<button type="button" class="btn btn-primary">Call Nurse </button>
+								</div>
+								</div>
+								<div class="col-md-4 ">
+								<div class='row' >		
+									<button type="button" class="btn btn-primary">Helper Doctor</button>
+								</div>
+                               </div>
                             </div>
                             
                         </div>
@@ -114,3 +126,85 @@
                 <!-- /. ROW  -->
                     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
+    
+ <div class="row">
+                <div class="col-md-4">
+                	
+                	<div class="panel-body" style="padding-left: -7px;padding-right: 0px;">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default" style="margin-top: -15px;padding-right: 17px;">
+                                    <div class="panel-heading" style="margin-right: -17px;">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" class="collapsed">Vital Signs</a>
+                                        </h4>
+                                        
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
+                                       	<center> <div class="panel-body">
+                                        
+                                        	<div class="row" style="margin-bottom: 15px">
+                                        		<div class="input-group" style="padding-left: 20px;">
+													<span class="input-group-btn">
+														<button class="btn btn-default" type="button">Temperature</button>
+									    			</span>
+													<input type="text" name="temp" id="temp" class="form-control" >
+													<span class="input-group-addon">C°</span>
+												</div>
+											</div>	
+											<div class="row" style="margin-bottom: 15px">
+												<div class="input-group" style="padding-left: 20px;">
+													<span class="input-group-btn">
+														<button class="btn btn-default" type="button">Respiration &nbsp</button>
+									    			</span>
+													<input type="text" name="res" id="res" class="form-control">
+													<span class="input-group-addon">P.M</span>
+												</div>
+											</div>	  
+											<div class="row" style="margin-bottom: 15px">
+												<div class="input-group" style="padding-left: 20px;">
+													<span class="input-group-btn">
+														<button class="btn btn-default" type="button">Heart pulse &nbsp</button>
+									    			</span>
+													<input type="text" name="pulse" id="pulse" class="form-control" >
+													<span class="input-group-addon">BPM</span>
+												</div>
+											</div>	  
+											<div class="row" style="margin-bottom: 15px">
+												<div class="input-group" style="padding-left: 20px;">
+													<span class="input-group-btn">
+														<button class="btn btn-default" type="button">pressure &nbsp &nbsp &nbsp</button>
+									    			</span>
+													<input type="text" name="blood" id="blood" class="form-control">
+													<span class="input-group-addon">mmHg</span>
+												</div>
+											</div>	 
+											  
+                                        </div></center> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+             </div>   
+             
+             
+			   <div class="col-md-8 col-sm-8">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Patient update State
+                        </div>
+                        <div class="panel-body" style="padding-left: 34px;padding-right: 39px;">
+                            <div class='row' style="margin-bottom:20px" >
+									<button class="btn btn-default" type="button">State</button>
+						    		<textarea name="state"cols="60" rows="4" class="form-control" ></textarea>
+						    </div>	
+						    <div class='row' style="margin-bottom:20px" >		
+									<button type="button" class="btn btn-primary">Update State </button>
+							</div>
+                        </div>
+                        
+                    </div>
+                </div>
+     
+      </div>          	
+</div>
