@@ -1,9 +1,15 @@
-<h1><?php echo lang('index_heading');?></h1>
+<?php $this->load->view('_blocks/header'); ?>
+<div id="content" class="container">
+
 <p><?php echo lang('index_subheading');?></p>
 
-<div id="infoMessage"><?php echo $message;?></div>
+<?php if(!empty($message)) echo '<div id="infoMessage" class="alert alert-warning"><i class="fa fa-warning"></i> '.$message.'</div>';?>
 
-<table cellpadding=0 cellspacing=10>
+<p><?php echo anchor('auth/create_user', lang('index_create_user_link'), array('class' => 'btn btn-default')); ?>
+ &nbsp; <?php echo anchor('auth/create_group', lang('index_create_group_link'), array('class' => 'btn btn-default')); ?></p>
+
+<table class="table table-striped table-hover">
+    <thead>
 	<tr>
 		<th><?php echo lang('index_fname_th');?></th>
 		<th><?php echo lang('index_lname_th');?></th>
@@ -12,6 +18,8 @@
 		<th><?php echo lang('index_status_th');?></th>
 		<th><?php echo lang('index_action_th');?></th>
 	</tr>
+    </thead>
+    <tbody>
 	<?php foreach ($users as $user):?>
 		<tr>
 			<td><?php echo $user->first_name;?></td>
@@ -22,10 +30,14 @@
 					<?php echo anchor("auth/edit_group/".$group->id, $group->name) ;?><br />
                 <?php endforeach?>
 			</td>
-			<td><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, lang('index_active_link')) : anchor("auth/activate/". $user->id, lang('index_inactive_link'));?></td>
-			<td><?php echo anchor("auth/edit_user/".$user->id, 'Edit') ;?></td>
+			<td><?php echo ($user->active) ? anchor("auth/deactivate/".$user->id, lang('index_active_link'), array('class' => 'btn btn-danger')) : anchor("auth/activate/". $user->id, lang('index_inactive_link'), array('class' => 'btn btn-danger'));?></td>
+			<td><?php echo anchor("auth/edit_user/".$user->id, 'Edit', array('class' => 'btn btn-primary')) ;?></td>
 		</tr>
 	<?php endforeach;?>
+    </tbody>
 </table>
 
-<p><?php echo anchor('auth/create_user', lang('index_create_user_link'))?> | <?php echo anchor('auth/create_group', lang('index_create_group_link'))?></p>
+
+
+<?php $this->load->view('_blocks/footer'); ?>
+
