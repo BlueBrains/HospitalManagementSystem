@@ -66,16 +66,17 @@
                              Advanced Tables
                         </div>
                         <div class="panel-body">
-         <form id="form1" name="form1" method="post" action="<?php echo base_url();?>doctor/new_analyse_request">
+         <form id="form1" name="form1" method="post"  action="<?php echo base_url();?>doctor/new_analyse_request">
          	<table width="50%" border="0">
     <tr>
       
       	<?php 
       	if(isset($patient))
 		{
-			echo "<td width='51%' height='41'><label for='patient_id'>patient ID</label>";
-			echo "<input type='text' name='patient_id' id='patient_id' value= '".$patient[0]->id."'/> </td>";
-			echo "<td width='51%' height='41'><label for='patient_id'>patient Name</label>";
+			echo "<td width='50%' height='41'><label for='patient_id'>patient ID</label>";
+			echo "&nbsp"."&nbsp"."&nbsp"."<input type='text' name='patient_id'  id='patient_id'  value= '".$patient[0]->id."'/> </td>";
+		
+			echo "<td width='50%' height='41'><label for='patient_name'>patient Name</label>";
 			echo "<input type='text' name='patient_name' id='patient_name' value ='".$patient[0]->Pname ."'> </td>";
 		}
 		else {

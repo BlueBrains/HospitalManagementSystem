@@ -98,6 +98,12 @@
         ?>
      </tbody>
                                 </table>
+                                <form method="get" action="patient/u/id/<?php echo $records[0]->id;?>">
+                                <a class='btn btn-primary ".$disabled."' href="<?php echo base_url();?>patient/u/id/<?php echo $records[0]->id;?>" role='button'>Edit amer Patient Info</a>
+                                </form>
+                              
+                                <p></p>
+                               
                             </div>
                             
                         </div>

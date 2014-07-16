@@ -89,7 +89,7 @@ else if (name=="Spine")
 <body>
 
 <div class="col-md-6">	
-<form name="myform" action="<?php echo base_url();?>doctor/radiograph_request_sign" method="get">	
+<form name="myform" action="<?php echo base_url();?>doctor/radiograph_internal_request_sign" method="get">	
 	
                       
                         <div class="panel-body">
@@ -128,8 +128,8 @@ else if (name=="Spine")
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">Patient Name*</button>
     			</span>
-				<input type="text" name="patient_id" id="patient_id" class="form-control">
-				
+				<input type="text" name="patient_name" id="patient_id" class="form-control" value="<?php if (isset($patient)) echo $patient[0]->Pname; ?>">
+				<input type="hidden" name="patient_id" id="patient_id" class="form-control" value="<?php if (isset($patient)) echo $patient[0]->id; ?>">
 			</div>
 			<span><?php if (isset($error)) echo '<p class = "error alert alert-danger">'.$error;?></span>
 		</div>		
@@ -189,7 +189,7 @@ else if (name=="Spine")
 </div>
 <div class="col-md-6">
 			<div class="media">
-				  <a class="pull-right" href="#">
+				  <a class="pull-right" >
 				   		 <img class="media-object" src="<?php echo base_url();?>/images/bone.jpg" alt="HTML Map"  border="0" usemap="#tutorials"/>
 				  </a>
 			</div>	
@@ -283,10 +283,7 @@ onmousedown="set('Lower Extremities')"
 			onmousedown="set('Mammo')"
             />			
 </map>
-			</div>
-		<div>
-</div>		
-</div>		
+					
 
 </body>
 </html>

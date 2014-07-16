@@ -71,6 +71,10 @@
     <tr>
       <td width="51%" height="41"><label for="patient_out">patient Name</label>
       <input type="text" name="patient_out" id="patient_out" /></td>
+      
+       <td width="51%" height="41"><label for="patient_out">patient Date</label>
+      <input type="text" name="patient_out_d" id="patient_out_d" /></td>
+      
       <td width="49%"><p>
     </p></td>
     </tr>

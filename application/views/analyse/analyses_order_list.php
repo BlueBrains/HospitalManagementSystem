@@ -108,7 +108,14 @@
 						echo "<td> not uploaded </td>";
 						if($section!='doctor')
 						{
-							echo "<td>"."<a href=".base_url()."analyse/upload/id/".$row->id.">"."upload result"."</a><br/>";
+							if(isset($outer))
+							{
+								echo "<td>"."<a href=".base_url()."analyse/upload_outer/id/".$row->id.">"."upload result"."</a><br/>";
+							}
+							else {
+								echo "<td>"."<a href=".base_url()."analyse/upload/id/".$row->id.">"."upload result"."</a><br/>";
+							}
+							
 						}
 						else {
 							{
@@ -119,7 +126,7 @@
 					}
 					else
 						{
-							echo "<td> uploaded </td>";
+							echo "<td>".$row->description."</td>";
 						echo "<td>"."<a href=".base_url()."analyse/edit_analyse/id/".$row->id.">"."edit" ."</td>";
 						}
 	                echo "</tr>";

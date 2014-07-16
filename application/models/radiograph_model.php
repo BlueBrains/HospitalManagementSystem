@@ -22,15 +22,15 @@ class radiograph_model extends CI_Model {
 		if ($id == 0)
 			$sql=$this->db->query("SELECT * FROM rad_request INNER JOIN radiology ON rad_request.image_id = radiology.image_id ");
 		else if ($id == -1)
-			$sql=$this->db->query("SELECT * FROM rad_request INNER JOIN radiology ON rad_request.image_id = radiology.image_id WHERE state = 2 and out1 = '0'");
+			$sql=$this->db->query("SELECT * FROM rad_request INNER JOIN radiology ON rad_request.image_id = radiology.image_id WHERE state = '2' and out1 = '0'");
 		else if ($id == -2)
-			$sql=$this->db->query("SELECT * FROM rad_request INNER JOIN radiology ON rad_request.image_id = radiology.image_id WHERE state = 1 and out1 = '0'");
+			$sql=$this->db->query("SELECT * FROM rad_request INNER JOIN radiology ON rad_request.image_id = radiology.image_id WHERE state = '1' and out1 = '0'");
 		else if ($id == -3)
 			$sql=$this->db->query('SELECT * FROM rad_request INNER JOIN radiology ON rad_request.image_id = radiology.image_id WHERE out1 = "1"');	
 		else if ($id == -4)
 			$sql=$this->db->query('SELECT * FROM rad_request INNER JOIN radiology ON rad_request.image_id = radiology.image_id WHERE state = "0"');
 		else 
-			$sql=$this->db->query("SELECT * FROM rad_request INNER JOIN radiology ON rad_request.image_id = radiology.image_id WHERE patient_id = '".$id."'");
+			$sql=$this->db->query("SELECT * FROM rad_request INNER JOIN patients ON patients.id = patient_id INNER JOIN radiology ON rad_request.image_id = radiology.image_id WHERE patient_id = '".$id."'");
 		foreach ($sql->result() as $raw ) {
                 $data[]=$raw;
             }
@@ -75,12 +75,14 @@ class radiograph_model extends CI_Model {
 			'patient_id' => $this->input->get('patient_id'),
 			'date' => $y,
 			'state'=>'0',
+			//'doctor_id'=>$this->input->get($_SESSION['user_id']),
 			'emergancy'=>$x,
+			'out1'=> 0,
 			'section_name' =>$this->input->get('section_name'),
 			'comment' => $this->input->get('comment'),	
 			'image_id'=> $this->input->get('image_id'),
 			'part_of_body'=> $this->input->get('part_of_body'),
-			'position'=> $this->input->get('position'),
+			'position'=> $this->input->get('position')
 		);		
 			}
 			
