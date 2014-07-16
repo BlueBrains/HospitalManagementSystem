@@ -1,10 +1,3 @@
-<?php
-	$this->load->model('ion_auth_model');
-	if($this->ion_auth->in_group('doctor')){
-		$side = ""
-	}
-?>
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -28,7 +21,8 @@
 						</li>';
 					
 						}
-                   
+                   	$this->load->helper('sidebar');
+                   	$side = side_array();
                     if (isset($side))
 					{
 					
