@@ -30,13 +30,13 @@ class Medicine_model extends CI_Model {
 		}
 	}
 
-	public function updateQuantity($def,$id){
+	public function updateQuantity($def,$id,$order_id){
 		$this->db->set('quantity',"quantity + ".(int)$def,FALSE);
 		$this->db->where('id',$id);
 		$this->db->update('medicines');
-		$this->db->insert('medicine_insertion',array('medicine_id'=>$id,'quantity'=>$def));
-	} 
-	
+		$this->db->insert('medicine_insertion',array('medicine_id'=>$id,'quantity'=>$def, 'order_id'=>$order_id));
+	}
+		
 	function terms($q){
     	$this->db->select('tradeName');
     	$this->db->like('tradeName', $q);
@@ -98,11 +98,12 @@ class Medicine_model extends CI_Model {
         }		
 			
 	}
-	public function getMedInsertion()
+	public function getMedInsertion($id)
 	{
-		$q = $this->db->select('tradeName,caliber,date,medicine_insertion.quantity')
+		$q = $this->db->select('tradeName,caliber,medicine_insertion.quantity')
 		->from('medicine_insertion')
 		->join('medicines', 'medicine_insertion.medicine_id = medicines.id','inner')
+		->where('medicine_insertion.order_id',$id)
 		->get();
 		if($q->num_rows()>0)
         {
@@ -113,10 +114,17 @@ class Medicine_model extends CI_Model {
         }		
 		
 	}
+	
+	public function getOrders(){
+		$this->db->order_by("date", "desc");
+		return $this->db->get('pharmacy_order')->result();
+	}
+	
 	public function assignTask($request_id,$nurse_id)
 	{		
 		$this->db->update('medicine_request', array('nurse_id'=>$nurse_id), array('id' => $request_id));
-	}	
+	}
+	 	
 }
 
 ?>

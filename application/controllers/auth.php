@@ -90,7 +90,7 @@ class Auth extends MY_Controller {
 					redirect('recipients/homepage');
 				}
 				else												
-					redirect('/', 'refresh');
+					redirect('/auth', 'refresh');
 			}
 			else
 			{

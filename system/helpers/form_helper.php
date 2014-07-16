@@ -326,7 +326,7 @@ if ( ! function_exists('form_dropdown'))
 
 		$multiple = (count($selected) > 1 && strpos($extra, 'multiple') === FALSE) ? ' multiple="multiple"' : '';
 
-		$form = '<select name="'.$name.'"'.$extra.$multiple.">\n";
+		$form = '<select name="'.$name.'"'.$extra.$multiple.">";
 
 		foreach ($options as $key => $val)
 		{
@@ -340,7 +340,7 @@ if ( ! function_exists('form_dropdown'))
 				{
 					$sel = (in_array($optgroup_key, $selected)) ? ' selected="selected"' : '';
 
-					$form .= '<option value="'.$optgroup_key.'"'.$sel.'>'.(string) $optgroup_val."</option>\n";
+					$form .= '<option value="'.$optgroup_key.'"'.$sel.'>'.(string) $optgroup_val."</option>";
 				}
 
 				$form .= '</optgroup>'."\n";
@@ -349,7 +349,7 @@ if ( ! function_exists('form_dropdown'))
 			{
 				$sel = (in_array($key, $selected)) ? ' selected="selected"' : '';
 
-				$form .= '<option value="'.$key.'"'.$sel.'>'.(string) $val."</option>\n";
+				$form .= '<option value="'.$key.'"'.$sel.'>'.(string) $val."</option>";
 			}
 		}
 

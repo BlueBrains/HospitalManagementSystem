@@ -6,13 +6,13 @@ class nurse extends REST_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->load->library('ion_auth');
-		// if (!$this->ion_auth->logged_in()||!$this->ion_auth->in_group("pharmacy_supervisor"))
-		// {
-			// redirect('auth/login');
-		// }	
-		// else{			
+		if (!$this->ion_auth->logged_in()||!$this->ion_auth->in_group("nurses"))
+		{
+			redirect('auth/login');
+		}	
+		else{			
 			$this->load->model('nurse_model');	
-		// }
+		}
 		
 		$this->p = new CI_Pusher();
 	}	
@@ -38,8 +38,7 @@ class nurse extends REST_Controller{
 	}
 	public function taskes_get()
 	{
-		// $data['records'] = $this->nurse_model->getAllTaskes($this->ion_auth->user()->id);
-		$data['records'] = $this->nurse_model->getAllTaskes(1);			
+		$data['records'] = $this->nurse_model->getAllTaskes($this->ion_auth->user()->row()->profile_id);;			
 		$bar[0]=" fa-edit ,Taskes,nurse/taskes,False";
 		$bar[1]=" fa-edit ,Food Programs,nurse/foodprog,False";
 		$data['side'] = $bar;

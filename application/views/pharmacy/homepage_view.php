@@ -1,8 +1,8 @@
 <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Doctor Dashboard</h2>   
-                        <h5>Welcome <?php echo "Dr.".$user->first_name." ".$user->last_name?> , Love to see you back. </h5>
+                     <h2>pharmacy supervisor Dashboard</h2>   
+                        <h5>Welcome <?php echo "Mr.".$user->first_name." ".$user->last_name?> , Love to see you back. </h5>
                     </div>
                 </div>              
                  <!-- /. ROW  -->
@@ -57,49 +57,6 @@
                  <!-- /. ROW  -->
                 <hr />  	
 
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                             Advanced Tables
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                        <tr>
-                                        	<th>Patient name</th>
-                                            <th>Rom Number</th>
-                                            <th>Date Entry</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-        <?php
-            if(isset($records))
-			{
-				foreach ($records as $row) 
-            	{
-	                echo "<tr>";
-	                echo "<td>"."<a href=".base_url()."doctor/patient_info/id/".$row->id.">".$row->Pname."</td>";
-	                echo "<td>".$row->room."</td>";
-	                echo "<td>".$row->date_in."</td>";
-	                echo "</tr>";
-	            }
-				
-			}
-            
-        ?>
-     </tbody>
-                                </table>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <!--End Advanced Tables -->
-                </div>
-            </div>
                 <!-- /. ROW  -->
                     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->

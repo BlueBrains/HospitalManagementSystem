@@ -51,17 +51,27 @@ class Migration_Medicines extends CI_Migration {
         
 		$this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
 		$this->dbforge->add_field("medicine_id int(11) unsigned NOT NULL ");
+		$this->dbforge->add_field("order_id int(11) unsigned NOT NULL ");		
 		$this->dbforge->add_field("quantity int(11) unsigned NOT NULL ");		
+ 		
+        $this->dbforge->add_key('id', TRUE);        
+       
+        $this->dbforge->create_table('medicine_insertion', TRUE);
+		
+		$this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
+		$this->dbforge->add_field("num int(11) unsigned NOT NULL ");				
 		$this->dbforge->add_field("date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP");
  		
         $this->dbforge->add_key('id', TRUE);        
        
-        $this->dbforge->create_table('medicine_insertion', TRUE);        		
+        $this->dbforge->create_table('pharmacy_order', TRUE); 		        		
     }
  
     public function down(){
         $this->dbforge->drop_table('medicines');
 		$this->dbforge->drop_table('medicine_request');
 		$this->dbforge->drop_table('medicine_exrequest');
+		$this->dbforge->drop_table('medicine_insertion');
+		$this->dbforge->drop_table('pharmacy_order');
     }
 }

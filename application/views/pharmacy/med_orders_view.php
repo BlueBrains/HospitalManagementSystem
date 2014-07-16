@@ -1,8 +1,8 @@
 <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Doctor Dashboard</h2>   
-                        <h5>Welcome <?php echo "Dr.".$user->first_name." ".$user->last_name?> , Love to see you back. </h5>
+                     <h2>Admin Dashboard</h2>   
+                        <h5>Welcome Jhon Deo , Love to see you back. </h5>
                     </div>
                 </div>              
                  <!-- /. ROW  -->
@@ -69,27 +69,25 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                        	<th>Patient name</th>
-                                            <th>Rom Number</th>
-                                            <th>Date Entry</th>
+                                        	<th>order number</th>
+                                            <th>number of ثlements</th>>
+                                            <th>date</th>
+                                            <th>order details</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
 
         <?php
-            if(isset($records))
-			{
-				foreach ($records as $row) 
-            	{
-	                echo "<tr>";
-	                echo "<td>"."<a href=".base_url()."doctor/patient_info/id/".$row->id.">".$row->Pname."</td>";
-	                echo "<td>".$row->room."</td>";
-	                echo "<td>".$row->date_in."</td>";
-	                echo "</tr>";
-	            }
-				
-			}
             
+            foreach ($records as $row) 
+            {
+                echo "<tr>";
+                echo "<td>".$row->id."</td>";
+				echo "<td>".$row->num."</td>";
+				echo "<td>".$row->date."</td>";
+				echo "<td>"."<a href=".base_url()."pharmacy_supervisor/medicine_insertion/id/".$row->id.">"."more"."</a></td>";
+                echo "</tr>";
+            }
         ?>
      </tbody>
                                 </table>
