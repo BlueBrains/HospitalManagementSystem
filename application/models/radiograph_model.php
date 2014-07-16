@@ -118,7 +118,7 @@ class radiograph_model extends CI_Model {
         //$ret=TRUE;
         if ( !$ret )
         {
-            echo "error on uploading";
+            //echo "error on uploading";
             return false;
         }
         else

@@ -89,11 +89,11 @@
              foreach($record as $row ) 
             {
 				if ($row->emergancy && $row->state != 2)
-					$active='class="danger"';
+					$active="class='danger'";
 				else if ($row->emergancy == 0 && $row->state != 2)
-					$active ='class="active"';
+					$active ="class='active'";
 				else 
-					$active ='class="success"';    	
+					$active ="class='success'";    	
                 echo "<tr".$active.">";
 				if(count($row->patient_name)<2)
                 echo "<td>".$row->patient_name."</td>";
