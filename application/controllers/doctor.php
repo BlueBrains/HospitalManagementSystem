@@ -14,17 +14,20 @@ class doctor extends REST_Controller
 			$this->load->model('medicine_model');
 			$this->load->model('pharmacy_model');
 			$this->load->model('radiograph_model');
-			$this->load->model('doctor_model');						
+			$this->load->model('doctor_model');			
+			$this->load->model('supervisor_model');						
 		}		
 
 	}
 	function homepage_get()
 	{
+		$data['user'] = $this->ion_auth->user()->row();
 		$user_groups = $this->ion_auth->get_users_groups()->result();
-		$dep_id= $user_groups[0]->id;
+		//$dep_id= $user_groups[0]->profile_id;
+		$dep_id= $this->ion_auth->user()->row()->profile_id;
 		$this->load->model('doctor_model');
 		$data['records']=$this->doctor_model->get_patients($dep_id);
-		$data['user'] = $this->ion_auth->user()->row();		
+				
 		$bar[0]=" fa-desktop ,Home Page,doctor/homepage,True";
 		$data['side'] = $bar;
 		
@@ -44,8 +47,13 @@ class doctor extends REST_Controller
 		$this->load->view('includes/template',$data);
 	}
 
+
+
+
+
 	function patient_info_get()
 	{
+		$data['user'] = $this->ion_auth->user()->row();
 		$id=$this->get('id');
 		$this->load->model('doctor_model');
 		$data['records']=$this->doctor_model->get_patient($id);
@@ -96,6 +104,7 @@ class doctor extends REST_Controller
 	{
 		$patient_id=$this->get('id');
 		//$patient_id=$id;
+		$data['user'] = $this->ion_auth->user()->row();
 		$this->load->model('analyse_model');
 		$data['records']=$this->analyse_model->finish_order_list_patient($patient_id);
 		$data['user'] = $this->ion_auth->user()->row();
@@ -136,7 +145,7 @@ class doctor extends REST_Controller
 	}
 	
 	function total_analyse_request_get()
-	{
+	{$data['user'] = $this->ion_auth->user()->row();
 		$patient_id=$this->get('id');
 		$this->load->model('analyse_model');		
 		$data['records']=$this->analyse_model->total_order_list_patient($patient_id);
@@ -185,7 +194,7 @@ class doctor extends REST_Controller
 		$bar[0]=" fa-desktop ,Home Page,doctor/homepage,false";
 		$bar[1]=" fa-desktop ,Patient information,doctor/patient_info/id/{$patient_id},false";
 		$data['side'] = $bar;
-		
+		$data['user'] = $this->ion_auth->user()->row();
 			$sub[0]="fa-qrcode ,Creat Request,#,False";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$patient_id},False";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$patient_id},False";
@@ -239,7 +248,7 @@ class doctor extends REST_Controller
 			$bar[0]=" fa-desktop ,Home Page,doctor/homepage,false";
 			$bar[1]=" fa-desktop ,Patient information,doctor/patient_info/id/{$id},false";
 			$data['side'] = $bar;
-		
+		$data['user'] = $this->ion_auth->user()->row();
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
@@ -282,7 +291,7 @@ class doctor extends REST_Controller
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order,False";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req,False";
 			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request,False";
-			
+			$data['user'] = $this->ion_auth->user()->row();
 			$sub_menue[0] = $sub;
 			$data['sub_menue']=$sub_menue;
 		$this->load->model('analyse_model');
@@ -305,7 +314,7 @@ class doctor extends REST_Controller
 		$data['main_content'] = 'radiograph/radiograph_order_list_view';
 	
 		if($this->response->format == 'html'){
-			
+			$data['user'] = $this->ion_auth->user()->row();
 			$data['patient']=$this->doctor_model->get_patient_name($id);
 			$bar[0]=" fa-desktop ,Home Page,doctor/homepage,false";
 			$bar[1]=" fa-desktop ,Patient information,doctor/patient_info/id/{$id},false";
@@ -329,7 +338,7 @@ class doctor extends REST_Controller
 			$sub_menue[2] = $sub;
 			
 			$data['sub_menue']=$sub_menue;
-		
+		$data['user'] = $this->ion_auth->user()->row();
        
 		$data['main_content'] = 'radiograph/radiograph_order_list_view';	
 		$data['title']='Home Page';
@@ -353,7 +362,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			$bar[0]="fa-desktop ,Home Page,doctor/homepage,false";
 			$bar[1]=" fa-desktop ,Patient information,doctor/patient_info/id/{$id},false";
 			$data['side'] = $bar;
-		
+		$data['user'] = $this->ion_auth->user()->row();
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
@@ -399,7 +408,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/Fill_order,False";
 			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
 			$sub_menue[0] = $sub;
-			
+			$data['user'] = $this->ion_auth->user()->row();
 			$sub[0]="fa-qrcode ,Edit analyse Request,#,False";
 			$sub[1]="fa-desktop ,ALL Analyse Requests,doctor/total_analyse_request/id/{$id},false";
 			$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$id},False";
@@ -473,7 +482,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 					$sub[1]="fa-desktop ,ALL medicine Requests,doctor/total_medorder_list/id/{$id},false";
 					$sub[2]="fa-desktop ,Un finished Requests,doctor/medorder_list/id/{$id},FALSE";					
 					$sub_menue[3] = $sub;			
-					
+					$data['user'] = $this->ion_auth->user()->row();
 					$data['sub_menue']=$sub_menue;					
 					$data['main_content']='pharmacy/registered_successfully_view';
 					$data['title']='Registered Successfully';
@@ -496,7 +505,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
             }
 		$id=$this->get('id');
 		if (isset($id) && $id >0)
-		{
+		{$data['user'] = $this->ion_auth->user()->row();
 		
 			$data['patient']=$this->doctor_model->get_patient_name($id);
 			$bar[0]="fa-desktop ,Home Page,doctor/homepage,false";
@@ -541,7 +550,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request,False";
 			$sub_menue[0] = $sub;
 			$data['sub_menue']=$sub_menue;
-
+$data['user'] = $this->ion_auth->user()->row();
 			$data['name']=$raw->fname." ".$raw->lname;
 			$data['dep']=$raw->name;		
 			$data['main_content'] = 'radiograph/doctor_rad_request';	
@@ -586,7 +595,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			$bar[0]="fa-desktop ,Home Page,doctor/homepage,false";
 			$bar[1]=" fa-desktop ,Patient information,doctor/patient_info/id/{$id},false";
 			$data['side'] = $bar;
-		
+		$data['user'] = $this->ion_auth->user()->row();
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
@@ -625,7 +634,10 @@ function finished_radiology_request_get()
             }
 		
 		if (isset($data))
-		{	$id=$this->get('id');
+		
+		{
+			$data['user'] = $this->ion_auth->user()->row();
+			$id=$this->get('id');
 			$bar[0]="fa-desktop ,Home Page,doctor/homepage,false";
 			$bar[1]=" fa-desktop ,Patient information,doctor/patient_info/id/{$id},false";
 			$data['side'] = $bar;
@@ -671,7 +683,7 @@ function show_result_get()
 			$bar[0]="fa-desktop ,Home Page,doctor/homepage,false";
 			$bar[1]=" fa-desktop ,Patient information,doctor/patient_info/id/{$id},false";
 			$data['side'] = $bar;
-		
+		$data['user'] = $this->ion_auth->user()->row();
 			$sub[0]="fa-qrcode ,Creat Request,#,TRUE";
 			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},TRUE";
 			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/doctor_req/id/{$id},False";
@@ -959,9 +971,24 @@ function show_result_get()
 
 	function v_get()
 	{
-		$data['main_content']='doctor/visit_patient';
+		$data['main_content']='doctor/patient_info_view';
 		$data['title']='Patient Profile';
 		$this->load->view('includes/template',$data);
+	}
+
+	function doc_call_nurse_post()
+	{
+		$this->supervisor_model->create_doctonu();
+		$this->patient_info_get();
+	}
+	function all_doc_call_nurse_post()
+	{
+		$data['record']=$this->supervisor_model->all_doctonu();
+	}	
+	
+	function doc_call_sup_post()
+	{
+		$data['record']=$this->supervisor_model->creat_doctosup();
 	}
 }
 

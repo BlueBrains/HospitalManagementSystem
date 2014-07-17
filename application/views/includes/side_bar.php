@@ -42,15 +42,16 @@
 					}
 						}
 					else 
-						{
+						{/*
 							$sidebar = explode(',', $side);
 							if ($sidebar[3]=="True")
 							$active = "active-menu";
 						else 
 							$active = "";
+						
                    echo "<li>
                         <a  href=".base_url().$sidebar[2]." class=".$active." ><i class='fa ".$sidebar[0]." fa-3x'></i>".$sidebar[1]." </a>
-                   </li>";
+                   </li>";*/
 						}
 							}
 							

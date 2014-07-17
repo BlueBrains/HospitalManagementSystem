@@ -102,21 +102,23 @@
                                 	
                               <div class="row">
                               	<div class="col-md-4 " >      
-                                <form method="get" action="patient/u/id/<?php echo $records[0]->id;?>">
+                                <form method="get" action="patient/u/id/<?php echo $row->id;?>">
                                 <a class='btn btn-primary ".$disabled."' href="<?php echo base_url();?>patient/u/id/<?php echo $records[0]->id;?>" role='button'>Show Patient Info</a>
                                 </form>
                               	</div>
                               	<div class="col-md-4 ">
 								<div class='row' >		
-									<form method="post" action="<?php echo base_url();?>supervisor/caller_1">
-									< <input type="hidden" name="p_id" value="<?php $row->id_patient ?>" id="p_id"/>	
-									<button type="button" class="btn btn-primary">Call Nurse </button>
+									<form method="post" action="<?php echo base_url();?>doctor/doc_call_nurse">
+								 	<input type="hidden" name="p_id" value="<?php echo $row->id; ?>" id="p_id"/>	
+									<button type="submit" class="btn btn-primary">Call Nurse </button>
+									<input type="text" name="stuff_name" id="stuff_name" class="form-control" >
 									</form>
 								</div>
 								</div>
 								<div class="col-md-4 ">
 								<div class='row' >		
-									<form method="post" action="<?php echo base_url();?>supervisor/caller_sv">
+									<form method="post" action="<?php echo base_url();?>doctor/caller_sv">
+									<button type="button" class="btn btn-primary">Helper Doctor</button>
 									<select class='form-control' placeholder='' name='section'>
 																  <option value='2'>Accident and emergency (A&E)</option>
 																  <option value='3'>Haematology</option>
@@ -125,7 +127,7 @@
 																  <option value='6'>Obstetrics and Gynaecology</option>
 																  <option value='6'>Intensive care unit (ICU) </option>
 															</select>		
-									<button type="button" class="btn btn-primary">Helper Doctor</button>
+									
 									</form>
 								</div>
                                </div>
