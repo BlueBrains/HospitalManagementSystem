@@ -16,7 +16,7 @@ class patient extends REST_Controller{
 			$data['title'] = 'Patient Information';
 			$data['patient'] = $patient;
 			$data['main_content']='patient/view';
-			
+			$data['pic'] = base_url().'uploads/'.$patient['public']->avatar;
 			$this->load->view('includes/template',$data);
 		}
 		
@@ -71,8 +71,10 @@ class patient extends REST_Controller{
 
 		$this->load->library('upload',$config);
 		if($this->upload->do_upload('photo')){
+			$upload_data = $this->upload->data(); 
+  			$file_name =   $upload_data['file_name'];
 			$this->patient_model->update($id,array('avatar'=>"
-													avatar/{$id}"));
+													avatar/{$file_name}"));
 			redirect("/patient/u/id/{$id}");			
 		}
 		else{

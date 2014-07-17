@@ -21,7 +21,8 @@
 						</li>';
 					
 						}
-                   
+                   	$this->load->helper('sidebar');
+                   	$side = side_array();
                     if (isset($side))
 					{
 					

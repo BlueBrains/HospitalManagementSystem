@@ -1,3 +1,17 @@
+	    <script>    	
+		$(function(){
+		  			$("#patientName1").autocomplete({
+		    			source: "<?php echo base_url();?>doctor/get_patients" 
+		  			}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+		        		var inner_html = '<a href="<?php echo base_url();?>patient/u/id/' + item.image + '"><div style="width:300px;height:50px;padding:5px 0px 5px;"><div class="img-responsive" style="float:left;margin-right:10px;"><img height="42" width="42" src="<? echo base_url()?>/photos/patients/'+ item.image +'.png"></div><div style="font-size:16px;margin-top:8px">' + item.label + '</div></div></a>';
+		        		return $( "<li></li>" )
+		            		.data( "item.autocomplete", item )
+		            		.append(inner_html)
+		            		.appendTo( ul );
+		    		};		  			
+		});
+		
+	</script>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -128,7 +142,7 @@ else if (name=="Spine")
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="button">Patient Name*</button>
     			</span>
-				<input type="text" name="patient_name" id="patient_id" class="form-control" value="<?php if (isset($patient)) echo $patient[0]->Pname; ?>">
+				<input type="text" name="patient_name" id="patientName1" class="form-control" value="<?php if (isset($patient)) echo $patient[0]->Pname; ?>">
 				<input type="hidden" name="patient_id" id="patient_id" class="form-control" value="<?php if (isset($patient)) echo $patient[0]->id; ?>">
 			</div>
 			<span><?php if (isset($error)) echo '<p class = "error alert alert-danger">'.$error;?></span>
