@@ -18,7 +18,7 @@ class Nurse_model extends CI_Model{
 	function terms($q,$id){
     	$this->db->select('CONCAT(fname, " " , lname) As name , id',FALSE);
 		$this->db->from('nurses');
-		$this->db->where('department_id',$id);
+		// $this->db->where('department_id',$id);
     	$this->db->like('fname', $q);
     	$query = $this->db->get();
     	if($query->num_rows > 0){

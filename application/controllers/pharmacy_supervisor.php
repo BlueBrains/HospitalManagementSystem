@@ -473,6 +473,15 @@ class Pharmacy_supervisor extends REST_Controller {
 		}
 		$this->medicine_orders_get();		
 	}	
+	
+	public function get_nurses_get()
+	{
+		$this->load->model('nurse_model');
+		if ( $this->input->get('term')){
+			$q = strtolower($this->input->get('term'));
+			$this->nurse_model->terms($q,'1');
+		}
+	}	
 
 }
 

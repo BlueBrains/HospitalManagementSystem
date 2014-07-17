@@ -2,7 +2,7 @@
 <script>    	
 		$(function(){
 		  			$("#NurseName").autocomplete({
-		    			source: "<?php echo base_url();?>nurse/get_nurses" 
+		    			source: "<?php echo base_url();?>pharmacy_supervisor/get_nurses" 
 		  			}).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
 		        		var inner_html = '<a href="<?php echo base_url();?>nurse/nurse_details/id/' + item.image + '"><div style="width:300px;height:50px;padding:5px 0px 5px;"><div class="img-responsive" style="float:left;margin-right:10px;"><img height="42" width="42" src="<? echo base_url()?>/photos/nurses/'+ item.image +'.png"></div><div style="font-size:16px;margin-top:8px">' + item.label + '</div></div></a>';
 		        		return $( "<li></li>" )

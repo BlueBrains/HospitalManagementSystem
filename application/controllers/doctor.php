@@ -387,7 +387,7 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 	{
 			$id = $this->get('id');
 			if($this->get())
-				$data['patient']=$this->doctor_model->get_patient_name($id);			
+			$data['patient']=$this->doctor_model->get_patient_name($id);			
 			$data['user'] = $this->ion_auth->user()->row();		
 			$data['records'] = $this->medicine_model->getAllMed();
 			$bar[0]=" fa-desktop ,Home Page,doctor/homepage,false";
@@ -420,8 +420,6 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 			$data['sub_menue']=$sub_menue;
 		
 		$data['title'] = 'Request a medicine';	
-		$data['bar1'] = "Log In";
-		$data['linkbar1'] ="/login";
 		$data['main_content'] = 'pharmacy/request_view';
 		$this->load->view('includes/template',$data);
 	}
@@ -436,11 +434,11 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 		}
 		else
 		{						
-			$patientId =$this->patient_model->find_by_name($this->input->post('patientName')) ;
+			$id =$this->patient_model->find_by_name($this->input->post('patientName')) ;
 			$medicineId =$this->medicine_model->findMedicine($this->input->post('medicineName'),$this->input->post('caliber'));					
 			$data = array(
-				'patient_id' => $patientId,
-				'doctor_id' => 3,//$this->session->userdata('doctor_id')
+				'patient_id' => $id,
+				'doctor_id' => $this->ion_auth->user()->row()->profile_id,
 				'medicine_id' => $medicineId,
 				'dose' => $this->input->post('dose'),
 				'state' => '0',
@@ -448,6 +446,35 @@ $data['patient']=$this->doctor_model->get_patient_name($id);
 				);
 			if($query = $this->pharmacy_model->addOrder($data))
 				{
+					$data['user'] = $this->ion_auth->user()->row();		
+					$bar[0]=" fa-desktop ,Home Page,doctor/homepage,false";
+					$bar[1]=" fa-desktop ,Patient information,doctor/patient_info/id/{$id},TRUE";
+					$data['side'] = $bar;
+					
+					$sub[0]="fa-qrcode ,Creat Request,#,False";
+					$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{id},False";
+					$sub[2]="fa-qrcode ,Creat Photography Request,doctor/Fill_order,False";
+					$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
+					$sub_menue[0] = $sub;
+					
+					$sub[0]="fa-qrcode ,Edit analyse Request,#,False";
+					$sub[1]="fa-desktop ,ALL Analyse Requests,doctor/total_analyse_request/id/{$id},false";
+					$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$id},False";
+					$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$id},FALSE";
+					$sub_menue[1] = $sub;
+					
+					$sub[0]="fa-qrcode ,Edit radiology Request,#,false";
+					$sub[1]="fa-desktop ,ALL Radiology Requests,doctor/total_radiograph_request/id/{$id},false";
+					$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$id},FALSE";
+					$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$id},FALSE";
+					$sub_menue[2] = $sub;
+					
+					$sub[0]="fa-qrcode ,Edit medicine Request,#,false";
+					$sub[1]="fa-desktop ,ALL medicine Requests,doctor/total_medorder_list/id/{$id},false";
+					$sub[2]="fa-desktop ,Un finished Requests,doctor/medorder_list/id/{$id},FALSE";					
+					$sub_menue[3] = $sub;			
+					
+					$data['sub_menue']=$sub_menue;					
 					$data['main_content']='pharmacy/registered_successfully_view';
 					$data['title']='Registered Successfully';
 					$this->load->view('includes/template',$data);				
@@ -870,13 +897,43 @@ function show_result_get()
 	public function finish_request_get(){
 		$value = $this->get('id');
 		$this->pharmacy_model->finishOrder($value);		
-		redirect('doctor/medorder_list/0');	
+		redirect('doctor/homepage');	
 	}
 
 	public function detail_request_get()
 	{
 		$value = $this->get('id');		
 		if($q = $this->pharmacy_model->detailOrder($value)){
+			$id = $q[0]->patient_id;	
+			$data['user'] = $this->ion_auth->user()->row();		
+			$bar[0]=" fa-desktop ,Home Page,doctor/homepage,false";
+			$bar[1]=" fa-desktop ,Patient information,doctor/patient_info/id/{$id},TRUE";
+			$data['side'] = $bar;
+			
+			$sub[0]="fa-qrcode ,Creat Request,#,False";
+			$sub[1]="fa-qrcode ,Creat Analyse Request,doctor/Fill_order_patient/id/{$id},False";
+			$sub[2]="fa-qrcode ,Creat Photography Request,doctor/Fill_order/id/{$id},False";
+			$sub[3]="fa-qrcode ,Creat Medicine Request,doctor/new_med_request/id/{$id},False";
+			$sub_menue[0] = $sub;
+			
+			$sub[0]="fa-qrcode ,Edit analyse Request,#,False";
+			$sub[1]="fa-desktop ,ALL Analyse Requests,doctor/total_analyse_request/id/{$id},false";
+			$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$id},False";
+			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$id},FALSE";
+			$sub_menue[1] = $sub;
+			
+			$sub[0]="fa-qrcode ,Edit radiology Request,#,false";
+			$sub[1]="fa-desktop ,ALL Radiology Requests,doctor/total_radiograph_request/id/{$id},false";
+			$sub[2]="fa-desktop ,Un Uploded Request,doctor/confirmed_analyse_request/id/{$id},FALSE";
+			$sub[3]="fa-desktop ,Implemented Request,doctor/finish_analyse_request/id/{$id},FALSE";
+			$sub_menue[2] = $sub;
+			
+			$sub[0]="fa-qrcode ,Edit medicine Request,#,false";
+			$sub[1]="fa-desktop ,ALL medicine Requests,doctor/total_medorder_list/id/{$id},false";
+			$sub[2]="fa-desktop ,Un finished Requests,doctor/medorder_list/id/{$id},FALSE";
+			$sub_menue[3] = $sub;			
+			
+			$data['sub_menue']=$sub_menue;			
 			$data['main_content'] = 'doctor/detail_medrequest_view';
 			$data['title'] = "Details";
 			$data['result'] = $q[0];			
