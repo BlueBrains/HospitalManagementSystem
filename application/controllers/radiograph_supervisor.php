@@ -5,15 +5,15 @@ class radiograph_supervisor extends REST_Controller{
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('radiograph_model');
-		$this->load->model('doctor_model');
-		
-		
-		// if (!isset($this->session->userdata('tag') || $this->session->userdata('tag') != "radiograph_supervisor")
-		// {
-			// echo "You dont have permission to start this action";
-		// }
-// 	
+		$this->load->library('ion_auth');
+		if (!$this->ion_auth->logged_in()||!$this->ion_auth->in_group("radiograph"))
+		{
+			redirect('auth/login');
+		}	
+		else{
+			$this->load->model('radiograph_model');
+			$this->load->model('doctor_model');
+		}
 	}
 	
 	function  homepage_get ()
@@ -22,6 +22,7 @@ class radiograph_supervisor extends REST_Controller{
 		
 	//		$data['nam']=$info->firstName." ".$info->lastName;
 			//$data['main_content'] = 'radiograph/radiograph_index';
+			$data['user'] = $this->ion_auth->user()->row();		
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
@@ -42,6 +43,7 @@ class radiograph_supervisor extends REST_Controller{
 	function total_order_list_get ()
 	{
 		$data['record'] = $this->radiograph_model->fetch_req(0);
+			$data['user'] = $this->ion_auth->user()->row();
 		    $bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,True";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
@@ -58,6 +60,7 @@ class radiograph_supervisor extends REST_Controller{
 	function order_list_implemented_get()
 	{
 		$data['record'] = $this->radiograph_model->fetch_req(-1);
+			$data['user'] = $this->ion_auth->user()->row();
 		    $bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
@@ -74,7 +77,8 @@ class radiograph_supervisor extends REST_Controller{
 	function order_list_get()
 	{
 		$data['record'] = $this->radiograph_model->fetch_req(-2);
-				    $bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
+			$data['user'] = $this->ion_auth->user()->row();
+			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,True";
 			$bar[3]=" fa-qrcode ,Out Order Requests,radiograph_supervisor/radiograph_external_request_done,False";
@@ -90,6 +94,7 @@ class radiograph_supervisor extends REST_Controller{
 	
 	function radiograph_external_request_done_get ()
 	{
+		$data['user'] = $this->ion_auth->user()->row();
 		$data['record'] = $this->radiograph_model->fetch_req(-3);
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
@@ -107,6 +112,7 @@ class radiograph_supervisor extends REST_Controller{
 	 
 	function un_seen_get()
 	{
+		$data['user'] = $this->ion_auth->user()->row();
 		$data['record'] = $this->radiograph_model->fetch_req(-4);
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,True";
@@ -123,7 +129,7 @@ class radiograph_supervisor extends REST_Controller{
 	
 	function radiograph_external_request_get()
 	{
-			
+			$data['user'] = $this->ion_auth->user()->row();
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
@@ -141,7 +147,7 @@ class radiograph_supervisor extends REST_Controller{
 	{
 		
 		$data['record'] = $this->radiograph_model->create_req(-1);	
-		
+		$data['user'] = $this->ion_auth->user()->row();
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,True";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
@@ -163,7 +169,7 @@ class radiograph_supervisor extends REST_Controller{
 	{
 		
 		$data['record'] = $this->radiograph_model->create_req($this->get('patient_id'));	
-		
+		$data['user'] = $this->ion_auth->user()->row();
 			// $bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,True";
 			// $bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			// $bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
@@ -183,7 +189,8 @@ class radiograph_supervisor extends REST_Controller{
 			$data['request'] = $request;
 			$data['main_content']='radiograph/test';
 			$data['title'] = 'radiograph';
-			$this->load->view('includes/template',$data);
+			$data['user'] = $this->ion_auth->user()->row();
+			$this->load->view('includes/template',$data);			
 		}
 		else 
 			$this->response($request,200);
@@ -201,6 +208,7 @@ class radiograph_supervisor extends REST_Controller{
 	function finish_request_get()
 	{
 		$data['req_id']=$this->get('id');
+		$data['user'] = $this->ion_auth->user()->row();
 			$data['record'] = $this->radiograph_model->fetch_req(0);
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,True";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
@@ -218,7 +226,8 @@ class radiograph_supervisor extends REST_Controller{
 	function upload_image_post()
 	{
 		if ($this->radiograph_model->upload_image($this->post('id')))
-		{	
+		{
+			$data['user'] = $this->ion_auth->user()->row();	
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,True";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
@@ -234,6 +243,7 @@ class radiograph_supervisor extends REST_Controller{
 		}
 		else
 			{
+				$data['user'] = $this->ion_auth->user()->row();
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
@@ -252,7 +262,8 @@ class radiograph_supervisor extends REST_Controller{
 	{
 		$data['record']=$this->radiograph_model->show_image($this->get('id'));
 		if (isset($data))
-		{	
+		{
+			$data['user'] = $this->ion_auth->user()->row();	
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
@@ -279,7 +290,8 @@ class radiograph_supervisor extends REST_Controller{
             }
 		
 		if (isset($data))
-		{	
+		{
+			$data['user'] = $this->ion_auth->user()->row();	
 			$bar[0]=" fa-desktop ,ALL Requests,radiograph_supervisor/total_order_list,False";
 			$bar[1]=" fa-qrcode ,Un Seen Request,radiograph_supervisor/un_seen,False";
 			$bar[2]=" fa-qrcode ,Un Finished Request,radiograph_supervisor/order_list,False";
