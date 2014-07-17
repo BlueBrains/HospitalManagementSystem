@@ -60,6 +60,6 @@
 padding: 15px 50px 5px 50px;
 float: right;
 font-size: 12px;margin-top: 7px;"> 
- Last access : <?php echo(date("Y-m-d",$user->last_login));?> &nbsp; <a href="<?php echo base_url()?>auth/logout" class="btn btn-danger square-btn-adjust" style="background-color: #0F275A;">Logout</a> </div>
+ Last access : <?php if(isset($user)) echo(date("Y-m-d",$user->last_login)); else echo "2014-17-7";?> &nbsp; <a href="<?php echo base_url()?>auth/logout" class="btn btn-danger square-btn-adjust" style="background-color: #0F275A;">Logout</a> </div>
         </nav>   
            <!-- /. NAV TOP  -->

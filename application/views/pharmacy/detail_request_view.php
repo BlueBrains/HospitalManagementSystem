@@ -65,7 +65,7 @@
 	</div>
 </div>
 
-
+</div>
 
 <!-- <h3 class="text-warning text-center"><?php echo $result->firstName.' '.$result->lastName ;  ?>
 	<small>offered </small>

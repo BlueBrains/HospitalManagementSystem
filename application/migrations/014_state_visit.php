@@ -38,7 +38,25 @@ class Migration_state_visit extends CI_Migration {
 		
 		
         $this->dbforge->add_key('id', TRUE);        
-        $this->dbforge->create_table('calls', TRUE);
+        $this->dbforge->create_table('doctonur_calls', TRUE);
+		
+		$this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
+		$this->dbforge->add_field("sender_id int(11) unsigned NOT NULL");
+		$this->dbforge->add_field("reciever_id int(11) unsigned NOT NULL");
+		$this->dbforge->add_field("w_r_b varchar(255) NOT NULL DEFAULT ''");
+		
+		
+        $this->dbforge->add_key('id', TRUE);        
+        $this->dbforge->create_table('nurtodoc_calls', TRUE);
+		
+		$this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
+		$this->dbforge->add_field("sender_id int(11) unsigned NOT NULL");
+		$this->dbforge->add_field("reciever_id int(11) unsigned NOT NULL");
+		$this->dbforge->add_field("w_r_b varchar(255) NOT NULL DEFAULT ''");
+		
+		
+        $this->dbforge->add_key('id', TRUE);        
+        $this->dbforge->create_table('suptodoc_calls', TRUE);
 		
 		$this->dbforge->add_field("id int(11) unsigned NOT NULL AUTO_INCREMENT");
 		$this->dbforge->add_field("doctor_id int(11) unsigned NOT NULL");
@@ -60,7 +78,9 @@ class Migration_state_visit extends CI_Migration {
         $this->dbforge->drop_table('request_state');
 		$this->dbforge->drop_table('mesuare');
 		
-		$this->dbforge->drop_table('calls');
+		$this->dbforge->drop_table('doctonur_calls');
+		$this->dbforge->drop_table('nurtodoc_calls');
+		$this->dbforge->drop_table('suptodoc_calls');
 		$this->dbforge->drop_table('my_patients');
     }
 }

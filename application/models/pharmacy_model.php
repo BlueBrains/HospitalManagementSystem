@@ -81,7 +81,7 @@ class Pharmacy_model extends CI_Model {
 
 	
 	public function detailOrder($value){				
-		$this->db->select('medicine_request.id,medicine_request.details,medicines.tradeName,medicines.caliber,medicine_request.dose,doctors.fname,doctors.lname,patients.fname pfname,patients.lname plname');   		
+		$this->db->select('medicine_request.id,patient_id,medicine_request.details,medicines.tradeName,medicines.caliber,medicine_request.dose,doctors.fname,doctors.lname,patients.fname pfname,patients.lname plname');   		
 		$this->db->from('medicine_request');
 		$this->db->join('medicines', 'medicine_request.medicine_id = medicines.id','inner');		
 		$this->db->join('doctors', 'medicine_request.doctor_id = doctors.id','inner');

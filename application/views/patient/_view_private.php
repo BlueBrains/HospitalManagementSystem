@@ -34,9 +34,9 @@
 
 </table>
 </div>
-
+<?php  if (isset($patient['private'])): ?>
 <?php echo form_open('patient/pr',array('role'=>'form','class'=>'add','method'=>'PUT'),array('id'=>$patient['private']->id));?>
-    
+<?php endif; ?>    
     <div class="input-group">
         <span class="input-group-addon">Field:</span>
         <select class="form-control" name='field'>

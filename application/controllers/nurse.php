@@ -33,11 +33,18 @@ class nurse extends REST_Controller{
 	
 	public function homepage_get()
 	{
-		$id = $this->seeion->userdate('user_id');
-		$data = $this->pharmacy_model->supervisor_info($id);
+		$data['user'] = $this->ion_auth->user()->row();
+		$bar[0]=" fa-edit ,Taskes,nurse/taskes,False";
+		$bar[1]=" fa-edit ,Food Programs,nurse/foodprog,False";
+		$data['side'] = $bar;
+		$data['section'] = 'nurses';		
+		$data['main_content'] = 'nurse/homepage_view';
+		$data['title'] = "homepage| nurse";
+		$this->load->view('includes/template',$data);
 	}
 	public function taskes_get()
 	{
+		$data['user'] = $this->ion_auth->user()->row();
 		$data['records'] = $this->nurse_model->getAllTaskes($this->ion_auth->user()->row()->profile_id);;			
 		$bar[0]=" fa-edit ,Taskes,nurse/taskes,False";
 		$bar[1]=" fa-edit ,Food Programs,nurse/foodprog,False";
@@ -47,13 +54,7 @@ class nurse extends REST_Controller{
 		$data['title'] = "Taskes";
 		$this->load->view('includes/template',$data);				
 	}
-	public function get_nurses_get()
-	{
-		if ( $this->input->get('term')){
-			$q = strtolower($this->input->get('term'));
-			$this->nurse_model->terms($q,'1');
-		}
-	}
+
 }
 
 ?>

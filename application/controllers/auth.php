@@ -84,10 +84,10 @@ class Auth extends MY_Controller {
 					redirect('doctor/homepage');
 				}
 				else if($this->ion_auth->in_group('nurses')){
-					redirect('nurses/homepage');
+					redirect('nurse/homepage');
 				}
 				else if($this->ion_auth->in_group('recipients')){
-					redirect('recipients/homepage');
+					redirect('recipient/homepage');
 				}
 				else												
 					redirect('/auth', 'refresh');

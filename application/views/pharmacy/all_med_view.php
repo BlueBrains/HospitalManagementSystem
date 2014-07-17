@@ -78,7 +78,6 @@
                                             <th>unit per packing</th>
                                             <th>packing per unitpacking</th>
                                             <th>med group</th>
-                                            <th>enter quantity</th>
                                             <th>update mediciine</th>
                                             
                                         </tr>
@@ -99,7 +98,6 @@
 				echo "<td>".$row->unit_per_packing."</td>";
 				echo "<td>".$row->packing_per_unitpacking."</td>";
 				echo "<td>".$row->med_group."</td>";
-				echo "<td>"."<a href=".base_url()."pharmacy_supervisor/update_medquan/id/".$row->id.">"."insert"."</a><br/>";
 				echo "<td>"."<a href=".base_url()."pharmacy_supervisor/update_medicine/id/".$row->id.">"."update"."</a><br/>";
                 echo "</tr>";
             }
