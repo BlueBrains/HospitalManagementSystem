@@ -5,16 +5,20 @@ class recepient extends REST_Controller{
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('recepient_model');
-		// if (!isset($this->session->userdata('tag') || $this->session->userdata('tag') != " recipient")
-		// {
-			// echo "You dont have permission to start this action";
-		// }
-// 	
+		
+		$this->load->library('ion_auth');
+		if (!$this->ion_auth->logged_in()||!$this->ion_auth->in_group("recipients"))
+		{
+			redirect('auth/login');
+		}	
+		else{
+				$this->load->model('recepient_model');
+		}
 	}
 	
 	function  homepage_get ()
 	{
+		$data['user'] = $this->ion_auth->user()->row();
 			$bar[0]=" fa-edit , Add Patient ,patient/new ,False";
 			$bar[1]=" fa-qrcode ,Patient in Hospital,recepient/patients_in_hospital,False";
 			$bar[2]=" fa-qrcode ,All hospital visiting,recepient/patients_visit_hospital,False";
@@ -29,6 +33,7 @@ class recepient extends REST_Controller{
 	
 	function patients_in_hospital_get()
 	{
+		$data['user'] = $this->ion_auth->user()->row();
 			$data['record'] = $this->recepient_model->p_i_h();			
 			$bar[0]=" fa-edit , Add Patient ,patient/new ,False";
 			$bar[1]=" fa-qrcode ,Patient in Hospital,recepient/patients_in_hospital,True";
@@ -42,6 +47,7 @@ class recepient extends REST_Controller{
 
 	function patients_visit_hospital_get()
 	{
+		$data['user'] = $this->ion_auth->user()->row();
 			$data['record'] = $this->recepient_model->p_r();			
 			$bar[0]=" fa-edit , Add Patient ,patient/new ,False";
 			$bar[1]=" fa-qrcode ,Patient in Hospital,recepient/patients_in_hospital,False";
@@ -61,7 +67,7 @@ class recepient extends REST_Controller{
 			$bar[0]=" fa-edit , Add Patient ,patient/new ,False";
 			$bar[1]=" fa-qrcode ,Patient in Hospital,recepient/patients_in_hospital,False";
 			$bar[2]=" fa-qrcode ,All hospital visiting,recepient/patients_visit_hospital,False";
-			
+			$data['user'] = $this->ion_auth->user()->row();
 			$data['r']=$this->recepient_model->findEntry($this->get('id'));
 			$data['main_content'] = 'reciption/patient_state_view';	
 			$data['section'] = 'reception';	
@@ -78,7 +84,7 @@ class recepient extends REST_Controller{
 			$bar[0]=" fa-edit , Add Patient ,patient/new ,False";
 			$bar[1]=" fa-qrcode ,Patient in Hospital,recepient/patients_in_hospital,False";
 			$bar[2]=" fa-qrcode ,All hospital visiting,recepient/patients_visit_hospital,False";
-			
+			$data['user'] = $this->ion_auth->user()->row();
 			$data['main_content'] = 'reciption/patient_state_view';	
 			$data['section'] = 'reception';	
 			$data['side'] = $bar;
@@ -98,6 +104,7 @@ class recepient extends REST_Controller{
 				$data['main_content'] = 'reciption/assgin_patient';	
 				$data['section'] = 'reception';	
 				$data['side'] = $bar;
+				$data['user'] = $this->ion_auth->user()->row();
 				$this->load->view('includes/template',$data);
 	}
 	
@@ -111,7 +118,7 @@ class recepient extends REST_Controller{
 				$bar[0]=" fa-edit , Add Patient ,patient/new ,False";
 				$bar[1]=" fa-qrcode ,Patient in Hospital,recepient/patients_in_hospital,False";
 				$bar[2]=" fa-qrcode ,All hospital visiting,recepient/patients_visit_hospital,True";
-				
+				$data['user'] = $this->ion_auth->user()->row();
 				$data['main_content'] = 'reciption/patients_in_hospital_view';	
 				$data['section'] = 'reception';	
 				$data['side'] = $bar;
@@ -131,7 +138,7 @@ class recepient extends REST_Controller{
 				$bar[0]=" fa-edit , Add Patient ,patient/new ,False";
 				$bar[1]=" fa-qrcode ,Patient in Hospital,recepient/patients_in_hospital,True";
 				$bar[2]=" fa-qrcode ,All hospital visiting,recepient/patients_visit_hospital,False";
-				
+				$data['user'] = $this->ion_auth->user()->row();
 				$data['main_content'] = 'reciption/patients_in_hospital_view';	
 				$data['section'] = 'reception';	
 				$data['side'] = $bar;
@@ -147,6 +154,7 @@ class recepient extends REST_Controller{
 				$data['id']=$this->get('id');
 				$data['main_content'] = 'reciption/assgin_patient';	
 				$data['section'] = 'reception';	
+				$data['user'] = $this->ion_auth->user()->row();
 				$data['side'] = $bar;
 				$data['error']="This Patient is Already in Hospital";
 				$this->load->view('includes/template',$data);
