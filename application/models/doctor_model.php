@@ -3,6 +3,12 @@ class doctor_model extends CI_Model
 {
 	function get_patients($dep_id)
 	{
+		$q=$this->get_doctor_info($dep_id);
+		
+		foreach ($q->result() as $raw ) {
+                $dep_id=$raw->department_id;
+            }
+		
 		$qq="SELECT patients.id,CONCAT(patients.fname,' ',patients.lname)as Pname,room,date_in FROM patients 
 		INNER JOIN entries on id_patient=patients.id
 		WHERE dep_id='".$dep_id."' AND date_out='0000-00-00 00:00:00'
@@ -21,7 +27,20 @@ class doctor_model extends CI_Model
 	function get_doctor_info($id)
 	{
 		
-		$sql=$this->db->query("SELECT * FROM doctors INNER JOIN department ON doctors.department_id = department.id WHERE doctors.id = '".$id."'");
+		$sql=$this->db->query("SELECT * FROM doctors INNER JOIN department ON doctors.department_id = department.id  INNER JOIN users ON doctors.id = users.profile_id WHERE doctors.id = '".$id."'");
+		if ($sql->num_rows >= 1)
+           { return $sql;}
+		else {
+			$f=0;	
+			return $f;
+		}
+           
+	}
+
+	function doctor_info($id)
+	{
+		
+		$sql=$this->db->query("SELECT * FROM doctors INNER JOIN department ON doctors.department_id = department.id  INNER JOIN users ON doctors.id = users.profile_id WHERE profile_id = '".$id."'");
 		if ($sql->num_rows >= 1)
            { return $sql;}
 		else {
