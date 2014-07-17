@@ -976,10 +976,10 @@ function show_result_get()
 		$this->load->view('includes/template',$data);
 	}
 
-	function doc_call_nurse_post()
+	function doc_call_nurse_get()
 	{
 		$this->supervisor_model->create_doctonu();
-		$this->patient_info_get();
+		$this->homepage_get();
 	}
 	function all_doc_call_nurse_post()
 	{
@@ -989,6 +989,12 @@ function show_result_get()
 	function doc_call_sup_post()
 	{
 		$data['record']=$this->supervisor_model->creat_doctosup();
+	}
+	
+	function visit_get()
+	{
+		$data['record']=$this->doctor_model->creat_visit($this->get('idd'));
+		$this->homepage_get();
 	}
 }
 

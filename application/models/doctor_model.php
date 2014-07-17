@@ -65,7 +65,7 @@ class doctor_model extends CI_Model
 	}
 	function get_patient($id)
 	{
-		$qq="SELECT patients.id,CONCAT(patients.fname,' ',patients.lname)as Pname,room,date_in,visit.state as Lstate FROM patients 
+		$qq="SELECT entries.id as e_id, patients.id,CONCAT(patients.fname,' ',patients.lname)as Pname,ward,bed,room,date_in,visit.state as Lstate FROM patients 
 		INNER JOIN entries on id_patient=patients.id
 		INNER JOIN visit on visit.patient_id=patients.id
 		WHERE patients.id='".$id."'
@@ -80,6 +80,26 @@ class doctor_model extends CI_Model
             return $data;
             
          }	
+	}
+	
+	function creat_visit($idd)
+	{
+		$now=getdate();
+			$nowDate=$now['year']."-".$now['mon']."-".$now['mday']." ".$now['hours'].":".$now['minutes'].":".$now['seconds'];
+			
+			$new_entry_insert_data = array(
+			'doctor_id' => $this->ion_auth->user()->row()->profile_id,
+			'patient_id' => $this->input->get('iid'),
+			'entry_id'=>$idd,
+			'state'=>$this->input->get('state'),
+			'Temperature'=>$this->input->get('temp'),
+			'pulse'=>$this->input->get('pulse'),
+			'Respiration' =>$this->input->get('res'),
+			'blood_pressure' => $this->input->get('blood'),	
+			
+			);
+		$insert = $this->db->insert('visit', $new_entry_insert_data);	
+		return TRUE;
 	}
 
 	

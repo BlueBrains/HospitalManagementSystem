@@ -108,8 +108,9 @@
                               	</div>
                               	<div class="col-md-4 ">
 								<div class='row' >		
-									<form method="post" action="<?php echo base_url();?>doctor/doc_call_nurse">
+									<form method="get" action="<?php echo base_url();?>doctor/doc_call_nurse">
 								 	<input type="hidden" name="p_id" value="<?php echo $row->id; ?>" id="p_id"/>	
+								 	<input type="hidden" name="w_r_b" value="<?php echo $row->ward.",".$row->room.",".$row->bed; ?>" />
 									<button type="submit" class="btn btn-primary">Call Nurse </button>
 									<input type="text" name="stuff_name" id="stuff_name" class="form-control" >
 									</form>
@@ -141,10 +142,10 @@
                 <!-- /. ROW  -->
                     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
-    
+ <form method="get" action="<?php echo base_url();?>doctor/visit/idd/<?php echo $row->e_id ;?>" >   
  <div class="row">
                 <div class="col-md-4">
-                	
+                	<input type="hidden" value="<?php echo $row->id; ?>" name="iid"/>
                 	<div class="panel-body" style="padding-left: -7px;padding-right: 0px;">
                             <div class="panel-group" id="accordion">
                                 <div class="panel panel-default" style="margin-top: -15px;padding-right: 17px;">
@@ -214,12 +215,13 @@
 						    		<textarea name="state"cols="60" rows="4" class="form-control" ></textarea>
 						    </div>	
 						    <div class='row' style="margin-bottom:20px" >		
-									<button type="button" class="btn btn-primary">Update State </button>
+									<button type="submit" class="btn btn-primary">Update State </button>
 							</div>
                         </div>
                         
                     </div>
                 </div>
      
-      </div>          	
+      </div> 
+</form>               	
 </div>

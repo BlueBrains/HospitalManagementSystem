@@ -2,17 +2,24 @@
 class supervisor_model extends CI_Model {
 	function create_doctonu()
 	{
-		$pieces = explode(" ", $this->input->post('stuff_name'));
+		$pieces = explode(" ", $this->input->get('stuff_name'));
 		$sql=$this->db->query("SELECT * FROM nurses where  fname ='".$pieces[0] ."' and lname ='".$pieces[1] ."'");
 		foreach ($sql->result() as $raw ) {
                 	
                 $stuff_id=$raw->id;
             }
+		if (null!==$this->input->get('w_r_b'))
+		{
+			$r=$this->input->get('w_r_b');
+		}
+		else {
+			$r=$this->input->get('w').','.$this->input->get('r').','.$this->input->get('b');
+		}
 		$new_member = array(
 		
 				'sender_id' => $this->ion_auth->user()->row()->profile_id,
 				'reciever_id' => $stuff_id,
-				'w_r_b' => $this->input->post('w').','.$this->input->post('r').','.$this->input->post('b'),
+				'w_r_b' => $r,
 				'checked'=>0
 			);
 			$insert = $this->db->insert('doctonur_calls', $new_member);
