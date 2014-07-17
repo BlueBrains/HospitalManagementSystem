@@ -8,7 +8,7 @@ class supervisor extends REST_Controller{
 		
 		
 		$this->load->library('ion_auth');
-		if (!$this->ion_auth->logged_in()||!$this->ion_auth->in_group("admin"))
+		if (!$this->ion_auth->logged_in()||!$this->ion_auth->in_group("supervisor"))
 		{
 			redirect('auth/login');
 		}	

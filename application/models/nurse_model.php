@@ -74,5 +74,35 @@ class Nurse_model extends CI_Model{
 			$data = $q->result();
 			return $data;
 		}	
-	}	
+	}
+	
+	public function getAllCalls($id)
+	{
+		$this->db->select('doctonur_calls.id, sender_id, reciever_id, w_r_b, doctors.fname dfname, doctors.lname dlname, callDate, checked')
+		->from('doctonur_calls')
+		->join('doctors', 'sender_id = doctors.id','inner')
+		->where('reciever_id',$id);
+		if($q = $this->db->get()){		
+			$data = $q->result();
+			return $data;
+		}				
+	}
+
+	public function getYourCalls($id)
+	{
+		$this->db->select('nurtodoc_calls.id, sender_id, reciever_id, w_r_b, doctors.fname dfname, doctors.lname dlname, callDate, checked')
+		->from('nurtodoc_calls')
+		->join('doctors', 'reciever_id = doctors.id','inner')
+		->where('sender_id',$id);
+		if($q = $this->db->get()){		
+			$data = $q->result();
+			return $data;
+		}				
+	}
+	public function seen($id)
+	{
+		$this->db->update('doctonur_calls',array('checked' => 1));
+	}
+
+			
 }
