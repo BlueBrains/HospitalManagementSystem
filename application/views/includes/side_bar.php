@@ -22,8 +22,10 @@
 					
 						}
                    	$this->load->helper('sidebar');
-                   	$side = side_array();
-                    if (isset($side))
+                   	$side1 = side_array();
+					if($side1 != "")
+						$side=$side1;
+					if (isset($side))
 					{
 					
                     if (is_array($side)){

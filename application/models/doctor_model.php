@@ -82,6 +82,7 @@ class doctor_model extends CI_Model
          }	
 	}
 	
+<<<<<<< HEAD
 	function creat_visit($idd)
 	{
 		$now=getdate();
@@ -101,6 +102,35 @@ class doctor_model extends CI_Model
 		$insert = $this->db->insert('visit', $new_entry_insert_data);	
 		return TRUE;
 	}
+=======
+	public function find_by_name($name){
+		$result = explode(" ",$name);
+		if(isset($result[1])){
+			$data = $this->db->get_where('doctors',array('fname'=>$result[0],'lname'=>$result[1]))->result();
+		}
+		else {
+			$data = $this->db->get_where('doctors',array('fname'=>$result[0]))->result();
+		}
+		if($data){
+		return $data[0]->id;
+		}
+	}	
+	
+	function terms($q){
+    	$this->db->select('CONCAT(fname, " " , lname) As name , id',FALSE);
+    	$this->db->like('fname', $q);
+    	$query = $this->db->get('doctors');
+    	if($query->num_rows > 0){
+      		foreach ($query->result_array() as $row){
+      			$new_row['label']=htmlentities(stripslashes($row['name']));
+				$new_row['value']=htmlentities(stripslashes($row['name']));
+				$new_row['image']=htmlentities(stripslashes($row['id']));
+        		$row_set[] = $new_row;
+      		}
+      		echo json_encode($row_set); //format the array into json data
+    	}
+  	}	
+>>>>>>> 332203a26732b8f79519577a15d5fd9328d4baab
 
 	
 }

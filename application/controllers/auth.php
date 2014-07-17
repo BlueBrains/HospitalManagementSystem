@@ -72,7 +72,7 @@ class Auth extends MY_Controller {
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
 				if($this->ion_auth->in_group('radiograph')){
-					redirect('radiology_supervisor/homepage');
+					redirect('radiograph_supervisor/homepage');
 				}
 				else if($this->ion_auth->in_group('pharmacy')){
 					redirect('pharmacy_supervisor/homepage');
@@ -89,6 +89,9 @@ class Auth extends MY_Controller {
 				else if($this->ion_auth->in_group('recipients')){
 					redirect('recipient/homepage');
 				}
+				else if($this->ion_auth->in_group('supervisor')){
+					redirect('supervisor/homepage');
+				}				
 				else												
 					redirect('/auth', 'refresh');
 			}
